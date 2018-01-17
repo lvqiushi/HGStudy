@@ -24,7 +24,10 @@ import cn.lv.hgstudy.pojo.Courseware;
  */
 public interface CoursewareService {
 	Courseware selectCousewareById(String coureswareid);
+
 	Page selectCousewareByCouid(String couid,Integer start,Integer pageNumber);
+
 	boolean addCouseware(Courseware couresware,CommonsMultipartFile courseware,String path);
+
 	boolean delectCouseware(String coureswareid);
 }

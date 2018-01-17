@@ -7,7 +7,7 @@ public class JsonResult<T> {
 	private ArrayList<T> content;
 	private String message;
 	private String otherinfor;
-	
+
 	public JsonResult() {
 		this.success = true;
 	}
@@ -35,6 +35,6 @@ public class JsonResult<T> {
 	public void setContent(ArrayList<T> content) {
 		this.content = content;
 	}
-	
-	
+
+
 }

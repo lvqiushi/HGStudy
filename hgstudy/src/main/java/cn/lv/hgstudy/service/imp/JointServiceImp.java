@@ -6,7 +6,7 @@
  * @date 2017年9月19日 下午10:41:13 
  * @version V1.0   
  */
-package cn.lv.hgstudy.service;
+package cn.lv.hgstudy.service.imp;
 
 import java.util.HashMap;
 import java.util.List;
@@ -14,6 +14,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import cn.lv.hgstudy.service.JointService;
 import org.springframework.stereotype.Service;
 
 import cn.lv.hgstudy.dao.JointDao;
@@ -21,36 +22,37 @@ import cn.lv.hgstudy.pojo.Joint;
 
 /** 
  * @ClassName: JointServiceImp 
- * @Description: TODO(这里用一句话描述这个类的作用) 
+ * @Description:
  * @author lv
  * @date 2017年9月19日 下午10:41:13 
  *  
  */
 @Service
-public class JointServiceImp implements JointService{
+public class JointServiceImp implements JointService {
 	@Resource
 	JointDao jointdao;
+
 	/* (non-Javadoc)
 	 * @see cn.lv.hgstudy.service.JointService#selectJointByJId(int)
 	 */
+	@Override
 	public Joint selectJointByJId(Integer jointid) {
-		// TODO Auto-generated method stub
 		return jointdao.selectJointById(jointid);
 	}
 
 	/* (non-Javadoc)
 	 * @see cn.lv.hgstudy.service.JointService#selectJointsByCouid(java.lang.String)
 	 */
+	@Override
 	public List<Joint> selectJointsByCId(Integer chapterid) {
-		// TODO Auto-generated method stub
 		return jointdao.selectJointByCId(chapterid);
 	}
 
 	/* (non-Javadoc)
 	 * @see cn.lv.hgstudy.service.JointService#addJoint(cn.lv.hgstudy.pojo.Joint)
 	 */
+	@Override
 	public int addJoint(Joint joint) {
-		// TODO Auto-generated method stub
 		Map map = new HashMap<String, Object>();
 		map.put("chapterid", joint.getChapterid());
 		map.put("index", joint.getJointIndex());
@@ -71,8 +73,8 @@ public class JointServiceImp implements JointService{
 	/* (non-Javadoc)
 	 * @see cn.lv.hgstudy.service.JointService#editJoint(cn.lv.hgstudy.pojo.Joint)
 	 */
+	@Override
 	public int editJoint(Joint joint) {
-		// TODO Auto-generated method stub
 		jointdao.editJointInfor(joint);
 		return 1;
 	}
@@ -80,8 +82,8 @@ public class JointServiceImp implements JointService{
 	/* (non-Javadoc)
 	 * @see cn.lv.hgstudy.service.JointService#deleteJoint(cn.lv.hgstudy.pojo.Joint)
 	 */
+	@Override
 	public int deleteJoint(Integer jointid) {
-		// TODO Auto-generated method stub
 		jointdao.deleteJoint(jointid);
 		return 1;
 	}

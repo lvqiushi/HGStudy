@@ -6,10 +6,11 @@
  * @date 2017年9月13日 下午7:28:50 
  * @version V1.0   
  */
-package cn.lv.hgstudy.service;
+package cn.lv.hgstudy.service.imp;
 
 import javax.annotation.Resource;
 
+import cn.lv.hgstudy.service.TeacherService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,29 +20,29 @@ import cn.lv.hgstudy.util.BASE64Encode;
 
 /** 
  * @ClassName: TeacherServiceImp 
- * @Description: TODO(这里用一句话描述这个类的作用) 
+ * @Description:
  * @author lv
  * @date 2017年9月13日 下午7:28:50 
  *  
  */
 @Service
-public class TeacherServiceImp implements TeacherService{
+public class TeacherServiceImp implements TeacherService {
 	@Resource
 	TeacherDao tdao;
 	
 	/* (non-Javadoc)
 	 * @see cn.lv.hgstudy.service.TeacherService#showTeacherInfor(int)
 	 */
+	@Override
 	public Teacher showTeacherInfor(String teaid) {
-		// TODO Auto-generated method stub
 		return tdao.selectTeaInforById(teaid);
 	}
 
 	/* (non-Javadoc)
 	 * @see cn.lv.hgstudy.service.TeacherService#loginTeacher(int)
 	 */
+	@Override
 	public Teacher loginTeacher(String teaid,String password) {
-		// TODO Auto-generated method stub
 		Teacher tea = tdao.selectTeacherById(teaid);
 		if(null == tea)
 			return null;
@@ -56,8 +57,8 @@ public class TeacherServiceImp implements TeacherService{
 	/* (non-Javadoc)
 	 * @see cn.lv.hgstudy.service.TeacherService#editTeacher(cn.lv.hgstudy.pojo.Teacher)
 	 */
+	@Override
 	public boolean editTeacher(Teacher tea) {
-		// TODO Auto-generated method stub
 		return tdao.editinfor(tea);
 	}
 
@@ -65,10 +66,9 @@ public class TeacherServiceImp implements TeacherService{
 	 * @see cn.lv.hgstudy.service.TeacherService#editTeaHeader(cn.lv.hgstudy.pojo.Teacher)
 	 */
 	@Transactional
+	@Override
 	public boolean editTeaHeader(String img,String teaid) {
-		// TODO Auto-generated method stub
-		BASE64Encode baseEncoude = new BASE64Encode();
-		String imageName = baseEncoude.DecoderImage(img.split(",")[1]);
+		String imageName = BASE64Encode.DecoderImage(img.split(",")[1]);
 		System.out.println(imageName);
 		Teacher tea = new Teacher();
 		tea.setTeaId(teaid);

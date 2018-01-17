@@ -1,9 +1,6 @@
 package cn.lv.hgstudy.controller;
 
-import java.util.List;
-
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import cn.lv.hgstudy.common.Page;
 import cn.lv.hgstudy.pojo.Course;
-import cn.lv.hgstudy.service.CourseServiceImp;
+import cn.lv.hgstudy.service.imp.CourseServiceImp;
 
 @Controller
 public class CourseController {

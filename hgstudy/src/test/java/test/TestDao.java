@@ -15,9 +15,8 @@ import cn.lv.hgstudy.dao.CoursewareDao;
 import cn.lv.hgstudy.dao.TeacherDao;
 import cn.lv.hgstudy.pojo.Course;
 import cn.lv.hgstudy.pojo.Courseware;
-import cn.lv.hgstudy.pojo.Teacher;
-import cn.lv.hgstudy.service.CourseServiceImp;
-import cn.lv.hgstudy.service.CoursewareServiceImp;
+import cn.lv.hgstudy.service.imp.CourseServiceImp;
+import cn.lv.hgstudy.service.imp.CoursewareServiceImp;
 
 public class TestDao {
 	static CourseDao cdao;

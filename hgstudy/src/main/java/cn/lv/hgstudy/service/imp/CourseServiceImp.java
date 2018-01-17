@@ -1,4 +1,4 @@
-package cn.lv.hgstudy.service;
+package cn.lv.hgstudy.service.imp;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import cn.lv.hgstudy.service.CourseService;
 import org.springframework.stereotype.Service;
 
 import cn.lv.hgstudy.common.Page;
@@ -22,14 +23,13 @@ import cn.lv.hgstudy.pojo.Course;
  *
  */
 @Service
-public class CourseServiceImp implements CourseService{
+public class CourseServiceImp implements CourseService {
 	
 	@Resource
 	CourseDao cdao;
-	
 
+	@Override
 	public List<Course> selectHotCourses() {
-		// TODO Auto-generated method stub
 		List courses = new ArrayList<Course>();
 		
 		for(int i=1;i<6;i++){			
@@ -39,8 +39,8 @@ public class CourseServiceImp implements CourseService{
 		return courses;
 	}
 
+	@Override
 	public List<Course> selectCompetitiveCourses(int start,int pageNumber) {
-		// TODO Auto-generated method stub
 		List courses = new ArrayList<Course>();
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("start", start);
@@ -50,8 +50,8 @@ public class CourseServiceImp implements CourseService{
 		return courses;
 	}
 
+	@Override
 	public Page selectCoursesByTeaID(String teaid,int start,int pageNumber) {
-		// TODO Auto-generated method stub
 		List courses = new ArrayList<Course>();
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("start", start);
@@ -64,20 +64,19 @@ public class CourseServiceImp implements CourseService{
 		return page;
 	}
 
+	@Override
 	public boolean EditCourseInfor(Course cou) {
-		// TODO Auto-generated method stub
 		return cdao.editCourseInfor(cou);
 	}
 
+	@Override
 	public Course selectCourseByID(String couid) {
-		// TODO Auto-generated method stub
 		return cdao.selectCourseById(couid);
 	}
 
-
+	@Override
 	public Page selectCourses(Integer start, Integer pageNumber, Integer type,
 			Integer kind) {
-		// TODO Auto-generated method stub
 		List courses = new ArrayList<Course>();
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("start", start);
