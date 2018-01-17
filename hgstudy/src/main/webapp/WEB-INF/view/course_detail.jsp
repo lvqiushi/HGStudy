@@ -76,7 +76,7 @@
         </div>
         <div class="col-sm-3 text-center">
             <a href="PlayAction.action?couid=${cou.couId }&teaid=${cou.tea.teaId}" type="button" id="course-btn" class="btn btn-info btn-lg btn-block">播放视频</a><br><br>
-            <a href="showkejian.action?couid=${cou.couId }" type="button" id="class-list" class="btn btn-info btn-lg btn-block">课件列表</a><br><br>
+            <a href="toDownloadCourseware?couid=${cou.couId }" type="button" id="class-list" class="btn btn-info btn-lg btn-block">课件列表</a><br><br>
             <div class="panel panel-success">
                 <div class="panel-heading">授课教师</div>
                 <div class="panel-body teacher-list">

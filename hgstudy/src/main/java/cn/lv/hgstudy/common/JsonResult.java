@@ -1,8 +1,10 @@
 package cn.lv.hgstudy.common;
 
+import java.util.ArrayList;
+
 public class JsonResult<T> {
 	private boolean success;
-	private T content;
+	private ArrayList<T> content;
 	private String message;
 	private String otherinfor;
 	
@@ -27,12 +29,12 @@ public class JsonResult<T> {
 	public void setOtherinfor(String otherinfor) {
 		this.otherinfor = otherinfor;
 	}
-
-	public T getContent() {
+	public ArrayList<T> getContent() {
 		return content;
 	}
-
-	public void setContent(T content) {
+	public void setContent(ArrayList<T> content) {
 		this.content = content;
 	}
+	
+	
 }

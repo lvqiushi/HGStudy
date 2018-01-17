@@ -16,7 +16,11 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+
+
+import cn.lv.hgstudy.common.JsonResult;
 import cn.lv.hgstudy.common.Page;
 import cn.lv.hgstudy.dao.CourseDao;
 import cn.lv.hgstudy.dao.TeacherDao;
@@ -25,6 +29,7 @@ import cn.lv.hgstudy.pojo.Teacher;
 import cn.lv.hgstudy.service.ChapterService;
 import cn.lv.hgstudy.service.CourseService;
 import cn.lv.hgstudy.service.TeacherService;
+import cn.lv.hgstudy.util.BASE64Encode;
 
 /** 
  * @ClassName: TeacherController 
@@ -49,7 +54,7 @@ public class TeacherController {
     /**
      * 
      * @Title: showTeacherInfor 
-     * @Description: 跳转到教师信息页面
+     * @Description: TODO(跳转到教师信息页面) 
      * @param teaid  教师号
      * @param model
      * @return String 教师信息页面 
@@ -68,7 +73,7 @@ public class TeacherController {
 	/**
 	 * 
 	 * @Title: managerTeacherInfor 
-	 * @Description: 跳转到教师个人中心页面
+	 * @Description: TODO(跳转到教师个人中心页面) 
 	 * @param model
 	 * @param session   
 	 * @return String     
@@ -85,7 +90,7 @@ public class TeacherController {
 	/**
 	 * 
 	 * @Title: showTeachercCourse 
-	 * @Description: 跳转到教师下的课程列表页面
+	 * @Description: TODO(跳转到教师下的课程列表页面) 
 	 * @param model
 	 * @param session
 	 * @param curpage
@@ -106,7 +111,7 @@ public class TeacherController {
 	/**
 	 * 
 	 * @Title: showTeachercCourse 
-	 * @Description: 跳转到编辑教师信息页面
+	 * @Description: TODO(跳转到编辑教师信息页面) 
 	 * @param model
 	 * @param teaid
 	 * @return String     
@@ -141,6 +146,22 @@ public class TeacherController {
 		List chapters = chapterService.selectChaptersByCouId(couid);
 		model.addAttribute("chapters", chapters);
 		return "edit_course";
+	}
+	
+	@RequestMapping(value = "/toEditCourseIndex")
+    public String toEditCourseIndex(Model model,String couid){
+		model.addAttribute("couid", couid);
+		return "edit_course_index";
+	}
+	
+	
+	@RequestMapping(value = "/editHeader")
+	@ResponseBody
+    public JsonResult editHeader(Model model,String img,String teaid){
+		tercherService.editTeaHeader(img,teaid);	
+		JsonResult result = new JsonResult();
+		result.setMessage("修改头像成功");
+		return result;
 	}
 	
 

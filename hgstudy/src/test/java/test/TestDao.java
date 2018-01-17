@@ -11,18 +11,26 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import cn.lv.hgstudy.dao.CourseDao;
+import cn.lv.hgstudy.dao.CoursewareDao;
 import cn.lv.hgstudy.dao.TeacherDao;
 import cn.lv.hgstudy.pojo.Course;
+import cn.lv.hgstudy.pojo.Courseware;
 import cn.lv.hgstudy.pojo.Teacher;
+import cn.lv.hgstudy.service.CourseServiceImp;
+import cn.lv.hgstudy.service.CoursewareServiceImp;
 
 public class TestDao {
 	static CourseDao cdao;
 	static TeacherDao tdao;
+	static CoursewareDao csdao;
+	static CoursewareServiceImp cservice;
+	static CourseServiceImp cervice;
 	@BeforeClass
     public static void before(){
         ApplicationContext ctx=new ClassPathXmlApplicationContext("applicationContext.xml");
         //tdao=ctx.getBean(TeacherDao.class);
-        cdao=ctx.getBean(CourseDao.class);
+        csdao=ctx.getBean(CoursewareDao.class);
+        cservice=ctx.getBean(CoursewareServiceImp.class);
     }
 	
 	@Test
@@ -47,10 +55,16 @@ public class TestDao {
 			System.out.println(cou.getCouName());
 		}
 		
-		Course cou1 = cdao.selectCourseById("1");
-		System.out.println("the new ");
-		System.out.println(cou1.getCouName());
-		System.out.println(cou1.getTea().getTeaName());
-		System.out.println(cou1.getTea().getTeaId());
+	}
+	@Test
+	public void test02(){
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("start", 0);
+		map.put("pagenumber", 4);
+		map.put("couid", 1);
+		List<Courseware> cslist = csdao.selectCoursewareByCouid(map);
+		for (Courseware cou : cslist) {
+			System.out.println(cou.getFileName());
+		}
 	}
 }

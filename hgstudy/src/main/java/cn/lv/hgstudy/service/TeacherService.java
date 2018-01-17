@@ -21,5 +21,6 @@ import cn.lv.hgstudy.pojo.Teacher;
 public interface TeacherService {
 	Teacher showTeacherInfor(String teaid);
 	Teacher loginTeacher(String username,String password);
+	boolean editTeaHeader(String img,String teaid);
 	boolean editTeacher(Teacher tea);
 }

@@ -53,7 +53,7 @@
         <div class="col-xs-3  head-img">
         	<div class="row">
         		<div class="col-md-6 col-sm-12">
-                    <a id="teacher-head-btn" href="#avatar-modal" data-toggle="modal"><img class="img-responsive img-rounded" id="teacherHeader" src="${tea.teaImage }" title="点击修改头像" alt=""></a>
+                    <a id="teacher-head-btn" href="#avatar-modal" data-toggle="modal"><img class="img-responsive img-rounded" id="teacherHeader" src="header/${tea.teaImage }" title="点击修改头像" alt=""></a>
                 </div>
 	            <div class="col-md-6">
 	            	<br>
@@ -190,7 +190,7 @@
 		data.img = src;
 		data.teaid = ${user.teaId};
 		$.ajax({
-			url: "Header.action",
+			url: "editHeader",
 			data: {
 				img:src,
 				teaid:data.teaid
@@ -198,9 +198,9 @@
 			type: "POST",
 			dataType: 'json',
 			success: function(re) {
-				if(re.data.success == true){
+				if(re.success == true){
 					$("#teacherHeader").attr('src',src );
-					alert(re.data.message);				
+					alert(re.message);				
 				}
 				else{					
 				}

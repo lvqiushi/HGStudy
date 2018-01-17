@@ -12,21 +12,56 @@
 		select * from joint j where j.chapter_id = #{chapterid}
 	</select>
 	
+	<select id="selectJointByIndex" parameterType="map"  resultType="boolean" >
+		select count(j.joint_id) from joint j where j.chapter_id = #{chapterid} and j.joint_index = #{index}
+	</select>
+	
     <delete id="deleteJoint" parameterType="int">
 		delete j from joint j where j.joint_id = #{jointid}
 	</delete>
 
-	<insert id="addJoint" parameterType="map" > 
-  		insert into joint(joint_index,joint_title,joint_infor,chapter_id) values
-              (#{joint.jointIndex},#{joint.jointTitle},#{joint.jointInfor},#{chapterid})
+	<insert id="addJoint" parameterType="Joint" > 
+  		insert into joint
+  			<trim prefix="(" suffix=")" suffixOverrides=",">
+				<if test="jointIndex != null">
+					joint_index,
+				</if>
+				<if test="jointTitle != null">
+					joint_title,
+				</if>
+				<if test="jointInfor != null">
+					joint_infor,
+				</if>
+				chapter_id,
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+				<if test="jointIndex != null">
+					#{jointIndex},
+				</if>
+				<if test="jointTitle != null">
+					#{jointTitle},
+				</if>
+				<if test="jointInfor != null">
+					#{jointInfor},
+				</if>
+				#{chapterid},
+			</trim>
 	</insert>
 	
 	<update id="editJointInfor" parameterType="Joint">  
         update joint j
-            set j.joint_title = #{jointTitle},
-            	j.joint_index = #{jointIndex},
-            	j.joint_infor = #{jointInfor}
-         where j.joint_id = #{jointid}   
+        	<trim prefix="set" suffixOverrides=",">
+        		<if test="jointTitle!=null and jointTitle!='' ">
+       				j.joint_title = #{jointTitle},
+       			</if>
+       			<if test="jointIndex!=null and jointIndex!='' ">
+       				j.joint_index = #{jointIndex},
+       			</if>
+       			<if test="jointInfor!=null and jointInfor!='' ">
+       				j.joint_infor = #{jointInfor},
+       			</if>
+        	</trim>
+         where j.joint_id = #{jid}   
 	</update>
 	
 	<resultMap type="Joint" id="jointMap">

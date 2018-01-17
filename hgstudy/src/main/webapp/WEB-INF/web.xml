@@ -6,10 +6,35 @@
 
   <display-name>Archetype Created Web Application</display-name>
   
+  	<filter>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>utf-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- <filter>
+		<filter-name>RequestFilter</filter-name>
+		<filter-class>cn.lv.hgstudy.filter.MultipartRequestFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>RequestFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping> -->
+	
     <!-- 该监听器将在Web容器启动时激活Spring -->
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
+
+ 	
     <context-param>
         <description>设置Spring加载时的配置文件位置，默认位置在web-inf/lib下</description>
         <param-name>contextConfigLocation</param-name>
@@ -61,16 +86,5 @@
     	<url-pattern>/*</url-pattern>
 	</filter-mapping>	-->
 	
-	<filter>
-		<filter-name>CharacterEncodingFilter</filter-name>
-		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
-		<init-param>
-			<param-name>encoding</param-name>
-			<param-value>utf-8</param-value>
-		</init-param>
-	</filter>
-	<filter-mapping>
-		<filter-name>CharacterEncodingFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
+
 </web-app>

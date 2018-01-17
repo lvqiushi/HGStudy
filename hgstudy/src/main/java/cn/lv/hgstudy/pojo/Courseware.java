@@ -13,13 +13,13 @@ public class Courseware implements java.io.Serializable {
 	private String fileInfor;
 	private String time;
 	private Integer couId;
-	private String uploader;
+	private Teacher uploader;
 
 	public Courseware() {
 	}
 
 	public Courseware(String fileName, String filePath, String fileInfor,
-			String time, Integer couId, String uploader) {
+			String time, Integer couId, Teacher uploader) {
 		this.fileName = fileName;
 		this.filePath = filePath;
 		this.fileInfor = fileInfor;
@@ -76,11 +76,11 @@ public class Courseware implements java.io.Serializable {
 		this.couId = couId;
 	}
 
-	public String getUploader() {
+	public Teacher getUploader() {
 		return this.uploader;
 	}
 
-	public void setUploader(String uploader) {
+	public void setUploader(Teacher uploader) {
 		this.uploader = uploader;
 	}
 

@@ -1,24 +1,28 @@
+/**   
+ * @Title: JointService.java 
+ * @Package cn.lv.hgstudy.service 
+ * @Description: TODO(用一句话描述该文件做什么) 
+ * @author lv 
+ * @date 2017年9月19日 下午10:26:17 
+ * @version V1.0   
+ */
 package cn.lv.hgstudy.service;
-
-import cn.lv.hgstudy.pojo.Joint;
 
 import java.util.List;
 
-/**  
- * <p> (这里用一句话描述这个类的作用) </p>
- *   
- * @author: xiucai（xiucai@maihaoche.com）
- * @date: 2018/1/11 15:28  
- * @since V1.0
- */
+import cn.lv.hgstudy.pojo.Joint;
+
+/** 
+ * @ClassName: JointService 
+ * @Description: TODO(这里用一句话描述这个类的作用) 
+ * @author lv
+ * @date 2017年9月19日 下午10:26:17 
+ *  
+ */
 public interface JointService {
-	Joint selectJointById(Integer id);
-
-	List<Joint> selectJointByCId(Integer chapterId);
-
-	Boolean deleteJoint(Integer id);
-
-	Boolean addJoint(Joint joint);
-
-	Boolean editJointInfor(Joint joint);
+	Joint selectJointByJId(Integer jointid);
+	List<Joint> selectJointsByCId(Integer chapterid);
+	int addJoint(Joint joint);
+	int editJoint(Joint joint);
+	int deleteJoint(Integer jointid);
 }

@@ -218,7 +218,7 @@
             <div class="row">
                 <c:forEach var="course" items="${courses}" varStatus="index">
 					<div class="index-course col-sm-3 col-xs-6">
-						<a href="CourseAction?couID=${course.couId}">
+						<a href="selectCourseInfor?couid=${course.couId}">
 						<img class="course-img img-responsive" src="${course.couImg}" alt=""></a>
 		                <div class="course-img-down img-responsive">
 	                        <span class="course-img-down-title" style="padding-top: 5px">${course.couName}</span><br>

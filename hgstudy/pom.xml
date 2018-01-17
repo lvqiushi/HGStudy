@@ -2,10 +2,10 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.spring</groupId>
-  <artifactId>hhit-study</artifactId>
+  <artifactId>spitter</artifactId>
   <packaging>war</packaging>
   <version>0.0.1-SNAPSHOT</version>
-  <name>hhit-web-study</name>
+  <name>spitter Maven Webapp</name>
   <url>http://maven.apache.org</url>
   
   
@@ -85,20 +85,28 @@
             <artifactId>c3p0</artifactId>
             <version>0.9.1.2</version>
         </dependency>
-
-	  <!-- 文件上传所依赖的jar包 -->
-	    <dependency>
-			<groupId>commons-fileupload</groupId>
-			<artifactId>commons-fileupload</artifactId>
-			<version>1.3.1</version>
-		</dependency>
-
-	  <!-- 邮件必备包 -->
+        
+        <!-- 文件上传所依赖的jar包 -->  
+	    <dependency>  
+	        <groupId>commons-fileupload</groupId>  
+	        <artifactId>commons-fileupload</artifactId>  
+	        <version>1.3.1</version>  
+	    </dependency> 
+        
+        <!-- 邮件必备包 -->
 	    <dependency>
 		    <groupId>com.sun.mail</groupId>
 		    <artifactId>javax.mail</artifactId>
 		    <version>1.6.0</version>
 		</dependency>
+		
+		<!-- StringUtils 工具包 -->
+		<dependency>
+		    <groupId>commons-lang</groupId>
+		    <artifactId>commons-lang</artifactId>
+		    <version>2.6</version>
+		</dependency>
+		
 	    
 	    <!-- security必备包 -->
         <dependency>
@@ -143,7 +151,7 @@
   </dependencies>
   
   <build>
-    <finalName>hhit-study</finalName>
+    <finalName>spitter</finalName>
 
     <plugins>
 	    <plugin>
@@ -151,6 +159,7 @@
 	        <artifactId>maven-compiler-plugin</artifactId>
 	        <version>3.5.1</version>
 	        <configuration>
+	        	<encoding>utf-8</encoding>
 	            <source>1.8</source>
 	            <target>1.8</target>
 	        </configuration>

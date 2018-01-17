@@ -1,7 +1,7 @@
 <%@page import="java.util.*"%>
-<%@ page language="java" import="hiber.pojo.*" contentType="text/html; charset=UTF-8"
+<%@ page language="java"  contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="s" uri="/struts-tags" %>
+
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
  <%
  	String path = request.getContextPath();

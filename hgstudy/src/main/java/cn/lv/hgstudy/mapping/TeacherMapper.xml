@@ -10,8 +10,14 @@
 	<select id="selectTeaInforById" parameterType="String"  resultMap="teacherResultMap">
 		select * from teacher tea where tea.tea_id = #{teaid}
 	</select>
+	
+	<update id="editTeaHeader" parameterType="Teacher" >
+		update teacher tea 
+			set tea.tea_header = #{teaImage}
+		where tea.tea_id = #{teaId}; 
+	</update>
  	
-	<update id="editinfor" parameterType="Teacher">  
+	<update id="editinfor" parameterType="Teacher" >  
         update teacher tea 
         	<trim prefix="set" suffixOverrides=",">
        			<if test="teaName!=null and teaName!='' ">

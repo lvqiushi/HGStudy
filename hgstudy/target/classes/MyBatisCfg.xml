@@ -12,7 +12,7 @@
 	
     <!--类型别名，默认引入com.zhangguo.Spring61.entities下的所有类 -->
     <typeAliases>
-        <package name="cn.lv.hgstudy.pojo"/>
+        <package name="com.spitter.pojo"/>
     </typeAliases>
 	
     <!-- 

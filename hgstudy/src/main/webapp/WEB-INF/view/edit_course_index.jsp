@@ -32,13 +32,13 @@
     <hr>
     <div style="margin-top: 150px;">
         <div class="col-xs-offset-3 col-xs-2">
-            <a type="button" id="kjList-btn" onclick="kejian(${param.couid})" class="btn btn-default btn-lg">课件列表</a>
+            <a type="button" id="kjList-btn" onclick="kejian(${couid})" class="btn btn-default btn-lg">课件列表</a>
         </div>
         <div class="col-xs-2">
-            <a type="button" id="addZJ-btn" onclick="addchapter(${param.couid})" class="btn btn-default btn-lg">添加章节</a>
+            <a type="button" id="addZJ-btn" onclick="addchapter(${couid})" class="btn btn-default btn-lg">添加章节</a>
         </div>
         <div class="col-xs-2">
-            <a type="button" id="fengmian-btn" onclick="editimage(${param.couid})" class="btn btn-default btn-lg">编辑课程封面</a>
+            <a type="button" id="fengmian-btn" onclick="editimage(${couid})" class="btn btn-default btn-lg">编辑课程封面</a>
         </div>
     </div>
 
@@ -46,10 +46,10 @@
 
 <script>
 	function addchapter(couid) {
-		location.href = "html/add_zhangjie.jsp?couid="+couid
+		location.href = "toAddChapter?couid="+couid
 	}
 	function kejian(couid) {
-		location.href = "kejian.action?couid="+couid+"&curpage=1"
+		location.href = "showCourseware?couid="+couid+"&curpage=1"
 	}
 	function editimage(couid) {
 		location.href = "html/courseimage.jsp?couid="+couid
