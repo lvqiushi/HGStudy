@@ -19,7 +19,7 @@ import cn.lv.hgstudy.service.JointService;
 
 /** 
  * @ClassName: JointController 
- * @Description: TODO(这里用一句话描述这个类的作用) 
+ * @Description:
  * @author lv
  * @date 2017年9月19日 下午10:22:35 
  *  
@@ -58,7 +58,6 @@ public class JointController {
 			else
 				return "redirect:/toEditCourse?couid="+couid;
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 			return "error";
 		}

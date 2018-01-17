@@ -14,7 +14,7 @@ import cn.lv.hgstudy.pojo.Joint;
 
 /** 
  * @ClassName: JointService 
- * @Description: TODO(这里用一句话描述这个类的作用) 
+ * @Description:
  * @author lv
  * @date 2017年9月19日 下午10:26:17 
  *  

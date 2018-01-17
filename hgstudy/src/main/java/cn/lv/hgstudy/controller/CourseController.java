@@ -8,12 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import cn.lv.hgstudy.common.Page;
 import cn.lv.hgstudy.pojo.Course;
-import cn.lv.hgstudy.service.imp.CourseServiceImp;
+import cn.lv.hgstudy.service.imp.CourseServiceImpl;
 
 @Controller
 public class CourseController {
-	@Resource
-	CourseServiceImp courseService;
+	@Resource CourseServiceImpl courseService;
 	//分页时每页数量
 	private int pageNumber = 6;
 	

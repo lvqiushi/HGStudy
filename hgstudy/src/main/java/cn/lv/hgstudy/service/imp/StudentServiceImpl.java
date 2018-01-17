@@ -24,7 +24,7 @@ import cn.lv.hgstudy.pojo.Student;
  *  
  */
 @Service
-public class StudentServiceImp implements StudentService {
+public class StudentServiceImpl implements StudentService {
 	@Resource
 	StudentDao sdao;
 	
@@ -33,7 +33,6 @@ public class StudentServiceImp implements StudentService {
 	 */
 	@Override
 	public Student showStudentInfor(String stuid) {
-		// TODO Auto-generated method stub
 		return sdao.selectStudentById(stuid);
 	}
 
@@ -42,7 +41,6 @@ public class StudentServiceImp implements StudentService {
 	 */
 	@Override
 	public Student loginStudent(String username, String password) {
-		// TODO Auto-generated method stub
 		Student stu = sdao.selectStudentById(username);
 		if(null == stu)
 			return null;

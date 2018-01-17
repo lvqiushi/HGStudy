@@ -15,21 +15,21 @@ import cn.lv.hgstudy.dao.CoursewareDao;
 import cn.lv.hgstudy.dao.TeacherDao;
 import cn.lv.hgstudy.pojo.Course;
 import cn.lv.hgstudy.pojo.Courseware;
-import cn.lv.hgstudy.service.imp.CourseServiceImp;
-import cn.lv.hgstudy.service.imp.CoursewareServiceImp;
+import cn.lv.hgstudy.service.imp.CourseServiceImpl;
+import cn.lv.hgstudy.service.imp.CoursewareServiceImpl;
 
 public class TestDao {
 	static CourseDao cdao;
 	static TeacherDao tdao;
 	static CoursewareDao csdao;
-	static CoursewareServiceImp cservice;
-	static CourseServiceImp cervice;
+	static CoursewareServiceImpl cservice;
+	static CourseServiceImpl cervice;
 	@BeforeClass
     public static void before(){
         ApplicationContext ctx=new ClassPathXmlApplicationContext("applicationContext.xml");
         //tdao=ctx.getBean(TeacherDao.class);
         csdao=ctx.getBean(CoursewareDao.class);
-        cservice=ctx.getBean(CoursewareServiceImp.class);
+        cservice=ctx.getBean(CoursewareServiceImpl.class);
     }
 	
 	@Test

@@ -28,7 +28,7 @@ import cn.lv.hgstudy.pojo.Joint;
  *  
  */
 @Service
-public class JointServiceImp implements JointService {
+public class JointServiceImpl implements JointService {
 	@Resource
 	JointDao jointdao;
 

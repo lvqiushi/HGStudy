@@ -36,7 +36,7 @@ import cn.lv.hgstudy.pojo.Courseware;
  *  
  */
 @Service
-public class CoursewareServiceImp implements CoursewareService {
+public class CoursewareServiceImpl implements CoursewareService {
 
 	@Resource
 	CoursewareDao coursewaredao;

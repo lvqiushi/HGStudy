@@ -25,7 +25,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import cn.lv.hgstudy.common.Page;
 import cn.lv.hgstudy.pojo.Courseware;
-import cn.lv.hgstudy.service.imp.CoursewareServiceImp;
+import cn.lv.hgstudy.service.imp.CoursewareServiceImpl;
 
 /** 
  * @ClassName: CoursewareController 
@@ -36,8 +36,7 @@ import cn.lv.hgstudy.service.imp.CoursewareServiceImp;
  */
 @Controller
 public class CoursewareController {
-	@Resource
-	CoursewareServiceImp cousewareService;
+	@Resource CoursewareServiceImpl cousewareService;
 	//分页时每页数量
 	private int pageNumber = 6;
 		

@@ -26,7 +26,7 @@ import cn.lv.hgstudy.pojo.Chapter;
  *  
  */
 @Service
-public class ChapterServiceImp implements ChapterService {
+public class ChapterServiceImpl implements ChapterService {
 
 	@Resource
 	ChapterDao chdao;

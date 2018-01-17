@@ -26,7 +26,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 /** 
  * @ClassName: MultipartRequestFilter 
- * @Description: TODO(这里用一句话描述这个类的作用) 
+ * @Description:
  * @author lv
  * @date 2017年10月27日 下午4:19:55 
  *  
@@ -37,21 +37,21 @@ public class MultipartRequestFilter implements Filter{
 	/* (non-Javadoc)
 	 * @see javax.servlet.Filter#destroy()
 	 */
+	@Override
 	public void destroy() {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	/* (non-Javadoc)
 	 * @see javax.servlet.Filter#doFilter(javax.servlet.ServletRequest, javax.servlet.ServletResponse, javax.servlet.FilterChain)
 	 */
+	@Override
 	public void doFilter(ServletRequest req, ServletResponse res,
 			FilterChain chain) throws IOException, ServletException {
-		// TODO Auto-generated method stub
 		String enctype = req.getContentType(); 
 		if (StringUtils.isNotBlank(enctype) && enctype.contains("multipart/form-data")){
 			 MultipartHttpServletRequest multiReq = multipartResolver.resolveMultipart((HttpServletRequest)req);
-			 req=multiReq;
+			 req = multiReq;
 			 System.out.println("已转换");
 		}
 	    chain.doFilter(req, res);
@@ -60,9 +60,8 @@ public class MultipartRequestFilter implements Filter{
 	/* (non-Javadoc)
 	 * @see javax.servlet.Filter#init(javax.servlet.FilterConfig)
 	 */
+	@Override
 	public void init(FilterConfig arg0) throws ServletException {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

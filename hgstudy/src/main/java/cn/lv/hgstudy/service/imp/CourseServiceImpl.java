@@ -23,7 +23,7 @@ import cn.lv.hgstudy.pojo.Course;
  *
  */
 @Service
-public class CourseServiceImp implements CourseService {
+public class CourseServiceImpl implements CourseService {
 	
 	@Resource
 	CourseDao cdao;

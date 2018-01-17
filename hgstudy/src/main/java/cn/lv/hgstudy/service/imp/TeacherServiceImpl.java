@@ -26,7 +26,7 @@ import cn.lv.hgstudy.util.BASE64Encode;
  *  
  */
 @Service
-public class TeacherServiceImp implements TeacherService {
+public class TeacherServiceImpl implements TeacherService {
 	@Resource
 	TeacherDao tdao;
 	
