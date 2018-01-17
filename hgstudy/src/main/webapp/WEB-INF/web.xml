@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://java.sun.com/xml/ns/javaee"
+     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+     id="WebApp_ID" version="3.0">
+
+  <display-name>Archetype Created Web Application</display-name>
+  
+    <!-- 该监听器将在Web容器启动时激活Spring -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <context-param>
+        <description>设置Spring加载时的配置文件位置，默认位置在web-inf/lib下</description>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath*:applicationContext.xml</param-value> 
+    </context-param>
+ 
+    <!-- 处理由JavaBeans,Introspector的使用而引起的缓冲泄露,建议配置此监听器 -->
+    <listener>
+        <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+    </listener>
+ 
+ 	<servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.js</url-pattern>
+        <url-pattern>*.css</url-pattern>
+        <url-pattern>*.ico</url-pattern>
+        <url-pattern>/img/*</url-pattern>
+        <url-pattern>/imgges/*</url-pattern>
+        <url-pattern>/courseimage/*</url-pattern>
+        <url-pattern>/header/*</url-pattern>
+        <url-pattern>/fonts/*</url-pattern>
+        <url-pattern>/font/*</url-pattern>
+    </servlet-mapping>
+    
+      <!--configure the setting of springmvcDispatcherServlet and configure the mapping-->
+    <servlet>
+        <servlet-name>spring-mvc</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        	<init-param>  
+	            <param-name>contextConfigLocation</param-name>   
+	            <param-value>classpath*:spring-mvc-servlet.xml</param-value>  
+        	</init-param>
+          <load-on-startup>1</load-on-startup> 
+    </servlet>
+ 
+    <servlet-mapping>
+        <servlet-name>spring-mvc</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+
+	<!-- Spring Secutiry4.1的过滤器链配置 
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+    <filter-name>springSecurityFilterChain</filter-name>
+    	<url-pattern>/*</url-pattern>
+	</filter-mapping>	-->
+	
+	<filter>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>utf-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+</web-app>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--命名空间应该是对应接口的包名+类名 -->
+<mapper namespace="cn.lv.hgstudy.dao.JointDao">
+    <!--id应该是接口中的方法，结果类型如没有配置别名则应该使用全名称 -->
+ 
+ 	<select id="selectJointById" parameterType="int"  resultMap="jointMap">
+		select * from joint j where j.joint_id = #{jointid}
+	</select>
+	
+	<select id="selectJointByCId" parameterType="int"  resultMap="jointMap">
+		select * from joint j where j.chapter_id = #{chapterid}
+	</select>
+	
+    <delete id="deleteJoint" parameterType="int">
+		delete j from joint j where j.joint_id = #{jointid}
+	</delete>
+
+	<insert id="addJoint" parameterType="map" > 
+  		insert into joint(joint_index,joint_title,joint_infor,chapter_id) values
+              (#{joint.jointIndex},#{joint.jointTitle},#{joint.jointInfor},#{chapterid})
+	</insert>
+	
+	<update id="editJointInfor" parameterType="Joint">  
+        update joint j
+            set j.joint_title = #{jointTitle},
+            	j.joint_index = #{jointIndex},
+            	j.joint_infor = #{jointInfor}
+         where j.joint_id = #{jointid}   
+	</update>
+	
+	<resultMap type="Joint" id="jointMap">
+         <!-- 用id属性来映射主键字段  -->
+         <id property="jid" column="joint_id"/>
+         <!-- 用result属性来映射非主键字段 -->
+         <result property="jointIndex" column="joint_index"/>
+         <result property="jointTitle" column="joint_title"/>
+         <result property="jointInfor" column="joint_infor"/>
+         <result property="chapterid" column="chapter_id"/>
+     </resultMap>
+</mapper>

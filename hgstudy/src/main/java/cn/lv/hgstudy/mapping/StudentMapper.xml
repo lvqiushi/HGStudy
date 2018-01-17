@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--命名空间应该是对应接口的包名+类名 -->
+<mapper namespace="cn.lv.hgstudy.dao.StudentDao">
+ 
+    <select id="selectStudentById" parameterType="String"  resultMap="stuResultMap">
+		select * from student stu where stu.stu_id = #{stuid}
+	</select>
+ 	
+	<update id="editinfor" parameterType="Teacher">  
+        update student stu 
+        	<trim prefix="set" suffixOverrides=",">
+       			<if test="stuName!=null and stuName!='' ">
+       				stu.stu_name = #{stuName}, 
+       			</if>
+       			<if test="stuSchool!=null and stuSchool!='' ">
+       				stu.stu_school = #{stuSchool}, 
+       			</if>
+       			<if test="stuImage!=null and stuImage!='' ">
+       				stu.stu_header = #{stuImage}, 
+       			</if>
+       			<if test="emailAdress!=null and emailAdress!='' ">
+       				stu.stu_email = #{emailAdress}, 
+       			</if>
+       			<if test="stuSex!=null and stuSex!='' ">
+       				stu.stu_sex = #{stuSex}
+       			</if>
+            </trim>
+         where stu.stu_id = #{stuId};     
+	</update>
+
+	
+	<resultMap type="Student" id="stuResultMap">
+         <!-- 用id属性来映射主键字段  -->
+         <id property="stuId" column="stu_id"/>
+         <!-- 用result属性来映射非主键字段 -->
+         <result property="stuName" column="stu_name"/>
+         <result property="stuSchool" column="stu_school"/>
+         <result property="stuPassword" column="stu_password"/>
+         <result property="stuImage" column="stu_header"/>
+         <result property="emailAdress" column="stu_email"/>
+         <result property="stuSex" column="stu_sex"/>
+     </resultMap>
+</mapper>

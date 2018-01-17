@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--命名空间应该是对应接口的包名+类名 -->
+<mapper namespace="cn.lv.hgstudy.dao.TeacherDao">
+    <!--id应该是接口中的方法，结果类型如没有配置别名则应该使用全名称 -->
+ 	<select id="selectTeacherById" parameterType="String"  resultMap="teaMap">
+		select tea.tea_id,tea.tea_name,tea.tea_password,tea.tea_email from teacher tea where tea.tea_id = #{teaid}
+	</select>
+	
+	<select id="selectTeaInforById" parameterType="String"  resultMap="teacherResultMap">
+		select * from teacher tea where tea.tea_id = #{teaid}
+	</select>
+ 	
+	<update id="editinfor" parameterType="Teacher">  
+        update teacher tea 
+        	<trim prefix="set" suffixOverrides=",">
+       			<if test="teaName!=null and teaName!='' ">
+       				tea.tea_name = #{teaName},
+       			</if>
+       			<if test="teaTil!=null and teaTil!='' ">
+       				tea.tea_til = #{teaTil},  
+       			</if>
+       			<if test="teaSchool!=null and teaSchool!='' ">
+       				tea.tea_school = #{teaSchool}, 
+       			</if>
+       			<if test="teaEduca!=null and teaEduca!='' ">
+       				tea.tea_educa = #{teaEduca}, 
+       			</if>
+       			<if test="teaImage!=null and teaImage!='' ">
+       				tea.tea_header = #{teaImage},
+       			</if>
+       			<if test="emailAdress!=null and emailAdress!='' ">
+       				tea.tea_email = #{emailAdress}, 
+       			</if>
+       			<if test="teaSex!=null and teaSex!='' ">
+       				tea.tea_sex = #{teaSex} , 
+       			</if>
+            </trim>
+         where tea.tea_id = #{teaId};     
+	</update>
+	
+	
+	<resultMap type="Teacher" id="teaMap">
+         <!-- 用result属性来映射非主键字段 -->
+         <result property="teaId" column="tea_id"/>
+         <result property="teaName" column="tea_name"/>
+         <result property="teaPassword" column="tea_password"/>
+         <result property="emailAdress" column="tea_email"/>
+     </resultMap>
+     
+	<resultMap type="Teacher" id="teacherResultMap">
+         <!-- 用result属性来映射非主键字段 -->
+         <result property="teaId" column="tea_id"/>
+         <result property="teaName" column="tea_name"/>
+         <result property="teaTil" column="tea_til"/>
+         <result property="teaSchool" column="tea_school"/>
+         <result property="teaImage" column="tea_header"/>
+         <result property="emailAdress" column="tea_email"/>
+         <result property="teaEduca" column="tea_educa"/>
+         <result property="teaSex" column="tea_sex"/>
+     </resultMap>
+</mapper>

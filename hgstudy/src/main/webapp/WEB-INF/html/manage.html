@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="ycw">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>编辑课程</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+    <!-- 全局js -->
+    <script src="../js/jquery-1.11.1.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <!--[if lt IE 9]>
+    <script src="../js/html5shiv.js"></script>
+    <script src="../js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid nvabar-container">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-header">
+                <a class="" href="#"><img class="img-responsive logo" src="../img/c1.png" style="margin-right: 20px"></a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav text-center">
+                    <li class="dropdown"><a href="../html/index.html" class="dropdown-toggle">首页</a></li>
+                    <li class="dropdown"><a href="#" class="dropdown-toggle">课程</a></li>
+                    <li class="dropdown"><a href="#" class="dropdown-toggle">其它</a></li>
+                    <li class="dropdown"><a href="#" class="dropdown-toggle">其它</a></li>
+                </ul>
+                <form class="navbar-form navbar-right" role="search">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search">
+                    </div>
+                    <button type="submit" class="btn btn-default">搜索</button>
+                    <span class="dropdown">
+                        <a href="#"><img src="../img/head.png" alt=".." class="dropdown-toggle img-circle head-top"></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">个人中心</a></li>
+                            <li><a href="../html/index.html">退出</a></li>
+                        </ul>
+                    </span>
+                </form>
+            </div>
+        </div>
+    </nav>
+</header>
+<article>
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                课程申请列表
+                <form class="navbar-form navbar-right" role="search">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search">
+                    </div>
+                    <button type="submit" class="btn btn-default">搜索</button>
+                </form>
+            </div>
+
+
+            <div class="panel-body text-center">
+                <table class="table kjTable">
+                    <tr>
+                        <th>课程名</th>
+                        <th>教师</th>
+                        <th>学校</th>
+                        <th>申请日期</th>
+                        <th>操作</th>
+                    </tr>
+                    <tr>
+                        <td>ios</td>
+                        <td>LIP</td>
+                        <td>hhit</td>
+                        <td>2017-01-02</td>
+                        <td><a href="#">同意</a> | <a href="#">拒绝</a></td>
+                    </tr>
+                </table>
+            </div>
+            <nav aria-label="Page navigation" class="text-center">
+                <ul class="pagination">
+                    <li>
+                        <a href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li>
+                        <a href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</article>
+</body>
+</html>

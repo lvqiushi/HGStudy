@@ -1,0 +1,225 @@
+@CHARSET "UTF-8";
+img{max-width: 100%;height:auto;}
+ol, ul, li,a {list-style: none;text-decoration: none;}
+body{
+    font-size: 14px;
+    font-family: "Microsoft YaHei";
+    padding:0;
+    margin: 0;
+    color:#8D8D8D;
+    /*background: #E7E8EB;*/
+}
+.clear{clear: both;}
+.header{width: 100%;height:40px;padding-left:30px;padding-top:2px;padding-bottom:3px;font-size: 30px;color: #ffffff;font-weight: bold;background:#EE924E; }
+.content{width: 85%;margin:0 auto;}
+.img-control{
+    display: inline-block;
+    border: 1px solid #EE924E;
+    width: 90px;
+    height: 90px;
+    text-align: center;
+    vertical-align: top;
+}
+.div-control{ 
+    text-align: center;
+}
+.button{margin-top: 20px;}
+.left{
+    float: left;
+    width: 25%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    display: block;
+    text-align: center;
+}
+.right{
+    float: left;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+}
+.upload-control{
+    padding: 20px;
+    border: 2px dashed #cccccc;
+    border-radius: 15px;
+}
+.file-control{
+    margin-top: 10px;
+}
+.upload-control input[type=file]{
+    position:relative;
+    left:-7px;
+    top: -40px;
+    opacity:0;
+    z-index:1;
+    width:223px;
+    height: 40px;
+    cursor: pointer;
+    text-align: center;
+    margin-bottom: -30px;
+}
+.system-img ul{
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+.center{text-align: center;}
+.btn{
+    background: #EE924E;
+    padding:5px 20px;
+    color: #ffffff;
+    border-radius:15px;
+    font-size: 14px;
+    font-weight: bold;
+}
+.dispose{
+    font-size:14px;
+    color: #3C3F41;
+   padding-top: 50px;
+}
+#system-img-list li{
+    position:relative;
+    width: 80px;
+    height: 80px;
+    display:inline-block;
+    margin-left: 8px;
+    margin-top: 8px;
+    vertical-align: middle;
+    text-align: center;
+    border: 1px solid #EE924E;
+}
+#system-img-list li a{
+    width: 80px;
+    height: 80px;
+    margin-left: 0;
+    margin-top: 3px;
+    text-align: center;
+    cursor: pointer;
+    display: block;
+}
+#system-img-list li.checked{border:2px solid red;}
+#system-img-list li.checked i{
+    width:30px;
+    height:30px;
+    position:absolute;
+    right:0;
+    bottom:0;
+    background:url(../img/bg/checked.gif) no-repeat;
+}
+.popUp-box-mask{
+    position: fixed;
+    background: #000;
+    opacity: 0.3;
+    z-index: 3;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left:0;
+    display:none;
+}
+.popUp-box{
+    position: relative;
+    width: 650px;
+    height: 450px;
+    top: 160px;
+    left: 20%;
+    z-index: 999;
+    display:none;
+}
+.popUp-box-inner{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 850px;
+    height: 500px;
+    margin: 0 auto;
+    padding: 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 2px 2px 3px #aaaaaa;
+    background: gainsboro;
+}
+.img-container{
+    display: table-cell;
+    width:650px;
+    height: 330px;
+    text-align: center;
+    vertical-align: middle;
+}
+.up-btn{
+    display: block;
+    width: 850px;
+    height: 50px;
+    background: #ffffff;
+    text-align: center;
+    border-radius: 0 0 5px 5px;
+    padding-top: 5px;
+}
+.hh{
+    height: 40px;width:830px;padding-left: 20px;background: #ffffff;margin: 0; border-radius: 5px 5px 0 0;line-height: 35px;
+}
+.up-btn-sd{
+    padding: 10px 15px 10px 15px;
+    /*background:  #EE924E;*/
+    text-align: center;
+    display: inline-block;
+    border-radius: 15px;
+    width: 80px;
+}
+.btn-bg-s{
+    background:  #EE924E;
+    margin-right: 20px;
+    color: #ffffff;
+}
+.btn-bg-d{
+    background:none;
+    border:1px solid #cccccc;
+    color:#3C3F41;
+    font-weight:bold;
+}
+.align-right{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width:30px;
+    height: 30px;
+    text-align: center;
+}
+.align-right i{
+    display: block;
+    width: 20px;
+    height: 20px;
+    background-image: url("../img/close50.png");
+    background-repeat:no-repeat;
+    background-size:18px 18px;
+}
+.align-right i:hover{
+    display: block;
+    width: 20px;
+    height: 20px;
+    background-image: url("../img/close.png");
+    -moz-background-size:18px 18px;
+    background-repeat:no-repeat;
+    background-size:18px 18px;
+    cursor: pointer;
+}
+.error{
+    color:red;
+    font-size:16px;
+    line-height:16px;
+    text-align:center;
+    display:none;
+}
+.up-btn-sd input[type=submit]{
+    width:50px;
+    height:20px;
+    background:none;
+    color:#ffffff;
+    opcity:0;
+    outline:0;
+    border:0;
+    font-size: 14px;
+    font-weight:bold;
+}
