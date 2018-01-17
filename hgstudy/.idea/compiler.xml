@@ -8,12 +8,10 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="hgstudy" />
-        <module name="spitter" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="hgstudy" target="1.8" />
-      <module name="spitter" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
