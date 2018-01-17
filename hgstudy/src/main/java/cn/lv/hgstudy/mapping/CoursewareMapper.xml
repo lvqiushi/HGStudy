@@ -2,5 +2,53 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--命名空间应该是对应接口的包名+类名 -->
 <mapper namespace="cn.lv.hgstudy.dao.CoursewareDao">
- 
+ 	
+ 	<select id="selectCoursewareById" parameterType="String"  resultMap="coursewareMap">
+		select c.*,t.tea_id,t.tea_name from courseware c left join teacher t on t.tea_id=c.uploader where c.file_id = #{coursewardid}
+	</select>
+	
+ 	<select id="selectCoursewareByCouid" parameterType="map"  resultMap="coursewareMap">
+		select c.*,t.tea_id,t.tea_name from courseware c left join teacher t on t.tea_id=c.uploader where c.cou_id = #{couid}
+		    limit #{start},#{pagenumber}
+	</select>
+	
+	<insert id="addCourseware" parameterType="Courseware" > 
+  		insert into courseware
+  			<trim prefix="(" suffix=")" suffixOverrides=",">
+				<if test="fileInfor != null">
+					file_Infor,
+				</if>
+				create_time,file_name,file_src,cou_id,uploader
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+				<if test="fileInfor != null">
+					#{fileInfor},
+				</if>
+				#{time},#{fileName},#{filePath},#{couId},#{uploader.teaId},
+			</trim>
+	</insert>
+	
+	<delete id="deleteCourseware" parameterType="String">
+		delete c from courseware c where c.file_id = #{coursewardid}
+	</delete>
+	
+ 	<select id="selectCourswareTotal" parameterType="String"  resultType="int">
+		select count(c.file_id) from courseware c 
+			 where c.cou_id = #{couid}
+	</select>
+	
+	<resultMap type="Courseware" id="coursewareMap">
+         <!-- 用id属性来映射主键字段  -->
+         <id property="fileId" column="file_id"/>
+         <!-- 用result属性来映射非主键字段 -->
+         <result property="fileName" column="file_name"/>
+         <result property="filePath" column="file_src"/>
+         <result property="fileInfor" column="file_Infor"/>
+         <result property="time" column="create_time"/>
+         <result property="couId" column="cou_id"/>
+		 <association property="uploader" javaType="Teacher">
+		 	<id property="teaId" column="tea_id"/>
+	         <result property="teaName" column="tea_name"/>
+		 </association>
+     </resultMap>
 </mapper>

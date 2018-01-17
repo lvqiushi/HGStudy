@@ -1,16 +1,19 @@
 package cn.lv.hgstudy.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import cn.lv.hgstudy.pojo.Joint;
 
 public interface JointDao {
 	boolean addJoint(Joint joint);
-	boolean deleteJoint(int jointid);
+	boolean deleteJoint(Integer jointid);
 	//
-	Joint selectJointById(int jointid);
+	Joint selectJointById(Integer jointid);
+	
+	boolean selectJointByIndex(Map map);
 	//
-	List<Joint> selectJointByCId(int chapterid);
+	List<Joint> selectJointByCId(Integer chapterid);
 	
 	boolean editJointInfor(Joint joint);
 	//

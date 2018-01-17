@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="hgstudy:war exploded">
-    <output-path>$PROJECT_DIR$/target/hhit-study</output-path>
+    <output-path>$PROJECT_DIR$/target/spitter</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
@@ -30,6 +30,7 @@
           <element id="library" level="project" name="Maven: commons-io:commons-io:2.2" />
           <element id="library" level="project" name="Maven: com.sun.mail:javax.mail:1.6.0" />
           <element id="library" level="project" name="Maven: javax.activation:activation:1.1" />
+          <element id="library" level="project" name="Maven: commons-lang:commons-lang:2.6" />
           <element id="library" level="project" name="Maven: org.springframework.security:spring-security-web:4.1.2.RELEASE" />
           <element id="library" level="project" name="Maven: aopalliance:aopalliance:1.0" />
           <element id="library" level="project" name="Maven: org.springframework.security:spring-security-core:4.1.2.RELEASE" />
@@ -46,7 +47,7 @@
         </element>
       </element>
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/target/hhit-study/META-INF/MANIFEST.MF" />
+        <element id="file-copy" path="$PROJECT_DIR$/target/spitter/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="hgstudy/web/Web" />
     </root>

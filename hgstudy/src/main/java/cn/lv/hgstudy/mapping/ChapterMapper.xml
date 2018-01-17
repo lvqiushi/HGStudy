@@ -9,25 +9,47 @@
 					where c.cou_id = #{couid} order by c.chapter_index ,j.joint_index 
 	</select>
 	
-	<select id="selectChapterByCId" parameterType="String"  resultMap="chapterMap">
+	<select id="selectChapterByCId" parameterType="Integer"  resultMap="chapterMap">
 		select * from chapter c where c.chapter_id = #{chapterid}
 	</select>
 	
-    <delete id="deleteChapterById" parameterType="String">
+    <delete id="deleteChapterById" parameterType="Integer">
 		delete c from chapter c where c.chapter_id = #{chapterid}
 	</delete>
 	
 	<update id="editChapterInfor" parameterType="Chapter">  
         update chapter c
             set c.chapter_title = #{chapterTitle},
-            	c.chapter_index = #{chapterIndex},
             	c.chapter_infor = #{chapterInfor}
-         where c.chapter_id = #{chapterid}    
+         where c.chapter_id = #{chapterId}    
 	</update>
 
-	<insert id="addChapter" parameterType="map" > 
-  		insert into chapter(chapter_index,chapter_title,chapter_infor,chapter_id,cou_id) values
-              (#{joint.chapterIndex},#{joint.chapterTitle},#{joint.chapterInfor},#{couid})
+	<insert id="addChapter" parameterType="Chapter" > 
+  		insert into chapter
+  			<trim prefix="(" suffix=")" suffixOverrides=",">
+				<if test="chapterIndex != null">
+					chapter_index,
+				</if>
+				<if test="chapterTitle != null">
+					chapter_title,
+				</if>
+				<if test="chapterInfor != null">
+					chapter_infor,
+				</if>
+				cou_id,
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+				<if test="chapterIndex != null">
+					#{chapterIndex},
+				</if>
+				<if test="chapterTitle != null">
+					#{chapterTitle},
+				</if>
+				<if test="chapterInfor != null">
+					#{chapterInfor},
+				</if>
+				#{couId},
+			</trim>
 	</insert>
 	
 	<resultMap type="Chapter" id="chapterMap">

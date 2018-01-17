@@ -51,7 +51,7 @@
             	<a id="editHome" class="pull-right"><i onclick="home('${couid}')" class="fa fa-home fa-fw"></i></a>
             	<!--  <a  class="pull-right" id="teacher-user"><i onclick="videomanager('${couid}')" class="fa fa-file-video-o fa-fw"></i></a>-->
                 <a  class="pull-right"><i onclick="editinfor('${couid}')" class="fa fa-edit fa-fw"></i></a>
-                <a href="ShowInforAction" class="pull-right" id="teacher-user"><i class="fa fa-user-circle fa-fw"></i></a>
+                <a href="teaInfor" class="pull-right" id="teacher-user"><i class="fa fa-user-circle fa-fw"></i></a>
             </h1>
             <hr style="margin: 30px 0">
             <div class="col-xs-4">
@@ -92,25 +92,33 @@
                 </div>
             </div>
             <div class="col-xs-8">
-                <iframe id="upload-iframe" class="iframeGroup" src="WEB-INF/view/edit_course_index.jsp?couid=${couid }" height="1200px" width="100%" frameborder="0"></iframe>
+                <iframe id="upload-iframe" class="iframeGroup" src="toEditCourseIndex?couid=${couid }" height="1200px" width="100%" frameborder="0" scrolling="no" onload="iframeLoad()"></iframe>
                
             </div>
         </div>
     </div>
 </article>
+<script type="text/javascript">
+		function iframeLoad() {
+			document.getElementById("upload-iframe").height = 0;
+			document.getElementById("upload-iframe").height = document
+					.getElementById("upload-iframe").contentWindow.document.body.scrollHeight;
+		}
+</script>
+	
 <script>
 	function addjoint(chapterid,couid) {
-		$("#upload-iframe").attr("src","html/add_xiaojie.jsp?chapterid="+chapterid+"&couid="+couid)
+		$("#upload-iframe").attr("src","toaddjoint?chapterid="+chapterid+"&couid="+couid)
 	}
 	function editchapter(chapterid,couid) {
-		$("#upload-iframe").attr("src","chapter!forward.action?chapterid="+chapterid+"&couid="+couid)
+		$("#upload-iframe").attr("src","toEditChapter?chapterId="+chapterid)
         $("#ZJtitle").text("编辑章节")
 	}
 	function editjoint(jid,couid) {
-		$("#upload-iframe").attr("src","editjoint.action?jointid="+jid+"&couid="+couid)
+		$("#upload-iframe").attr("src","toeditjoint?jointid="+jid+"&couid="+couid)
 	}
 	function home(couid) {
-		$("#upload-iframe").attr("src","html/edit_course_index.jsp?couid="+couid)
+		$("#upload-iframe").attr("src","toEditCourseIndex?couid="+couid)
 	}
 	function editinfor(couid) {
 		$("#upload-iframe").attr("src","editcourseinfor!foward.action?couid="+couid)

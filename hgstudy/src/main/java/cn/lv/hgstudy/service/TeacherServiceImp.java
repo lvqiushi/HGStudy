@@ -6,15 +6,16 @@
  * @date 2017年9月13日 下午7:28:50 
  * @version V1.0   
  */
-package cn.lv.hgstudy.service.impl;
+package cn.lv.hgstudy.service;
 
 import javax.annotation.Resource;
 
-import cn.lv.hgstudy.service.TeacherService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import cn.lv.hgstudy.dao.TeacherDao;
 import cn.lv.hgstudy.pojo.Teacher;
+import cn.lv.hgstudy.util.BASE64Encode;
 
 /** 
  * @ClassName: TeacherServiceImp 
@@ -24,7 +25,7 @@ import cn.lv.hgstudy.pojo.Teacher;
  *  
  */
 @Service
-public class TeacherServiceImpl implements TeacherService {
+public class TeacherServiceImp implements TeacherService{
 	@Resource
 	TeacherDao tdao;
 	
@@ -58,6 +59,21 @@ public class TeacherServiceImpl implements TeacherService {
 	public boolean editTeacher(Teacher tea) {
 		// TODO Auto-generated method stub
 		return tdao.editinfor(tea);
+	}
+
+	/* (non-Javadoc)
+	 * @see cn.lv.hgstudy.service.TeacherService#editTeaHeader(cn.lv.hgstudy.pojo.Teacher)
+	 */
+	@Transactional
+	public boolean editTeaHeader(String img,String teaid) {
+		// TODO Auto-generated method stub
+		BASE64Encode baseEncoude = new BASE64Encode();
+		String imageName = baseEncoude.DecoderImage(img.split(",")[1]);
+		System.out.println(imageName);
+		Teacher tea = new Teacher();
+		tea.setTeaId(teaid);
+		tea.setTeaImage(imageName);
+		return tdao.editTeaHeader(tea);
 	}
 
 }
