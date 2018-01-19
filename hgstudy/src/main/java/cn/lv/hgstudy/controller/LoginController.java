@@ -40,28 +40,32 @@ public class LoginController {
 	
 	@RequestMapping(value = "/login")
     public String login(String username,String password,String usertype,HttpSession session){
-		password = password.trim();
-		if("student".equals(usertype)){
-			Student stu = studentService.loginStudent(username, password);
-			if(null == stu){
-				return "redirect:/login.jsp";
+		try {
+			password = password.trim();
+			if ("student".equals(usertype)) {
+				Student stu = studentService.loginStudent(username, password);
+				if (null == stu) {
+					return "redirect:/login.jsp";
+				} else {
+					session.setAttribute("user", stu);
+					session.setAttribute("userType", usertype);
+					return "redirect:/index";
+				}
 			}
-			else{
-				session.setAttribute("user", stu);
-				session.setAttribute("userType", usertype);
-				return "redirect:/index";
-			}	
+			if ("teacher".equals(usertype)) {
+				Teacher tea = teacherService.loginTeacher(username, password);
+				if (null == tea) {
+					return "redirect:/login.jsp";
+				} else {
+					session.setAttribute("user", tea);
+					session.setAttribute("userType", usertype);
+					return "redirect:/index";
+				}
+			}
 		}
-		if("teacher".equals(usertype)){
-			Teacher tea = teacherService.loginTeacher(username,password);
-			if(null == tea){
-				return "redirect:/login.jsp";
-			}
-			else{
-				session.setAttribute("user", tea);
-				session.setAttribute("userType", usertype);
-				return "redirect:/index";
-			}
+		catch (Exception e)
+		{
+			e.printStackTrace();
 		}
 		return "redirect:/index";
 	}

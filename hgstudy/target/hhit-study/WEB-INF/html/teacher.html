@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="ycw">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>老师页面</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+    <!-- 全局js -->
+    <script src="../js/jquery-1.11.1.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/top.js"></script>
+    <!--[if lt IE 9]>
+    <script src="../js/html5shiv.js"></script>
+    <script src="../js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+<article class="container">
+    <div class="row info-row">
+        <div class="col-xs-3 text-center head-img">
+            <!--<img class="img-responsive img-rounded" src="../img/head.png" alt="">-->
+            <!--<h3>唐三藏</h3>-->
+            <!--<h5>945454234@qq.com</h5><br>-->
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <a href="#" id="teacher-head-btn"><img class="img-rounded" src="../img/head.png"></a>
+                </div>
+                <div class="col-md-6">
+                    <br>
+                    <h4>唐三藏</h4>
+                    <h5>945454234</h5><br>
+                </div>
+            </div>
+            <div class="info-btn">
+                <a type="button" id="course-btn" class="btn btn-default btn-block">我的课程</a><br>
+                <a type="button" id="teacher-profile-btn" class="btn btn-default btn-block">编辑信息</a><br>
+            </div>
+        </div>
+        <div class="col-xs-9">
+            
+            <div class="panel panel-default  teacher-course" style="display: none">
+                <div class="panel-heading"><h4>我的课程</h4></div>
+                <div class="panel-body">
+                    <h4>课程总数：</h4>
+                    <div class="row">
+                        <div class="row course-list">
+                            <div class="col-sm-4">
+                                <img class="img-responsive" src="../img/c1.PNG" alt="">
+                            </div>
+                            <div class="col-sm-8">
+                                <p style="font-size: 20px;margin-top: 10px">课程标题</p>
+                                <p>这是相关的课程概述----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</p>
+                            </div>
+                        </div>
+                        
+                        
+                    </div>
+                </div>
+                <nav aria-label="Page navigation" class="text-center">
+                    <ul class="pagination">
+                        <li>
+                            <a href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li>
+                            <a href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="panel panel-default teacher-profile" style="display: none">
+                <div class="panel-heading"><h4>编辑信息</h4></div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <form class="form-horizontal" role="form">
+                                <div class="form-group">
+                                    <label for="teacher_name" class="col-sm-2 control-label">姓名</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="teacher_name" placeholder="姓名">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="teacher_email" class="col-sm-2 control-label">邮箱</label>
+                                    <div class="col-sm-10">
+                                        <input type="email" class="form-control" id="teacher_email" placeholder="Email">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">性别</label>
+                                    <div class="col-sm-10">
+                                        <label class="radio-inline">
+                                            <input type="radio" name="gender" id="inlineRadio1" value="option1"> 男
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="gender" id="inlineRadio2" value="option2"> 女
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="about_teacher" class="col-sm-2 control-label">老师介绍</label>
+                                    <div class="col-sm-10">
+                                        <textarea class="form-control" rows="4" id="about_teacher" placeholder="老师介绍"></textarea>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <hr style="margin: 10px">
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-default">保存</button>
+                            <button type="reset" class="btn btn-default">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</article>
+
+<script>
+    $(document).ready(function () {
+        $(".teacher-course").show()
+        $("#teacher-profile-btn").click(function () {
+            $(".teacher-course").hide()
+            $(".teacher-profile").show()
+        })
+        $("#course-btn").click(function () {
+            $(".teacher-profile").hide();
+            $(".teacher-course").show()
+        })
+    })
+</script>
+
+<!--<script>-->
+    <!--$(document).ready(function () {-->
+        <!--$("#").click(function () {-->
+            <!--$("#upload-iframe").attr("src","EC-iframe-upload.html")-->
+        <!--})-->
+    <!--})-->
+<!--</script>-->
+
+</body>
+</html>

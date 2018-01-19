@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--命名空间应该是对应接口的包名+类名 -->
+<mapper namespace="cn.lv.hgstudy.dao.CourseDao">
+    <!--id应该是接口中的方法，结果类型如没有配置别名则应该使用全名称 -->
+ 
+ 	<select id="selectCourseById" parameterType="String"  resultMap="couMap">
+		select cou.*,tea.tea_name,tea.tea_id,tea.tea_header,tea.tea_til from course cou left join teacher tea on cou.tea_id=tea.tea_id where cou.cou_id = #{couid}
+	</select>
+	
+	<select id="selectCourses" parameterType="map"  resultMap="couMap">
+		select cou.*,tea.tea_name,tea.tea_id from course cou left join teacher tea on cou.tea_id=tea.tea_id
+			<where>
+				<if test="type!=null and type != '' " >
+				    cou.cou_type = #{type}
+				</if>
+				<if test="teaid!=null and teaid != '' " >
+				    and cou.tea_id = #{teaid}
+				</if>
+		   	</where>
+		   	<if test="sort!=null and sort != '' " >
+		         order by ${sort} desc
+		    </if>
+		    limit #{start},#{pagenumber}
+	</select>
+	
+	<select id="selectCoursesTotal" parameterType="map"  resultType="int">
+		select count(cou.cou_id) from course cou 
+			<where>
+				<if test="type!=null and type != '' " >
+				    cou.cou_type = #{type}
+				</if>
+				<if test="teaid!=null and teaid != '' " >
+				    and cou.tea_id = #{teaid}
+				</if>
+		   	</where>
+	</select>
+	
+	<select id="selectCoursesByTeaId" parameterType="map"  resultMap="couMap">
+		select cou.* from course cou 
+			<where>
+				<if test="teaid!=null and teaid != '' " >
+				    cou.tea_id = #{teaid}
+				</if>
+		   	</where>
+		    order by cou.create_time desc
+		    limit #{start},#{pagenumber}
+	</select>
+	
+	<select id="selectHotCourse" parameterType="int"  resultMap="couMap">
+		select * from course cou where cou.cou_type=#{type} order by cou.evaluate desc limit 0,1
+	</select>
+	
+    <delete id="deleteCourseById" parameterType="String">
+		delete cou from course cou where cou.cou_id = #{couid}
+	</delete>
+
+	<update id="editCourseInfor" parameterType="Course">  
+       update course cou 
+       		<trim prefix="set" suffixOverrides=",">
+       			<if test="couName!=null and couName!='' ">
+       				cou.cou_name=#{couName},
+       			</if>
+       			<if test="couinfor!=null and couinfor!='' ">
+       				cou.cou_infor=#{couinfor},
+       			</if>
+       			<if test="outline!=null and outline!='' ">
+       				cou.cou_outline=#{outline},
+       			</if>
+       			<if test="outview!=null and outview!='' ">
+       				cou.cou_outview=#{outview},
+       			</if>
+       			<if test="couImg!=null and couImg!='' ">
+       				cou.cou_image=#{couImg},
+       			</if>
+             </trim>
+         where cou.cou_id = #{couId};    
+	</update>
+
+
+	
+	<resultMap type="Course" id="couMap">
+         <!-- 用id属性来映射主键字段  -->
+         <id property="couId" column="cou_id"/>
+         <!-- 用result属性来映射非主键字段 -->
+         <result property="couName" column="cou_name"/>
+         <result property="couType" column="cou_type"/>
+         <result property="evaluate" column="evaluate"/>
+         <result property="couImg" column="cou_image"/>
+         <result property="couinfor" column="cou_infor"/>
+         <result property="couSchool" column="cou_school"/>
+         <result property="creatTime" column="create_time" jdbcType="DATE" />
+         <association property="tea"  javaType="Teacher">
+	         <id property="teaId" column="tea_id"/>
+	         <result property="teaName" column="tea_name"/>
+	         <result property="teaImage" column="tea_header"/>
+	         <result property="teaTil" column="tea_til"/>
+   		 </association>
+     </resultMap>
+     
+     <!-- <resultMap type="Course" id="couMap" extends="baseMap">
+     	<association property="tea"  javaType="Teacher">
+	         <id property="teaId" column="tea_id"/>
+	         <result property="teaName" column="tea_name"/>
+   		 </association>
+     </resultMap>
+     
+     <resultMap type="Course" id="couinforMap" extends="baseMap">
+     	<association property="tea"  javaType="Teacher">
+	         <id property="teaId" column="tea_id"/>
+	         <result property="teaName" column="tea_name"/>
+	         <result property="teaImage" column="tea_header"/>
+   		 </association>
+     </resultMap> -->
+</mapper>
