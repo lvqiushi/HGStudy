@@ -83,7 +83,7 @@
     <div class="form-group">
         <label for="edit-course-2" class="col-sm-2 control-label">课程介绍</label>
         <div class="col-sm-10">
-            <textarea class="form-control" name="introduce" rows="4" id="edit-course-2" required>${cou.couinfor }</textarea>
+            <textarea class="form-control" name="introduce" rows="4" id="edit-course-1" required>${cou.couinfor }</textarea>
         </div>
     </div>
     <div class="form-group">

@@ -29,7 +29,7 @@
     <![endif]-->
 </head>
 <body>
-	<div class="container">
+	<div class="container" style="margin: 0;width: 100%">
         <div class="panel panel-default teacher-profile">
             <div class="panel-heading"><h4>编辑信息</h4></div>
             <div class="panel-body">

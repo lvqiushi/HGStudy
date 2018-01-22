@@ -30,7 +30,7 @@
     <![endif]-->
 </head>
 <body>
-	<div class="container">
+	<div class="container" style="margin: 0;width: 100%">
         <div class="panel panel-default  teacher-course">
             <div class="panel-heading"><h4>我的课程   课程总数：${pagebean.rowCount}</h4></div>
             <div class="panel-body">

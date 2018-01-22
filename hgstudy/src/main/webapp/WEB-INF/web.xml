@@ -52,7 +52,8 @@
         <url-pattern>*.css</url-pattern>
         <url-pattern>*.ico</url-pattern>
         <url-pattern>/img/*</url-pattern>
-        <url-pattern>/imgges/*</url-pattern>
+        <url-pattern>/style/*</url-pattern>
+        <url-pattern>/js/*</url-pattern>
         <url-pattern>/courseimage/*</url-pattern>
         <url-pattern>/header/*</url-pattern>
         <url-pattern>/fonts/*</url-pattern>

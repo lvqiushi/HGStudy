@@ -32,7 +32,7 @@
 <body>
 <%@ include file="top.jsp" %>
 <article>
-    <div class="container">
+    <div class="container" style="margin-left: 50px; margin-right: 20px; width: 100%">
         <div class="row">
             <div class="col-sm-3" style="padding-right: 30px">
                 <div class="row all-course-list text-center">
@@ -49,7 +49,7 @@
 
 
 
-            <div class="col-sm-9">
+            <div class="col-sm-9" style="width: 1000px;">
                 <ul class="nav nav-tabs" role="tablist" id="kind">
                     <li role="presentation"><a onclick="foward()" role="tab" data-toggle="tab">热门</a></li>
                     <li role="presentation"><a onclick="foward1()" role="tab" data-toggle="tab">最新</a></li>

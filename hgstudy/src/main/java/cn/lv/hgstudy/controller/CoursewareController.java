@@ -66,7 +66,7 @@ public class CoursewareController {
 		long downloadedLength = 0L;
 		try {
 			//打开本地文件流
-			InputStream inputStream = new FileInputStream(ctxPath+File.separator+courseware.getFilePath());
+			InputStream inputStream = new FileInputStream(filepath);
 			//激活下载操作
 			OutputStream os = response.getOutputStream();
 

@@ -9,16 +9,13 @@
 </head>
 <body>
 错误信息
+
 <c:if test="${not empty errCode}">
-    <h1>${errCode} : System Errors</h1>
+    <h1>System Errors:${exception}</h1>
 </c:if>
 
-<c:if test="${empty errCode}">
-    <h1>System Errors</h1>
-</c:if>
-
-<c:if test="${not empty errMsg}">
-    <h2>${errMsg}</h2>
+<c:if test="${not empty url}">
+    <h2>URL:${url}</h2>
 </c:if>
 
 </body>

@@ -92,18 +92,42 @@
                 </div>
             </div>
             <div class="col-xs-8">
-                <iframe id="upload-iframe" class="iframeGroup" src="toEditCourseIndex?couid=${couid }" height="1200px" width="100%" frameborder="0" scrolling="no" onload="iframeLoad()"></iframe>
+                <iframe id="upload-iframe" class="iframeGroup" src="toEditCourseIndex?couid=${couid }" height="100%" width="100%" frameborder="0" scrolling="no" ></iframe>
                
             </div>
         </div>
     </div>
 </article>
-<script type="text/javascript">
-		function iframeLoad() {
-			document.getElementById("upload-iframe").height = 0;
-			document.getElementById("upload-iframe").height = document
-					.getElementById("upload-iframe").contentWindow.document.body.scrollHeight;
-		}
+<script>
+//    $(window.parent.document).find("#upload-iframe").load(function(){
+//
+//        var main = $(window.parent.document).find("#upload-iframe");
+//
+//        var thisheight = document.getElementById("upload-iframe").contentWindow.document.body.scrollHeight+30;
+//        //var thisheight = $(document).height()+30;
+//
+//        main.height(thisheight);
+//
+//    });
+
+//控制内联框架iframe的窗体高度
+function setIframeHeight(iframe) {
+    if (iframe) {
+        var iframeWin = iframe.contentWindow || iframe.contentDocument.parentWindow;
+        if (iframeWin.document.body) {
+			if(iframeWin.document.body.scrollHeight < 700)
+                $("#upload-iframe").css("height",500);
+			else
+            	$("#upload-iframe").css("height",iframeWin.document.body.scrollHeight);
+        }
+    }
+};
+
+setInterval(function() {
+    var objDOM = document.getElementById('upload-iframe');
+    setIframeHeight(objDOM)
+}, 1000);
+
 </script>
 	
 <script>
@@ -121,7 +145,7 @@
 		$("#upload-iframe").attr("src","toEditCourseIndex?couid="+couid)
 	}
 	function editinfor(couid) {
-		$("#upload-iframe").attr("src","editcourseinfor!foward.action?couid="+couid)
+		$("#upload-iframe").attr("src","toEditCourseInfor?couid="+couid)
 	}
 
 </script>

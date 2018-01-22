@@ -142,6 +142,21 @@
 
 		<div class="loading" aria-label="Loading" role="img" tabindex="-1"></div>
 <script>
+    //控制内联框架iframe的窗体高度
+    function setIframeHeight(iframe) {
+        if (iframe) {
+            var iframeWin = iframe.contentWindow || iframe.contentDocument.parentWindow;
+            if (iframeWin.document.body) {
+				$("#teacher-iframe").css("height",iframeWin.document.body.scrollHeight);
+            }
+        }
+    };
+
+    setInterval(function() {
+        var objDOM = document.getElementById('teacher-iframe');
+        setIframeHeight(objDOM)
+    }, 1000);
+
 	function click2(userid) {
 		$("#teacher-iframe").attr("src","showPersonInfor?teaid="+userid)
 	}
@@ -211,7 +226,7 @@
 		});
 	}
     $(document).ready(function () {
-        
+
     })
 </script>
 </body>

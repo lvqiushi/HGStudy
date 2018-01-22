@@ -4,7 +4,7 @@
 <mapper namespace="cn.lv.hgstudy.dao.CourseDao">
     <!--id应该是接口中的方法，结果类型如没有配置别名则应该使用全名称 -->
  
- 	<select id="selectCourseById" parameterType="String"  resultMap="couMap">
+ 	<select id="selectCourseById" parameterType="String"  resultMap="couDetilMap">
 		select cou.*,tea.tea_name,tea.tea_id,tea.tea_header,tea.tea_til from course cou left join teacher tea on cou.tea_id=tea.tea_id where cou.cou_id = #{couid}
 	</select>
 	
@@ -97,6 +97,27 @@
 	         <result property="teaTil" column="tea_til"/>
    		 </association>
      </resultMap>
+
+	<resultMap type="Course" id="couDetilMap">
+		<!-- 用id属性来映射主键字段  -->
+		<id property="couId" column="cou_id"/>
+		<!-- 用result属性来映射非主键字段 -->
+		<result property="couName" column="cou_name"/>
+		<result property="couType" column="cou_type"/>
+		<result property="evaluate" column="evaluate"/>
+		<result property="couImg" column="cou_image"/>
+		<result property="couinfor" column="cou_infor"/>
+		<result property="couSchool" column="cou_school"/>
+		<result property="outview" column="cou_outview"/>
+		<result property="outline" column="cou_outline"/>
+		<result property="creatTime" column="create_time" jdbcType="DATE" />
+		<association property="tea"  javaType="Teacher">
+			<id property="teaId" column="tea_id"/>
+			<result property="teaName" column="tea_name"/>
+			<result property="teaImage" column="tea_header"/>
+			<result property="teaTil" column="tea_til"/>
+		</association>
+	</resultMap>
      
      <!-- <resultMap type="Course" id="couMap" extends="baseMap">
      	<association property="tea"  javaType="Teacher">

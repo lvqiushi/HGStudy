@@ -95,58 +95,58 @@
     </div>
 </article>
 <script type="text/javascript">
-		/*$(document).ajaxComplete(function(event, xhr, settings) {
-			//验证附加的头部信息
-		    if(xhr.getResponseHeader("status")=="nologin"){ 
-		            alert("请先进行登陆!");
-		            //回到登录页面
-		            window.location.replace("/login.jsp");  
-		    }  
-		});*/
-		/* 提交结果，执行ajax */
-		function attention(couid,oper){
-				$.ajax({
-					type:"post",
-					url:"attention!attention.action",//需要用来处理ajax请求的action,excuteAjax为处理的方法名，JsonAction为action名
-					data:{//设置数据源
-						couid:couid, 
-						oper:oper //这里不要加","  不然会报错，而且根本不会提示错误地方
-					},
-					dataType:"json",//设置需要返回的数据类型
-					
-					success:function(data){
-						//var d = $.parseJSON(data);//将数据转换成json类型，可以把data用alert()输出出来看看到底是什么样的结构
-						//得到的d是一个形如{"key":"value","key1":"value1"}的数据类型，然后取值出来
-						
-						var divshow = $("#attention");
-						if(data.nologin != null){
-							alert("请先进行登陆!");
-				            //回到登录页面
-				            window.location.href="/login.jsp"; 
-						}
-						else{
-							alert(data.data.message);
-							if(data.data.success == true){
-								$("#courseinfor button:eq(0)").remove();
-								if(data.data.otherinfor == 1){
-									//$("#courseinfor").children("button:first").remove();
-									divshow.append("<button onclick=\"attention(${cou.couId},2)\" class=\"btn\" style=\"background-color: #b2dba1; color: white\">取消关注</button>");
-								}
-								else{
-									divshow.append("<button onclick=\"attention(${cou.couId},1)\" class=\"btn\" >关注</button>");
-								}
-							}
-							else{
-								
-							}
-						}	
-					},
-					error:function(data,state){
-						alert(data+"系统异常，请稍后重试！"+state);
-					}//这里不要加","
-				});
-			}
-		
-	</script>
+    /*$(document).ajaxComplete(function(event, xhr, settings) {
+        //验证附加的头部信息
+        if(xhr.getResponseHeader("status")=="nologin"){
+                alert("请先进行登陆!");
+                //回到登录页面
+                window.location.replace("/login.jsp");
+        }
+    });*/
+    /* 提交结果，执行ajax */
+    function attention(couid,oper){
+        $.ajax({
+            type:"post",
+            url:"attention!attention.action",//需要用来处理ajax请求的action,excuteAjax为处理的方法名，JsonAction为action名
+            data:{//设置数据源
+                couid:couid,
+                oper:oper //这里不要加","  不然会报错，而且根本不会提示错误地方
+            },
+            dataType:"json",//设置需要返回的数据类型
+
+            success:function(data){
+                //var d = $.parseJSON(data);//将数据转换成json类型，可以把data用alert()输出出来看看到底是什么样的结构
+                //得到的d是一个形如{"key":"value","key1":"value1"}的数据类型，然后取值出来
+
+                var divshow = $("#attention");
+                if(data.nologin != null){
+                    alert("请先进行登陆!");
+                    //回到登录页面
+                    window.location.href="/login.jsp";
+                }
+                else{
+                    alert(data.data.message);
+                    if(data.data.success == true){
+                        $("#courseinfor button:eq(0)").remove();
+                        if(data.data.otherinfor == 1){
+                            //$("#courseinfor").children("button:first").remove();
+                            divshow.append("<button onclick=\"attention(${cou.couId},2)\" class=\"btn\" style=\"background-color: #b2dba1; color: white\">取消关注</button>");
+                        }
+                        else{
+                            divshow.append("<button onclick=\"attention(${cou.couId},1)\" class=\"btn\" >关注</button>");
+                        }
+                    }
+                    else{
+
+                    }
+                }
+            },
+            error:function(data,state){
+                alert(data+"系统异常，请稍后重试！"+state);
+            }//这里不要加","
+        });
+    }
+
+</script>
 </body>
 </html>
