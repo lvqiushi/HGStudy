@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--命名空间应该是对应接口的包名+类名 -->
+<mapper namespace="cn.lv.hgstudy.dao.LiveDao">
+    <!--id应该是接口中的方法，结果类型如没有配置别名则应该使用全名称 -->
+
+
+    <select id="selectAll" parameterType="map"  resultMap="live">
+        select * from live l where l.status = 1 limit #{start},#{pagenumber}
+    </select>
+
+    <select id="selectById" parameterType="int"  resultMap="live">
+        select * from live l where l.id = #{id}
+    </select>
+
+    <select id="selectLiveTotal"  resultType="int">
+        select count(l.id) from live l
+    </select>
+
+    <update id="openLive" parameterType="int">
+      update live l
+        l.status = 1
+      where l.id = #{id}
+    </update>
+
+    <update id="exitLive" parameterType="int">
+        update live l
+        l.status = 0
+        where l.id = #{id}
+    </update>
+
+    <insert id="addLive" parameterType="live" >
+        insert into live
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="description != null">
+                description,
+            </if>
+            tea_id,title,image,room_name,status,tea_name
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="description != null">
+                #{description},
+            </if>
+            #{teaId},#{title},#{image},#{roomName},#{status},#{teaName}
+        </trim>
+    </insert>
+
+    <resultMap type="Live" id="live">
+        <!-- 用id属性来映射主键字段  -->
+        <id property="id" column="id"/>
+        <!-- 用result属性来映射非主键字段 -->
+        <result property="teaId" column="tea_id"/>
+        <result property="title" column="title"/>
+        <result property="image" column="image"/>
+        <result property="roomName" column="room_name"/>
+        <result property="status" column="status"/>
+        <result property="teaName" column="tea_name"/>
+    </resultMap>
+</mapper>

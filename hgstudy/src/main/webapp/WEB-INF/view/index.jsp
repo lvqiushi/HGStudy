@@ -211,7 +211,7 @@
     </div>
 
 
-    <div class="more-course">
+    <div class="more-course" style="height: 780px;">
         <div class="container">
             <h2>精品课程</h2>
             <hr class="more-course-line">
@@ -251,6 +251,30 @@
             </div>   
         </div>
     </div>
+
+	<div class="more-course">
+		<div class="container">
+			<h2>正在直播</h2>
+			<hr class="more-course-line">
+			<div class="row">
+				<c:forEach var="live" items="${lives}" varStatus="index">
+					<div class="index-course col-sm-3 col-xs-6">
+						<a href="toLiveRoom?id=${live.id}">
+							<img class="course-img img-responsive" src="${live.image}" alt=""></a>
+						<div class="course-img-down img-responsive">
+							<span class="course-img-down-title" style="padding-top: 5px">${live.title}</span><br>
+							<div class="course-info">
+								<span class="course-info">${live.teaName}</span>
+							</div>
+							<div class="course-info">
+								<p name="courseinfor">${live.description}</p>
+							</div>
+						</div>
+					</div>
+				</c:forEach>
+			</div>
+		</div>
+	</div>
 </article>
 <%@ include file="tail.jsp" %>
 <script>
