@@ -2,6 +2,7 @@ package cn.lv.hgstudy.pojo;
 
 // Generated 2017-1-3 19:38:48 by Hibernate Tools 3.4.0.CR1
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,7 +16,7 @@ public class Video implements java.io.Serializable {
 	private String vidInfor;
 	private String vidName;
 	private String vidImg;
-	private String time;
+	private LocalDateTime time;
 	private Double evaluate;
 	private Integer jointid;
 	
@@ -23,7 +24,7 @@ public class Video implements java.io.Serializable {
 	}
 
 	public Video(String vidPath, String vidInfor, String vidName,
-			String vidImg, String time, Double evaluate,int jointid) {
+			String vidImg, LocalDateTime time, Double evaluate,int jointid) {
 		this.vidPath = vidPath;
 		this.vidInfor = vidInfor;
 		this.vidName = vidName;
@@ -73,11 +74,11 @@ public class Video implements java.io.Serializable {
 		this.vidImg = vidImg;
 	}
 
-	public String getTime() {
+	public LocalDateTime getTime() {
 		return this.time;
 	}
 
-	public void setTime(String time) {
+	public void setTime(LocalDateTime time) {
 		this.time = time;
 	}
 

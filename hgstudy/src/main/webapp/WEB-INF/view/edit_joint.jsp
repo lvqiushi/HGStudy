@@ -54,7 +54,7 @@
 			<div class="col-sm-offset-2 col-sm-8 text-left">
 				<button type="submit" class="btn btn-default">保存</button>
 				<button type="reset" class="btn btn-default">取消</button>
-				<a href="Videomanage?jointid=${joint.jid}" class="btn btn-default" >上传视频</a>
+				<a href="toVideoManage?jointId=${joint.jid}" class="btn btn-default" >上传视频</a>
 				<a href="delejoint?jointid=${joint.jid }&couid=${couid}" class="btn btn-default pull-right" target="_parent">删除本小节</a> 
 			</div>
     </div>

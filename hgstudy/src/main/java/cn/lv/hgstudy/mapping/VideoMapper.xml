@@ -2,5 +2,40 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--命名空间应该是对应接口的包名+类名 -->
 <mapper namespace="cn.lv.hgstudy.dao.VideoDao">
+    <insert id="addVideo" parameterType="video" >
+        insert into video
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="vidInfor != null">
+                vid_Infor,
+            </if>
+            vid_src,vid_name,vid_img_src,joint_id,create_time=now()
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="vidInfor != null">
+                #{vidInfor},
+            </if>
+            #{vidPath},#{vidName},#{vidImg},#{jointid}
+        </trim>
+    </insert>
 
+    <select id="selectVideoById" parameterType="int"  resultMap="video">
+        select v.* from video v where v.joint_id = #{jointId}
+    </select>
+
+    <delete id="delVideo" parameterType="int">
+        delete v from video v where v.vid_id = #{videoId}
+    </delete>
+
+    <resultMap type="Video" id="video">
+        <!-- 用id属性来映射主键字段  -->
+        <id property="vidId" column="vid_id"/>
+        <!-- 用result属性来映射非主键字段 -->
+        <result property="vidPath" column="vid_src"/>
+        <result property="vidInfor" column="vid_Infor"/>
+        <result property="vidName" column="vid_name"/>
+        <result property="vidImg" column="vid_img_src"/>
+        <result property="time" column="create_time"/>
+        <result property="evaluate" column="evaluate"/>
+        <result property="jointid" column="joint_id"/>
+    </resultMap>
 </mapper>
