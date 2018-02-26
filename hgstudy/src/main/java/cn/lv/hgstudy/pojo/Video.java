@@ -16,7 +16,7 @@ public class Video implements java.io.Serializable {
 	private String vidInfor;
 	private String vidName;
 	private String vidImg;
-	private LocalDateTime time;
+	private String time;
 	private Double evaluate;
 	private Integer jointid;
 	
@@ -24,7 +24,7 @@ public class Video implements java.io.Serializable {
 	}
 
 	public Video(String vidPath, String vidInfor, String vidName,
-			String vidImg, LocalDateTime time, Double evaluate,int jointid) {
+			String vidImg, String time, Double evaluate,int jointid) {
 		this.vidPath = vidPath;
 		this.vidInfor = vidInfor;
 		this.vidName = vidName;
@@ -74,11 +74,11 @@ public class Video implements java.io.Serializable {
 		this.vidImg = vidImg;
 	}
 
-	public LocalDateTime getTime() {
+	public String getTime() {
 		return this.time;
 	}
 
-	public void setTime(LocalDateTime time) {
+	public void setTime(String time) {
 		this.time = time;
 	}
 

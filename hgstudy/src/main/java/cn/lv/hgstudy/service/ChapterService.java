@@ -20,7 +20,7 @@ import cn.lv.hgstudy.pojo.Chapter;
  *  
  */
 public interface ChapterService {
-	List<Chapter> selectChaptersByCouId(String couid);
+	List<Chapter> selectChaptersByCouId(Integer couid);
 	
     Chapter selectChapterByCId(int chapterid);
     

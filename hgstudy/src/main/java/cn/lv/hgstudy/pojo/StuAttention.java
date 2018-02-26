@@ -7,38 +7,34 @@ package cn.lv.hgstudy.pojo;
  */
 public class StuAttention implements java.io.Serializable {
 
-	private Integer attid;
-	private Integer userid;
-	private Integer couid;
+	private Integer attId;
+	private String userId;
+	private Integer couId;
 
 	public StuAttention() {
 	}
-	public StuAttention(Integer couid) {
-		this.couid = couid;
-	}
-	
-	public StuAttention(Integer userid, Integer couid) {
-		this.userid = userid;
-		this.couid = couid;
-	}
-	public Integer getAttid() {
-		return attid;
-	}
-	public void setAttid(Integer attid) {
-		this.attid = attid;
-	}
-	public Integer getUserid() {
-		return userid;
-	}
-	public void setUserid(Integer userid) {
-		this.userid = userid;
-	}
-	public Integer getCouid() {
-		return couid;
-	}
-	public void setCouid(Integer couid) {
-		this.couid = couid;
+
+	public Integer getAttId() {
+		return attId;
 	}
 
-	
+	public void setAttId(Integer attId) {
+		this.attId = attId;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public Integer getCouId() {
+		return couId;
+	}
+
+	public void setCouId(Integer couId) {
+		this.couId = couId;
+	}
 }

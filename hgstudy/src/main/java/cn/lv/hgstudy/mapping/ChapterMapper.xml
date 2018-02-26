@@ -3,7 +3,7 @@
 <!--命名空间应该是对应接口的包名+类名 -->
 <mapper namespace="cn.lv.hgstudy.dao.ChapterDao">
     <!--id应该是接口中的方法，结果类型如没有配置别名则应该使用全名称 -->
-    <select id="selectChaptersByCouId" parameterType="String"  resultMap="chapterMap">
+    <select id="selectChaptersByCouId" parameterType="int"  resultMap="chapterMap">
 		select c.*,j.joint_id,j.joint_title,j.joint_infor,j.joint_index,j.chapter_id jc_id from 
 				chapter c left join joint j on c.chapter_id = j.chapter_id 
 					where c.cou_id = #{couid} order by c.chapter_index ,j.joint_index 

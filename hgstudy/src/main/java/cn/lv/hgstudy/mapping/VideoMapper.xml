@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--命名空间应该是对应接口的包名+类名 -->
 <mapper namespace="cn.lv.hgstudy.dao.VideoDao">
-    <insert id="addVideo" parameterType="video" >
+    <insert id="addVideo" parameterType="Video" >
         insert into video
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="vidInfor != null">
@@ -18,7 +18,7 @@
         </trim>
     </insert>
 
-    <select id="selectVideoById" parameterType="int"  resultMap="video">
+    <select id="selectVideoByJointId" parameterType="int"  resultMap="video">
         select v.* from video v where v.joint_id = #{jointId}
     </select>
 
@@ -34,7 +34,7 @@
         <result property="vidInfor" column="vid_Infor"/>
         <result property="vidName" column="vid_name"/>
         <result property="vidImg" column="vid_img_src"/>
-        <result property="time" column="create_time"/>
+        <result property="time" column="create_time" />
         <result property="evaluate" column="evaluate"/>
         <result property="jointid" column="joint_id"/>
     </resultMap>

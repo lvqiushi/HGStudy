@@ -4,4 +4,30 @@
 <mapper namespace="cn.lv.hgstudy.dao.StuAttDao">
     <!--id应该是接口中的方法，结果类型如没有配置别名则应该使用全名称 -->
 
+    <delete id="delAttention" parameterType="StuAttention">
+        delete att from stu_attention att where att.cou_id = #{couId} and att.user_id = #{userId}
+    </delete>
+
+    <select id="selectAttention" parameterType="StuAttention"  resultType="int">
+        select count(att.id) from stu_attention att
+          where att.cou_id = #{couId} and att.user_id = #{userId}
+    </select>
+
+    <insert id="addAttention" parameterType="StuAttention" >
+        insert into stu_attention
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            user_id,cou_id
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            #{userId},#{couId}
+        </trim>
+    </insert>
+
+    <resultMap type="StuAttention" id="attention">
+        <!-- 用id属性来映射主键字段  -->
+        <id property="attId" column="id"/>
+        <!-- 用result属性来映射非主键字段 -->
+        <result property="userId" column="user_id"/>
+        <result property="couId" column="cou_id"/>
+    </resultMap>
 </mapper>

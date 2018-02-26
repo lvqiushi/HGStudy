@@ -34,7 +34,7 @@ public class ChapterServiceImpl implements ChapterService {
 	 * @see cn.lv.hgstudy.service.ChapterService#selectChaptersByCouId(int)
 	 */
 	@Override
-	public List<Chapter> selectChaptersByCouId(String couid) {
+	public List<Chapter> selectChaptersByCouId(Integer couid) {
 		return chdao.selectChaptersByCouId(couid);
 	}
 

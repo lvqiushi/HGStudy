@@ -140,7 +140,7 @@ public class TeacherController {
 	}
 	
 	@RequestMapping(value = "/toEditCourse")
-    public String toEditCourse(Model model,String couid,HttpSession session){
+    public String toEditCourse(Model model,Integer couid,HttpSession session){
 		Course cou = courseService.selectCourseByID(couid);
 		model.addAttribute("couname", cou.getCouName());
 		model.addAttribute("couid", cou.getCouId());

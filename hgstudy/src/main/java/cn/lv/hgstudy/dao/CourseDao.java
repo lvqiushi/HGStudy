@@ -6,7 +6,7 @@ import java.util.Map;
 import cn.lv.hgstudy.pojo.Course;
 
 public interface CourseDao {
-	Course selectCourseById(String couid);
+	Course selectCourseById(Integer couid);
 	//
 	List<Course> selectCourses(Map<String,Object> map);
 	
@@ -20,7 +20,7 @@ public interface CourseDao {
 	boolean editCourseInfor(Course cou);
 
 	//
-	boolean deleteCourseById(String couid);
+	boolean deleteCourseById(Integer couid);
 	//
 	//boolean changeTeacher();
 }

@@ -45,12 +45,14 @@
     <div class="row">
         <div class="col-sm-8" id="courseinfor">
             <h1 id="attention" class="course-details-title"><b>${cou.couName}</b>
-             <c:if test="${not empty statu && statu==2 }">
-             	<button onclick="attention(${cou.couId},2)" class="btn" style="background-color: #b2dba1; color: white">取消关注</button>
-             </c:if>
-             <c:if test="${empty statu || statu==1 }">
-             	<button onclick="attention(${cou.couId},1)" class="btn" >关注</button>
-             </c:if>
+                <c:if test="${not empty statu}">
+                     <c:if test="${statu==2 }">
+                        <button onclick="attention(${cou.couId},2)" class="btn" style="background-color: #b2dba1; color: white">取消关注</button>
+                     </c:if>
+                     <c:if test="${statu==1 }">
+                        <button onclick="attention(${cou.couId},1)" class="btn" >关注</button>
+                     </c:if>
+                </c:if>
              </h1><br>
             <p class="course-details-summary">${cou.couinfor}</p>
         </div>
@@ -107,7 +109,7 @@
     function attention(couid,oper){
         $.ajax({
             type:"post",
-            url:"attention!attention.action",//需要用来处理ajax请求的action,excuteAjax为处理的方法名，JsonAction为action名
+            url:"AttentionCou",//需要用来处理ajax请求的action,excuteAjax为处理的方法名，JsonAction为action名
             data:{//设置数据源
                 couid:couid,
                 oper:oper //这里不要加","  不然会报错，而且根本不会提示错误地方
@@ -125,10 +127,10 @@
                     window.location.href="/login.jsp";
                 }
                 else{
-                    alert(data.data.message);
-                    if(data.data.success == true){
+                    alert(data.jsonResult.message);
+                    if(data.jsonResult.success == true){
                         $("#courseinfor button:eq(0)").remove();
-                        if(data.data.otherinfor == 1){
+                        if(data.jsonResult.otherinfor == 1){
                             //$("#courseinfor").children("button:first").remove();
                             divshow.append("<button onclick=\"attention(${cou.couId},2)\" class=\"btn\" style=\"background-color: #b2dba1; color: white\">取消关注</button>");
                         }

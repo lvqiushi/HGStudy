@@ -6,7 +6,8 @@ import java.util.Map;
 import cn.lv.hgstudy.pojo.Chapter;
 
 public interface ChapterDao {
-	List<Chapter> selectChaptersByCouId(String couid);
+	List<Chapter> selectChaptersByCouId(Integer couid);
+
     Chapter selectChapterByCId(int chapterid);
     
 	boolean editChapterInfor(Chapter chapter);

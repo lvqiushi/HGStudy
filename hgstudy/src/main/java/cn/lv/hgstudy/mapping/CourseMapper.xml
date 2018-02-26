@@ -4,7 +4,7 @@
 <mapper namespace="cn.lv.hgstudy.dao.CourseDao">
     <!--id应该是接口中的方法，结果类型如没有配置别名则应该使用全名称 -->
  
- 	<select id="selectCourseById" parameterType="String"  resultMap="couDetilMap">
+ 	<select id="selectCourseById" parameterType="int"  resultMap="couDetilMap">
 		select cou.*,tea.tea_name,tea.tea_id,tea.tea_header,tea.tea_til from course cou left join teacher tea on cou.tea_id=tea.tea_id where cou.cou_id = #{couid}
 	</select>
 	
@@ -51,7 +51,7 @@
 		select * from course cou where cou.cou_type=#{type} order by cou.evaluate desc limit 0,1
 	</select>
 	
-    <delete id="deleteCourseById" parameterType="String">
+    <delete id="deleteCourseById" parameterType="int">
 		delete cou from course cou where cou.cou_id = #{couid}
 	</delete>
 

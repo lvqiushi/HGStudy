@@ -70,7 +70,7 @@ public class CourseServiceImpl implements CourseService {
 	}
 
 	@Override
-	public Course selectCourseByID(String couid) {
+	public Course selectCourseByID(Integer couid) {
 		return cdao.selectCourseById(couid);
 	}
 

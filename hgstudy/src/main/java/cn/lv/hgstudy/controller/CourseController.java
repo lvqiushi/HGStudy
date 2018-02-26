@@ -2,7 +2,12 @@ package cn.lv.hgstudy.controller;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import cn.lv.hgstudy.enums.AttentionEnum;
+import cn.lv.hgstudy.pojo.Student;
+import cn.lv.hgstudy.service.StuAttService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +20,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class CourseController {
-	@Resource CourseServiceImpl courseService;
+	@Resource
+	CourseServiceImpl courseService;
+	@Autowired
+	StuAttService stuAttService;
+
 	//分页时每页数量
 	private int pageNumber = 6;
 	
@@ -36,16 +45,28 @@ public class CourseController {
     }
 	
 	@RequestMapping(value = "/selectCourseInfor")
-    public String showCourseInfor(String couid,Model model){
-		
-		Course course = courseService.selectCourseByID(couid);
-		model.addAttribute("cou", course);
-
+    public String showCourseInfor(Integer couid,Model model,HttpSession session){
+    	try {
+			String type = (String) session.getAttribute("userType");
+			Course course = courseService.selectCourseByID(couid);
+			model.addAttribute("cou", course);
+			if("student".equals(type)) {
+				Student student = (Student) session.getAttribute("user");
+				if(stuAttService.selectAttention(student.getStuId(),couid) > 0){
+					model.addAttribute("statu", AttentionEnum.CANCEL.getCode());
+				}
+				else {
+					model.addAttribute("statu", AttentionEnum.ATTENTION.getCode());
+				}
+			}
+		}catch (Exception e){
+    		e.printStackTrace();
+		}
         return "course_detail";
     }
 
 	@RequestMapping(value = "/toEditCourseInfor")
-	public String toEditCourseIndex(String couid,Model model){
+	public String toEditCourseIndex(Integer couid,Model model){
 
 		Course course = courseService.selectCourseByID(couid);
 		model.addAttribute("cou", course);
