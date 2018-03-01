@@ -40,6 +40,12 @@ public class CoursewareController {
 	//分页时每页数量
 	private int pageNumber = 6;
 		
+	/*     
+	 * <p> 跳转到下载课件页面 </p>
+	 * 
+	 * @param [couid, curpage, model]
+	 * @return java.lang.String 
+	 */
 	@RequestMapping(value = "/toDownloadCourseware")
     public String toDownloadCourseware(String couid,Integer curpage,Model model){
 		if(null==curpage || curpage<1){
@@ -51,6 +57,12 @@ public class CoursewareController {
 		return "courseware_download";
 	}
 	
+	/*     
+	 * <p> 下载课件 </p>
+	 * 
+	 * @param [fileid, model, request, response]
+	 * @return void 
+	 */
 	@RequestMapping(value = "/DownloadCourseware")
     public void DownloadCourseware(String fileid,Model model,HttpServletRequest request, HttpServletResponse response) throws Exception{
 		Courseware courseware = cousewareService.selectCousewareById(fileid);
@@ -69,7 +81,6 @@ public class CoursewareController {
 			InputStream inputStream = new FileInputStream(filepath);
 			//激活下载操作
 			OutputStream os = response.getOutputStream();
-
 			//循环写入输出流
 			byte[] b = new byte[2048];
 			int length;
@@ -77,7 +88,6 @@ public class CoursewareController {
 				os.write(b, 0, length);
 				downloadedLength += b.length;
 			}
-
 			// 这里主要关闭。
 			os.close();
 			inputStream.close();
@@ -86,6 +96,12 @@ public class CoursewareController {
 		}
 	}
 	
+	/*     
+	 * <p> 根据课程展示课件列表 </p>
+	 * 
+	 * @param [couid, curpage, model]
+	 * @return java.lang.String 
+	 */
 	@RequestMapping(value = "/showCourseware")
     public String showCourseware(String couid,Integer curpage,Model model){
 		if(null==curpage || curpage<1){
@@ -97,13 +113,25 @@ public class CoursewareController {
         return "show_kejian";
     }
 	
+    /*     
+     * <p> 上传课件 </p>
+     * 
+     * @param [crsware, courseware, request]
+     * @return java.lang.String 
+     */
 	@RequestMapping(value = "/addCourseware")
     public String addCourseware(Courseware crsware,@RequestParam("courseware") CommonsMultipartFile courseware,HttpServletRequest request){
-		String path= request.getSession().getServletContext().getRealPath("/courseware");
+		String path = request.getSession().getServletContext().getRealPath("/courseware");
 		cousewareService.addCouseware(crsware,courseware,path);
         return "redirect:/showCourseware?couid="+crsware.getCouId();
     }
-	
+
+    /*     
+     * <p> 删除课件 </p>
+     * 
+     * @param [coursewareid, couid]
+     * @return java.lang.String 
+     */
 	@RequestMapping(value = "/delectCourseware")
     public String delectCourseware(String coursewareid,String couid){
 		cousewareService.delectCouseware(coursewareid);

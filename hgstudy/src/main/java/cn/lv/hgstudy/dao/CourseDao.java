@@ -10,17 +10,17 @@ public interface CourseDao {
 	//
 	List<Course> selectCourses(Map<String,Object> map);
 	
-	int selectCoursesTotal(Map<String,Object> map);
+	Integer selectCoursesTotal(Map<String,Object> map);
 	//
 	//List<Course> selectCoursesByTeaId(Map<String,Object> map);
 	//
 	Course selectHotCourse(int type);
 	
 	//
-	boolean editCourseInfor(Course cou);
+	Boolean editCourseInfor(Course cou);
 
 	//
-	boolean deleteCourseById(Integer couid);
+	Boolean deleteCourseById(Integer couid);
 	//
 	//boolean changeTeacher();
 }

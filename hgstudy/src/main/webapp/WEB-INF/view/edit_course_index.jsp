@@ -52,7 +52,7 @@
 		location.href = "showCourseware?couid="+couid+"&curpage=1"
 	}
 	function editimage(couid) {
-		location.href = "html/courseimage.jsp?couid="+couid
+		location.href = "toEditCourImg?couid="+couid
 	}
 
 </script>

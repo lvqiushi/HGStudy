@@ -25,6 +25,12 @@ public class VideoController {
 	@Autowired
 	JointService jointService;
 
+	/*     
+	 * <p> 跳转到视频管理页面 </p>
+	 * 
+	 * @param [jointId, model]
+	 * @return java.lang.String 
+	 */
 	@RequestMapping(value = "/toVideoManage")
 	public String toManage(Integer jointId,Model model){
 		try {
@@ -43,6 +49,12 @@ public class VideoController {
 		return "video_manage";
 	}
 
+	/*     
+	 * <p> 跳转到上传视频页面 </p>
+	 * 
+	 * @param [jointId, operte, model]
+	 * @return java.lang.String 
+	 */
 	@RequestMapping(value = "/toUploadVideo")
 	public String toUploadVideo(Integer jointId,Integer operte,Model model){
 		try {
@@ -53,6 +65,12 @@ public class VideoController {
 		return null;
 	}
 
+	/*     
+	 * <p> 删除视频 </p>
+	 * 
+	 * @param [videoId, model]
+	 * @return java.lang.String 
+	 */
 	@RequestMapping(value = "/delVideo")
 	public String delVideo(Integer videoId,Model model){
 		try {
@@ -63,6 +81,12 @@ public class VideoController {
 		return "video_manage";
 	}
 
+	/*     
+	 * <p> 重新上传视频 </p>
+	 * 
+	 * @param [videoId, model]
+	 * @return java.lang.String 
+	 */
 	@RequestMapping(value = "/reUploadVideo")
 	public String reUploadVideo(Integer videoId,Model model){
 

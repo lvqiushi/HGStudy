@@ -110,6 +110,8 @@ ul{
 }
 
 .course-info{
+    width: 230px;
+    height: 70px;
     color: #999999;
     padding-top: 5px;
 }

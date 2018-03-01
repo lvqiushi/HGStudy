@@ -20,7 +20,7 @@ public class LiveController {
 	LiveService liveService;
 
 	@RequestMapping(value = "/toLiveRoom")
-	public String showCourseInfor(Integer id,Model model){
+	public String toLiveRoom(Integer id,Model model){
 //		Live live = liveService.selectById(id);
 //		model.addAttribute("live",live);
 		return "live_room";

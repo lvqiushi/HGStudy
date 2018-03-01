@@ -127,11 +127,14 @@ public class TeacherController {
 		return "teacher_infor";
 	}
 	
+	/*     
+	 * <p> 编辑教师个人信息 </p>
+	 * 
+	 * @param [model, tea, session]
+	 * @return java.lang.String 
+	 */
 	@RequestMapping(value = "/editTeaInfor")
     public String editTeacherInfor(Model model,Teacher tea,HttpSession session){
-		System.out.println(tea.getTeaImage());
-		System.out.println(tea.getTeaName());
-		System.out.println(tea.getTeaId());
 		tercherService.editTeacher(tea);
 		session.setAttribute("user", tea);
 		Teacher newtea = tercherService.showTeacherInfor(tea.getTeaId());
@@ -139,6 +142,12 @@ public class TeacherController {
 		return "teacher";
 	}
 	
+	/*     
+	 * <p> 跳转到管理课程页面 </p>
+	 * 
+	 * @param [model, couid, session]
+	 * @return java.lang.String 
+	 */
 	@RequestMapping(value = "/toEditCourse")
     public String toEditCourse(Model model,Integer couid,HttpSession session){
 		Course cou = courseService.selectCourseByID(couid);
@@ -149,13 +158,24 @@ public class TeacherController {
 		return "edit_course";
 	}
 	
+	/*     
+	 * <p> 跳转到课程管理首页 </p>
+	 * 
+	 * @param [model, couid]
+	 * @return java.lang.String 
+	 */
 	@RequestMapping(value = "/toEditCourseIndex")
     public String toEditCourseIndex(Model model,String couid){
 		model.addAttribute("couid", couid);
 		return "edit_course_index";
 	}
 	
-	
+	/*     
+	 * <p> 修改头像 </p>
+	 * 
+	 * @param [model, img, teaid]
+	 * @return cn.lv.hgstudy.common.JsonResult 
+	 */
 	@RequestMapping(value = "/editHeader")
 	@ResponseBody
     public JsonResult editHeader(Model model,String img,String teaid){
@@ -164,6 +184,4 @@ public class TeacherController {
 		result.setMessage("修改头像成功");
 		return result;
 	}
-	
-
 }

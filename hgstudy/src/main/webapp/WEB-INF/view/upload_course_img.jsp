@@ -26,10 +26,11 @@
 </style>
 </head>
 <body>
-	
-	 <form name="form" action="editcourseimage" class="form-horizontal" method="post" enctype="multipart/form-data" target="_parent" onsubmit="return checkimg();">
+    <h3 align="center">上传课程封面</h3>
+    <hr>
+	 <form name="form" action="EditCourImg" class="form-horizontal" method="post" enctype="multipart/form-data" target="_parent" onsubmit="return checkimg();">
         <div class="modal-body">
-        	<img alt="预览" src="" id="cutimg"  /> 
+        	<img alt="预览"  id="cutimg"  />
             <div class="zxx_main_con">
                 <div class="zxx_test_list">
                     <input class="photo-file" type="file" name="pic" id="fcupload" onchange="readURL(this);" /> 
@@ -66,11 +67,14 @@
 			if(fileName.length>0){
 				var idx = fileName.lastIndexOf(".");
 				var suffix = fileName.substring(idx+1);
-			if(suffix.toLowerCase()!='jpg'&&suffix.toLowerCase()!='png'&&suffix.toLowerCase()!='gif'){
+			    if(suffix.toLowerCase()!='jpg'&&suffix.toLowerCase()!='png'&&suffix.toLowerCase()!='gif'){
 					alert("图片必须为jpg、png或gif格式");
 					return false;
 				}
+				return true;
 			}
+			else
+			    return false;
 		}
     </script>
 </body>

@@ -1,5 +1,7 @@
 package cn.lv.hgstudy.service.imp;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,11 +15,13 @@ import org.springframework.stereotype.Service;
 import cn.lv.hgstudy.common.Page;
 import cn.lv.hgstudy.dao.CourseDao;
 import cn.lv.hgstudy.pojo.Course;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 /**
  * 
  * @ClassName: CourseServiceImp 
- * @Description: TODO() 
+ * @Description:
  * @author lv
  * @date 2017年9月12日 下午7:22:27 
  *
@@ -65,7 +69,7 @@ public class CourseServiceImpl implements CourseService {
 	}
 
 	@Override
-	public boolean EditCourseInfor(Course cou) {
+	public Boolean EditCourseInfor(Course cou) {
 		return cdao.editCourseInfor(cou);
 	}
 
@@ -75,13 +79,36 @@ public class CourseServiceImpl implements CourseService {
 	}
 
 	@Override
+	public Boolean EditCourseImg(Integer couid,CommonsMultipartFile pic,String path) {
+		System.out.println("paht "+path);
+		Boolean success = false;
+		Course cou = new Course();
+		String fileName = pic.getOriginalFilename();
+		String prefix = fileName.substring(fileName.lastIndexOf(".")+1);
+		String filename = cou.getCouId()+System.currentTimeMillis()+"."+prefix;
+		File newFile=new File(path+File.separator+filename);
+		cou.setCouId(couid);
+		cou.setCouImg(path+File.separator+filename);
+		try {
+			pic.transferTo(newFile);
+			success = cdao.editCourseInfor(cou);
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return success;
+	}
+
+	@Override
 	public Page selectCourses(Integer start, Integer pageNumber, Integer type,
-			Integer kind) {
+			Integer kind,String keyword) {
 		List courses = new ArrayList<Course>();
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("start", start);
 		map.put("pagenumber", pageNumber);
-		if(null != type){
+		map.put("keyword",keyword);
+		if(null != type && type > 0){
 			map.put("type", type);
 		}
 		if(null != kind){

@@ -11,14 +11,19 @@
 	<select id="selectCourses" parameterType="map"  resultMap="couMap">
 		select cou.*,tea.tea_name,tea.tea_id from course cou left join teacher tea on cou.tea_id=tea.tea_id
 			<where>
-				<if test="type!=null and type != '' " >
+				<if test="type != null and type != '' " >
 				    cou.cou_type = #{type}
 				</if>
-				<if test="teaid!=null and teaid != '' " >
+				<if test="teaid != null and teaid != '' " >
 				    and cou.tea_id = #{teaid}
 				</if>
+				<if test="keyword != null and keyword != '' " >
+					and (cou.cou_school like concat('%',#{keyword},'%')
+						or cou.cou_name like concat('%',#{keyword},'%')
+						or tea.tea_name like concat('%',#{keyword},'%'))
+				</if>
 		   	</where>
-		   	<if test="sort!=null and sort != '' " >
+		   	<if test="sort != null and sort != '' " >
 		         order by ${sort} desc
 		    </if>
 		    limit #{start},#{pagenumber}
@@ -27,10 +32,10 @@
 	<select id="selectCoursesTotal" parameterType="map"  resultType="int">
 		select count(cou.cou_id) from course cou 
 			<where>
-				<if test="type!=null and type != '' " >
+				<if test="type != null and type != '' " >
 				    cou.cou_type = #{type}
 				</if>
-				<if test="teaid!=null and teaid != '' " >
+				<if test="teaid != null and teaid != '' " >
 				    and cou.tea_id = #{teaid}
 				</if>
 		   	</where>
@@ -51,7 +56,7 @@
 		select * from course cou where cou.cou_type=#{type} order by cou.evaluate desc limit 0,1
 	</select>
 	
-    <delete id="deleteCourseById" parameterType="int">
+    <delete id="deleteCourseById" parameterType="String">
 		delete cou from course cou where cou.cou_id = #{couid}
 	</delete>
 

@@ -17,6 +17,7 @@ import cn.lv.hgstudy.common.Page;
 import cn.lv.hgstudy.pojo.Course;
 import cn.lv.hgstudy.service.imp.CourseServiceImpl;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 @Controller
 public class CourseController {
@@ -28,22 +29,38 @@ public class CourseController {
 	//分页时每页数量
 	private int pageNumber = 6;
 	
+	/*     
+	 * <p> 查询课程 </p>
+	 * 
+	 * @param [curpage, type, kind, model]
+	 * @return java.lang.String 
+	 */
 	@RequestMapping(value = "/selectCourses")
     public String index(Integer curpage,
 			@RequestParam(value = "type", required = false, defaultValue = "0")Integer type,
 			@RequestParam(value = "kind", required = false, defaultValue = "1")Integer kind,
-			Model model){
-		if(null==curpage || curpage<1){
-			curpage=1;
-		}
-		Page courses = courseService.selectCourses((curpage-1)*pageNumber, pageNumber, type, kind);
-		model.addAttribute("pagebean", courses);
+			String keyword, Model model){
+		try {
+			if(null==curpage || curpage<1){
+				curpage=1;
+			}
+			Page courses = courseService.selectCourses((curpage-1)*pageNumber, pageNumber, type, kind,keyword);
+			model.addAttribute("pagebean", courses);
 
-		model.addAttribute("kind", kind);
-		model.addAttribute("type", type);
+			model.addAttribute("kind", kind);
+			model.addAttribute("type", type);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
         return "all_course";
     }
 	
+    /*     
+     * <p> 查看课程详情 </p>
+     * 
+     * @param [couid, model, session]
+     * @return java.lang.String 
+     */
 	@RequestMapping(value = "/selectCourseInfor")
     public String showCourseInfor(Integer couid,Model model,HttpSession session){
     	try {
@@ -65,6 +82,12 @@ public class CourseController {
         return "course_detail";
     }
 
+    /*     
+     * <p> 跳转到编辑课程页面 </p>
+     * 
+     * @param [couid, model]
+     * @return java.lang.String 
+     */
 	@RequestMapping(value = "/toEditCourseInfor")
 	public String toEditCourseIndex(Integer couid,Model model){
 
@@ -74,11 +97,46 @@ public class CourseController {
 		return "edit_course_infor";
 	}
 
+	/*     
+	 * <p> 编辑课程详情接口 </p>
+	 * 
+	 * @param [cou, model]
+	 * @return java.lang.String 
+	 */
 	@RequestMapping(value = "/editCourseInfor")
 	public String editCourseInfor(Course cou,Model model){
 		boolean b = courseService.EditCourseInfor(cou);
 		//model.addAttribute("cou", course);
 
 		return "redirect:/toEditCourse?couid="+cou.getCouId();
+	}
+
+	/*     
+	 * <p> 跳转到编辑课程封面页面 </p>
+	 * 
+	 * @param [couid, model]
+	 * @return java.lang.String 
+	 */
+	@RequestMapping(value = "/toEditCourImg")
+	public String toEditCourImg(Integer couid,Model model){
+		model.addAttribute("couid",couid);
+		return "upload_course_img";
+	}
+
+	/*     
+	 * <p> 上传课程封面 </p>
+	 * 
+	 * @param [couid, model, pic, request]
+	 * @return java.lang.String 
+	 */
+	@RequestMapping(value = "/EditCourImg")
+	public String EditCourImg(Integer couid,Model model,@RequestParam("pic") CommonsMultipartFile pic,HttpServletRequest request){
+		try {
+			String path = request.getSession().getServletContext().getRealPath("/courseimage");
+			courseService.EditCourseImg(couid,pic,path);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return "upload_course_img";
 	}
 }
