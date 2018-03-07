@@ -19,15 +19,26 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
-	<!-- <filter>
-		<filter-name>RequestFilter</filter-name>
-		<filter-class>cn.lv.hgstudy.filter.MultipartRequestFilter</filter-class>
-	</filter>
+    <context-param>
+        <param-name>log4jConfigLocation</param-name>
+        <param-value>classpath:log4j.properties</param-value>
+    </context-param>
 
-	<filter-mapping>
-		<filter-name>RequestFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping> -->
+    <listener>
+        <listener-class>
+            org.springframework.web.util.Log4jConfigListener
+        </listener-class>
+    </listener>
+
+    <!-- <filter>
+        <filter-name>RequestFilter</filter-name>
+        <filter-class>cn.lv.hgstudy.filter.MultipartRequestFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>RequestFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping> -->
 	
     <!-- 该监听器将在Web容器启动时激活Spring -->
     <listener>

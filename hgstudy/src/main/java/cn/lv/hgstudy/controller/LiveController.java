@@ -21,8 +21,8 @@ public class LiveController {
 
 	@RequestMapping(value = "/toLiveRoom")
 	public String toLiveRoom(Integer id,Model model){
-//		Live live = liveService.selectById(id);
-//		model.addAttribute("live",live);
+		Live live = liveService.selectById(id);
+		model.addAttribute("live",live);
 		return "live_room";
 	}
 }

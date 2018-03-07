@@ -18,7 +18,7 @@
                         <li class="dropdown"><a href="index" class="dropdown-toggle">首页</a></li>
                         <li class="dropdown"><a href="selectCourses?curpage=1" class="dropdown-toggle">课程</a></li>
                     </ul>
-                    <form class="navbar-form navbar-right" role="search" action="selectCourses" onsubmit="return checkSearch();">
+                    <form class="navbar-form navbar-right" role="search" action="searchCourses" onsubmit="return checkSearch();">
                         <div class="form-group">
                             <input type="text" class="form-control" id="search" name="keyword" placeholder="Search">
                         </div>

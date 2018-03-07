@@ -42,11 +42,13 @@
 					<tr>
 						<th style="width: 300px">课件名</th>
 						<th>课件简介</th>
+						<th>上传时间</th>
 					</tr>
 					<c:forEach var="c" items="${pagebean.contents}">
 						<tr>
 							<td><a href="DownloadCourseware?fileid=${c.fileId}">${c.fileName}</a></td>
 							<td><div class="kjjj">${c.fileInfor }</div></td>
+							<td>${c.time }</td>
 						</tr>
 					</c:forEach>
 				</table>

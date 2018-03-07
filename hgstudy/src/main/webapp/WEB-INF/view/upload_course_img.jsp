@@ -64,6 +64,7 @@
         
         function checkimg(){
 			var fileName =document.getElementById("fcupload").value;
+
 			if(fileName.length>0){
 				var idx = fileName.lastIndexOf(".");
 				var suffix = fileName.substring(idx+1);
@@ -73,8 +74,10 @@
 				}
 				return true;
 			}
-			else
-			    return false;
+			else {
+                alert("请先选择上传文件");
+                return false;
+            }
 		}
     </script>
 </body>

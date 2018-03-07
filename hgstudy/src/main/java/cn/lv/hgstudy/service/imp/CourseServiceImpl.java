@@ -85,10 +85,10 @@ public class CourseServiceImpl implements CourseService {
 		Course cou = new Course();
 		String fileName = pic.getOriginalFilename();
 		String prefix = fileName.substring(fileName.lastIndexOf(".")+1);
-		String filename = cou.getCouId()+System.currentTimeMillis()+"."+prefix;
+		String filename = couid+System.currentTimeMillis()+"."+prefix;
 		File newFile=new File(path+File.separator+filename);
 		cou.setCouId(couid);
-		cou.setCouImg(path+File.separator+filename);
+		cou.setCouImg("courseimage"+File.separator+filename);
 		try {
 			pic.transferTo(newFile);
 			success = cdao.editCourseInfor(cou);
@@ -119,6 +119,23 @@ public class CourseServiceImpl implements CourseService {
 				map.put("sort", "cou.create_time");
 			}			
 		}
+		courses = cdao.selectCourses(map);
+		int total = cdao.selectCoursesTotal(map);
+
+		Page page = new Page(total, start, pageNumber);
+		page.setContents(courses);
+		return page;
+	}
+
+	@Override
+	public Page searchCourses(Integer start, Integer pageNumber,String keyword) {
+		List courses = new ArrayList<Course>();
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("start", start);
+		map.put("pagenumber", pageNumber);
+		map.put("keyword",keyword);
+		map.put("sort", "cou.create_time");
+
 		courses = cdao.selectCourses(map);
 		int total = cdao.selectCoursesTotal(map);
 

@@ -36,7 +36,7 @@ public class CourseController {
 	 * @return java.lang.String 
 	 */
 	@RequestMapping(value = "/selectCourses")
-    public String index(Integer curpage,
+    public String selectCourses(Integer curpage,
 			@RequestParam(value = "type", required = false, defaultValue = "0")Integer type,
 			@RequestParam(value = "kind", required = false, defaultValue = "1")Integer kind,
 			String keyword, Model model){
@@ -49,11 +49,34 @@ public class CourseController {
 
 			model.addAttribute("kind", kind);
 			model.addAttribute("type", type);
+			model.addAttribute("curpage", curpage);
 		}catch (Exception e){
 			e.printStackTrace();
 		}
         return "all_course";
     }
+
+	/*    
+	 * <p> 搜索课程 </p>
+	 *
+	 * @param [curpage, type, kind, model]
+	 * @return java.lang.String
+	 */
+	@RequestMapping(value = "/searchCourses")
+	public String searchCourses(Integer curpage, String keyword, Model model){
+		try {
+			if(null==curpage || curpage<1){
+				curpage=1;
+			}
+			Page courses = courseService.searchCourses((curpage-1)*pageNumber, pageNumber,keyword);
+			model.addAttribute("pagebean", courses);
+			model.addAttribute("keyword", keyword);
+			model.addAttribute("curpage", curpage);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return "search_result";
+	}
 	
     /*     
      * <p> 查看课程详情 </p>
@@ -133,10 +156,14 @@ public class CourseController {
 	public String EditCourImg(Integer couid,Model model,@RequestParam("pic") CommonsMultipartFile pic,HttpServletRequest request){
 		try {
 			String path = request.getSession().getServletContext().getRealPath("/courseimage");
-			courseService.EditCourseImg(couid,pic,path);
+			if(courseService.EditCourseImg(couid,pic,path)){
+				model.addAttribute("msg","上传课程封面图片成功");
+			}
+			else
+				model.addAttribute("msg","上传课程封面图片失败");
 		}catch (Exception e){
 			e.printStackTrace();
 		}
-		return "upload_course_img";
+		return "redirect:/toEditCourse?couid="+couid;
 	}
 }

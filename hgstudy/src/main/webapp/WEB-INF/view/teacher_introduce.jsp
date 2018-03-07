@@ -33,7 +33,7 @@
 <article class="container">
     <div class="row teacher-info-box">
         <div class="col-sm-3 text-center">
-            <img class="img-rounded teacher-head" src="${tea.teaImage }">
+            <img class="img-rounded teacher-head" src="header/${tea.teaImage }">
         </div>
         <div class="col-sm-9">
             <h3>${tea.teaName}</h3><br>

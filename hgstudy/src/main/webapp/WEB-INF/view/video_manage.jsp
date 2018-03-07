@@ -31,7 +31,7 @@
             <div class="panel-heading">视频列表</div>
             <div class="panel-body">
 				<c:if test="${empty video}">
-					该小节还未上传视频<a href="html/video_upload.jsp?jointid=${joint.jid }&operte=1">是否现在上传</a>
+					该小节还未上传视频<a href="toUploadVideo?jointid=${joint.jid }&operte=1">是否现在上传</a>
 				</c:if>
 				
 				<c:if test="${not empty video}">				
@@ -56,7 +56,7 @@
                     <div class="form-group">
                         <label for="operate" class="col-xs-3 control-label  text-center">操作</label>
                         <div class="col-xs-9">
-                            <p id="operate"><a href="Videomanage!delete?vidid=${video.vidId}">删除</a> | <a href="html/video_upload.jsp?jointid=${joint.jid }&operte=2">重新上传</a></p>
+                            <p id="operate"><a href="delVideo?videoId=${video.vidId}">删除</a> | <a href="toUploadVideo?jointid=${joint.jid }&operte=2">重新上传</a></p>
                         </div>
                     </div>
 				</c:if>

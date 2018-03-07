@@ -8,12 +8,12 @@
 <html> 
 <head><title>视频上传</title>
 <base href="<%=basePath%>">
-<style type="text/css">@import url(plupload/js/jquery.plupload.queue/css/jquery.plupload.queue.css);</style>
-<script src="js/jquery-1.11.1.min.js"" type="text/javascript"></script> 
-<script type="text/javascript" src="plupload/js/plupload.full.js"></script>
-<script type="text/javascript" src="plupload/js/jquery.plupload.queue/jquery.plupload.queue.js"></script>
-<script type="text/javascript" src="plupload/js/i18n/cn.js"></script>
-<script type="text/javascript">
+	<link href="js/plupload/js/jquery.plupload.queue/css/jquery.plupload.queue.css" rel="stylesheet">
+	<script src="js/jquery-1.11.1.min.js" type="text/javascript"></script>
+	<script type="text/javascript" src="plupload/js/plupload.full.js"></script>
+	<script type="text/javascript" src="plupload/js/jquery.plupload.queue/jquery.plupload.queue.js"></script>
+	<script type="text/javascript" src="plupload/js/i18n/cn.js"></script>
+	<script type="text/javascript">
 // Convert divs to queue widgets when the DOM is ready
 	$(function() {
 		$("#uploader").pluploadQueue({
@@ -32,9 +32,9 @@
 			],
 	
 			// Flash settings
-			flash_swf_url : 'plupload/js/plupload.flash.swf',
+			flash_swf_url : 'js/plupload/js/plupload.flash.swf',
 			// Silverlight settings
-			silverlight_xap_url : 'plupload/js/plupload.silverlight.xap'
+			silverlight_xap_url : 'js/plupload/js/plupload.silverlight.xap'
 		});
 		$('form').submit(function(e) {
 	        var uploader = $('#uploader').pluploadQueue();

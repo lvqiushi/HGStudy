@@ -13,6 +13,8 @@ public interface CourseService {
 
 	Page selectCourses(Integer start,Integer pageNumber,Integer type,Integer kind,String keyword);
 
+	Page searchCourses(Integer start,Integer pageNumber,String keyword);
+
 	Page selectCoursesByTeaID(String teaid,int start,int pageNumber);
 
 	Course selectCourseByID(Integer couid);

@@ -84,7 +84,7 @@
                 <div class="panel-body teacher-list">
                     <div class="row">
                         <div class="col-sm-6">
-                            <a href="showTeacherInfor?teaid=${cou.tea.teaId}"><img class="img-responsive img-circle" src="${cou.tea.teaImage }" alt=""></a>
+                            <a href="showTeacherInfor?teaid=${cou.tea.teaId}"><img class="img-responsive img-circle" src="header/${cou.tea.teaImage }" alt=""></a>
                         </div>
                         <div class="col-sm-6">
                             <h4>${cou.tea.teaName }<br><br>${cou.tea.teaTil }</h4>

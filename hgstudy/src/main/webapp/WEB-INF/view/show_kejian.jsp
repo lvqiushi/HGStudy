@@ -39,7 +39,7 @@
 <div class="panel panel-default">
     <div class="panel-heading">课件列表</div>
 		<div class="panel-body text-center">
-			<p class="text-left">课件总数 : ${pagebean.pageCount}</p>
+			<p class="text-left">课件总数 : ${pagebean.rowCount}</p>
 			<table class="table kjTable">
 				<tr>
 					<th>课件名</th>
