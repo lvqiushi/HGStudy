@@ -69,6 +69,7 @@
         <url-pattern>/header/*</url-pattern>
         <url-pattern>/fonts/*</url-pattern>
         <url-pattern>/font/*</url-pattern>
+        <url-pattern>/video/*</url-pattern>
     </servlet-mapping>
     
       <!--configure the setting of springmvcDispatcherServlet and configure the mapping-->

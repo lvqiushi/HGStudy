@@ -31,7 +31,7 @@
             <div class="panel-heading">视频列表</div>
             <div class="panel-body">
 				<c:if test="${empty video}">
-					该小节还未上传视频<a href="toUploadVideo?jointid=${joint.jid }&operte=1">是否现在上传</a>
+					该小节还未上传视频<a href="toUploadVideo?jointId=${jointId}&operte=1">是否现在上传</a>
 				</c:if>
 				
 				<c:if test="${not empty video}">				

@@ -10,16 +10,16 @@
 <base href="<%=basePath%>">
 	<link href="js/plupload/js/jquery.plupload.queue/css/jquery.plupload.queue.css" rel="stylesheet">
 	<script src="js/jquery-1.11.1.min.js" type="text/javascript"></script>
-	<script type="text/javascript" src="plupload/js/plupload.full.js"></script>
-	<script type="text/javascript" src="plupload/js/jquery.plupload.queue/jquery.plupload.queue.js"></script>
-	<script type="text/javascript" src="plupload/js/i18n/cn.js"></script>
+	<script type="text/javascript" src="js/plupload/js/plupload.full.js"></script>
+	<script type="text/javascript" src="js/plupload/js/jquery.plupload.queue/jquery.plupload.queue.js"></script>
+	<script type="text/javascript" src="js/plupload/js/i18n/cn.js"></script>
 	<script type="text/javascript">
 // Convert divs to queue widgets when the DOM is ready
 	$(function() {
 		$("#uploader").pluploadQueue({
 			// General settings
 			runtimes : 'gears,flash,silverlight,browserplus,html5,html4',
-			url : 'FileUpload.action',
+			url : 'UploadVideo',
 			max_file_size : '1000mb',
 			unique_names : true,
 			multiple_queues : true,
@@ -61,8 +61,8 @@
 <body>
 	<div>
 		<div style="width: 750px; margin: 0px auto">
-			<form id="formId" action="Submit1.action" method="post" enctype="multipart/form-data">
-				<input name="jointid" type="hidden" value="${param.jointid }" />
+			<form id="formId" action="submitUpload" method="post" enctype="multipart/form-data">
+				<input name="jointId" type="hidden" value="${param.jointId }" />
 				<input name="operte" type="hidden" value="${param.operte }" />
 				<div id="uploader">
 					<p>您的浏览器未安装 Flash, Silverlight, Gears, BrowserPlus 或者支持 HTML5 .</p>

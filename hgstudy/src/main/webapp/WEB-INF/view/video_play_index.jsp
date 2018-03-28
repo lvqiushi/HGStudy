@@ -35,11 +35,11 @@
 <article class="container-fluid" style="margin-top: 30px">
     <div class="row">
         <div class="container">
-            <span style="font-size: 30px">${cou.couName }</span>
-            <span>&nbsp;&nbsp;&nbsp;&nbsp;授课教师：${cou.tea.teaName }</span>
+            <span style="font-size: 30px">${course.couName }</span>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;授课教师：${course.tea.teaName }</span>
         </div>
         <hr style="margin: 12px">
-        <div class="leftNav col-sm-3 col-lg-2">
+        <div class="leftNav col-sm-3 col-lg-2" style="width: 280px">
             <div class="panel-group  text-center" id="accordion" role="tablist" aria-multiselectable="true">
             
             <c:forEach var="c" items="${chapters}">
@@ -53,8 +53,8 @@
                     </div>
                     <div id="collapse<%=i %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
                     <c:forEach var="j" items="${c.joints}">                   
-                        <div class="panel-body">
-                            <a type="button"  onclick="play('${j.jid}')" class="btn btn-primary btn-block">${j.jointTitle }</a>
+                        <div style="height:45px;width: 248px">  <%--class="panel-body"--%>
+                            <a type="button"  onclick="play('${j.jid}')" class="btn btn-primary btn-block" style="width: 190px;margin-top: 6px;margin-left: 30px;margin-bottom: 0px">${j.jointTitle }</a>
                         </div>                   
                     </c:forEach>   
                     </div> 
@@ -66,14 +66,14 @@
     
             </div>
         </div>
-        <div class="video-box col-sm-9 col-lg-10 text-center">
+        <div class="video-box col-sm-9 col-lg-10 text-center" style="width: 1000px;margin-left: 100px">
             <iframe  id="video-iframe" src="PlayVideo?jointId=${playVideoId}" frameborder="0" width="100%" height="800px"></iframe>
         </div>
     </div>
 </article>
 <script>
     function play(jointid) {
-    	$("#video-iframe").attr("src","PlayVideo?jointid="+jointid)
+    	$("#video-iframe").attr("src","PlayVideo?jointId="+jointid)
     }
 </script>
 </body>

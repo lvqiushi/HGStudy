@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--命名空间应该是对应接口的包名+类名 -->
 <mapper namespace="cn.lv.hgstudy.dao.LiveDao">
-    <!--id应该是接口中的方法，结果类型如没有配置别名则应该使用全名称 -->
+    <!--id应该是接口中的方法，结果类型如没有配置别名则应该使用全名称 吕秋实-->
 
 
     <select id="selectAll" parameterType="map"  resultMap="live">

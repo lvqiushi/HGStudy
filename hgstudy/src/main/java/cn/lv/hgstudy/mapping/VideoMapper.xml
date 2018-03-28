@@ -8,13 +8,19 @@
             <if test="vidInfor != null">
                 vid_Infor,
             </if>
-            vid_src,vid_name,vid_img_src,joint_id,create_time=now()
+            <if test="vidImg != null">
+                vid_img_src,
+            </if>
+            vid_src,vid_name,joint_id,create_time
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="vidInfor != null">
                 #{vidInfor},
             </if>
-            #{vidPath},#{vidName},#{vidImg},#{jointid}
+            <if test="vidImg != null">
+                #{vidImg},
+            </if>
+            #{vidPath},#{vidName},#{jointid},now()
         </trim>
     </insert>
 
