@@ -16,10 +16,10 @@
     <insert id="addAttention" parameterType="StuAttention" >
         insert into stu_attention
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            user_id,cou_id
+            user_id,cou_id,creat_time
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            #{userId},#{couId}
+            #{userId},#{couId},now()
         </trim>
     </insert>
 
@@ -29,5 +29,6 @@
         <!-- 用result属性来映射非主键字段 -->
         <result property="userId" column="user_id"/>
         <result property="couId" column="cou_id"/>
+        <result property="creatTime" column="creat_time"/>
     </resultMap>
 </mapper>

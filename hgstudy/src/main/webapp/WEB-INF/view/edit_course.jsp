@@ -48,10 +48,12 @@
     <div class="container">
         <div class="row ">
             <h1>${couname }        	
-            	<a id="editHome" class="pull-right"><i onclick="home('${couid}')" class="fa fa-home fa-fw"></i></a>
+            	<a id="editHome" class="pull-right"><i onclick="home('${couid}')" class="fa fa-home fa-fw" style="width: 42px"></i></a>
             	<!--  <a  class="pull-right" id="teacher-user"><i onclick="videomanager('${couid}')" class="fa fa-file-video-o fa-fw"></i></a>-->
                 <a  class="pull-right"><i onclick="editinfor('${couid}')" class="fa fa-edit fa-fw"></i></a>
                 <a href="teaInfor" class="pull-right" id="teacher-user"><i class="fa fa-user-circle fa-fw"></i></a>
+				<a href="#" class="pull-right" id="send-mail"><i class="fa fa-envelope-open" style="width: 42px"></i></a>
+				<a href="#" class="pull-right" id="live-apply"><i class="fa fa-video-camera" style="width: 46px"></i></a>
             </h1>
             <hr style="margin: 30px 0">
             <div class="col-xs-4">
@@ -126,7 +128,7 @@ function setIframeHeight(iframe) {
 setInterval(function() {
     var objDOM = document.getElementById('upload-iframe');
     setIframeHeight(objDOM)
-}, 1000);
+}, 400);
 
 </script>
 	

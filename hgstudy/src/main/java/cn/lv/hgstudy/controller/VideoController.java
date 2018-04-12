@@ -1,5 +1,6 @@
 package cn.lv.hgstudy.controller;
 
+import cn.lv.hgstudy.enums.VideoUploadEnum;
 import cn.lv.hgstudy.pojo.Chapter;
 import cn.lv.hgstudy.pojo.Course;
 import cn.lv.hgstudy.pojo.Joint;
@@ -147,27 +148,35 @@ public class VideoController {
 //			Long times = System.currentTimeMillis();
 //			Date d = new Date(times);
 //			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			Video vid = new Video();
-			vid.setVidPath(path);
-			vid.setJointid(jointId);
-			vid.setVidName(uploadFileName);
+			if(VideoUploadEnum.UPLOAD.equals(operte)) {
+				Video vid = new Video();
+				vid.setVidPath(path);
+				vid.setJointid(jointId);
+				vid.setVidName(uploadFileName);
 
-			videoService.uploadVideo(vid);
-
-			String result =  "";
+				videoService.uploadVideo(vid);
+			}
+			if(VideoUploadEnum.RE_UPLOAD.getCode().equals(operte)){
+				Video video = videoService.selectVideo(jointId);
+				video.setVidPath(path);
+				video.setVidName(uploadFileName);
+				videoService.updateVideo(video);
+			}
+			String result = "";
 			int count = Integer.parseInt(request.getParameter("uploader_count"));
 			for (int i = 0; i < count; i++) {
-				String temFile= request.getParameter("uploader_" + i + "_name");
+				String temFile = request.getParameter("uploader_" + i + "_name");
 				String temName = request.getParameter("uploader_" + i + "_tmpname");
 				try {
 					//do something with file;
 					result += uploadFileName + "导入完成. <br />";
-				} catch(Exception e) {
+				} catch (Exception e) {
 					result += uploadFileName + "导入失败:" + e.getMessage() + ". <br />";
 					e.printStackTrace();
 				}
 			}
 			model.addAttribute("result",result);
+
 		}catch (Exception e){
 			e.printStackTrace();
 		}

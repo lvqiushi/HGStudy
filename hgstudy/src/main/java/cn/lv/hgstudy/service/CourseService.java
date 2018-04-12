@@ -17,6 +17,8 @@ public interface CourseService {
 
 	Page selectCoursesByTeaID(String teaid,int start,int pageNumber);
 
+	Page selectCoursesByStuID(String stuId,int start,int pageNumber);
+
 	Course selectCourseByID(Integer couid);
 
 	Boolean EditCourseImg(Integer couid,CommonsMultipartFile pic,String path);

@@ -28,9 +28,21 @@
 		    </if>
 		    limit #{start},#{pagenumber}
 	</select>
+
+	<select id="selectAttCourses" parameterType="map"  resultMap="couMap">
+		select att.*,cou.*,tea.tea_name,tea.tea_id from stu_attention att left join course cou on att.cou_id = cou.cou_id
+			left join teacher tea on cou.tea_id=tea.tea_id
+		<where>
+			<if test="teaid != null and teaid != '' " >
+				and att.user_id = #{stuId}
+			</if>
+		</where>
+		order by att.creat_time desc
+		limit #{start},#{pagenumber}
+	</select>
 	
 	<select id="selectCoursesTotal" parameterType="map"  resultType="int">
-		select count(cou.cou_id) from course cou 
+		select cou.*,tea.tea_name,tea.tea_id from course cou left join teacher tea on cou.tea_id=tea.tea_id
 			<where>
 				<if test="type != null and type != '' " >
 				    cou.cou_type = #{type}
@@ -38,19 +50,33 @@
 				<if test="teaid != null and teaid != '' " >
 				    and cou.tea_id = #{teaid}
 				</if>
-		   	</where>
-	</select>
-	
-	<select id="selectCoursesByTeaId" parameterType="map"  resultMap="couMap">
-		select cou.* from course cou 
-			<where>
-				<if test="teaid!=null and teaid != '' " >
-				    cou.tea_id = #{teaid}
+				<if test="keyword != null and keyword != '' " >
+					and (cou.cou_school like concat('%',#{keyword},'%')
+					or cou.cou_name like concat('%',#{keyword},'%')
+					or tea.tea_name like concat('%',#{keyword},'%'))
 				</if>
 		   	</where>
-		    order by cou.create_time desc
-		    limit #{start},#{pagenumber}
 	</select>
+
+	<select id="selectAttCoursesTotal" parameterType="map"  resultType="int">
+		select count(att.id) from stu_attention att
+		<where>
+			<if test="stuId != null and stuId != '' " >
+				and att.user_id = #{stuId}
+			</if>
+		</where>
+	</select>
+	
+	<!--<select id="selectCoursesByTeaId" parameterType="map"  resultMap="couMap">-->
+		<!--select cou.* from course cou -->
+			<!--<where>-->
+				<!--<if test="teaid!=null and teaid != '' " >-->
+				    <!--cou.tea_id = #{teaid}-->
+				<!--</if>-->
+		   	<!--</where>-->
+		    <!--order by cou.create_time desc-->
+		    <!--limit #{start},#{pagenumber}-->
+	<!--</select>-->
 	
 	<select id="selectHotCourse" parameterType="int"  resultMap="couMap">
 		select * from course cou where cou.cou_type=#{type} order by cou.evaluate desc limit 0,1

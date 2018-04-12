@@ -21,5 +21,10 @@ import cn.lv.hgstudy.pojo.Student;
 
 public interface StudentService {
 	Student showStudentInfor(String stuid);
+
 	Student loginStudent(String username,String password);
+
+	Boolean editStuHeader(String img,String stuId);
+
+	Boolean editStudentInfor(Student student);
 }

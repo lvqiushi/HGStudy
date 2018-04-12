@@ -32,6 +32,26 @@
         delete v from video v where v.vid_id = #{videoId}
     </delete>
 
+    <update id="updateVideo" parameterType="Video">
+        update video v
+        <trim prefix="set" suffixOverrides=",">
+            <if test="vidPath!=null and vidPath!='' ">
+                v.vid_src = #{vidPath},
+            </if>
+            <if test="vidInfor!=null and vidInfor!='' ">
+                v.vid_Infor = #{vidInfor},
+            </if>
+            <if test="vidName!=null and vidName!='' ">
+                v.vid_name = #{vidName},
+            </if>
+            <if test="vidImg!=null and vidImg!='' ">
+                v.vid_img_src = #{vidImg},
+            </if>
+            v.create_time = now()
+        </trim>
+        where v.vid_id = #{vidId};
+    </update>
+
     <resultMap type="Video" id="video">
         <!-- 用id属性来映射主键字段  -->
         <id property="vidId" column="vid_id"/>

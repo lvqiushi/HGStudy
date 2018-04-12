@@ -33,7 +33,7 @@
         	<img alt="预览"  id="cutimg"  />
             <div class="zxx_main_con">
                 <div class="zxx_test_list">
-                    <input class="photo-file" type="file" name="pic" id="fcupload" onchange="readURL(this);" /> 
+                    <input class="photo-file" type="file" name="pic" id="fcupload" onchange="readURL(this);" />
                     <button id="submit" >上传</button>
                 	<input type="hidden"  name="couid"  value="${param.couid }"/> 
                 </div>
@@ -63,7 +63,7 @@
         }
         
         function checkimg(){
-			var fileName =document.getElementById("fcupload").value;
+			var fileName = document.getElementById("fcupload").value;
 
 			if(fileName.length>0){
 				var idx = fileName.lastIndexOf(".");

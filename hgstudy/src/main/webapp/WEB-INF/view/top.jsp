@@ -29,7 +29,7 @@
 								<a href="login.jsp"><img src="img/user.png" alt=".." class="dropdown-toggle img-circle head-top"></a>
 							</c:if>
 							<c:if test="${not empty user}">
-                            <a href="ShowInforAction"><img src="img/userhover.png" alt=".." class="dropdown-toggle img-circle head-top"></a>
+                            <img src="img/userhover.png" alt=".." class="dropdown-toggle img-circle head-top"></a>
                             <ul class="dropdown-menu" role="menu">
                                 <c:if test="${'student' == userType}">
                             		<li><a href="stuInfor">个人中心</a></li>

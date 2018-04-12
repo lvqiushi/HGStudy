@@ -14,7 +14,7 @@
                         http://www.springframework.org/schema/tx
         				http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">    
 
-    <context:property-placeholder location="classpath:db.properties"/>
+    <context:property-placeholder location="classpath:*.properties"/>
     <!--默认的注解映射的支持-->
     <mvc:annotation-driven validator="validator" conversion-service="conversionService" />
     <!-- 支持上传文件  --> 

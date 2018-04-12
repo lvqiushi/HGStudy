@@ -69,7 +69,7 @@ public class TeacherServiceImpl implements TeacherService {
 	@Override
 	public boolean editTeaHeader(String img,String teaid) {
 		String imageName = BASE64Encode.DecoderImage(img.split(",")[1]);
-		System.out.println(imageName);
+
 		Teacher tea = new Teacher();
 		tea.setTeaId(teaid);
 		tea.setTeaImage(imageName);

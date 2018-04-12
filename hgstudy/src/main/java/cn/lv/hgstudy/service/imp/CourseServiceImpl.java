@@ -69,6 +69,20 @@ public class CourseServiceImpl implements CourseService {
 	}
 
 	@Override
+	public Page selectCoursesByStuID(String stuId, int start, int pageNumber) {
+		List courses = new ArrayList<Course>();
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("start", start);
+		map.put("pagenumber", pageNumber);
+		map.put("stuId", stuId);
+		courses = cdao.selectAttCourses(map);
+		int total = cdao.selectAttCoursesTotal(map);
+		Page page = new Page(total, start, pageNumber);
+		page.setContents(courses);
+		return page;
+	}
+
+	@Override
 	public Boolean EditCourseInfor(Course cou) {
 		return cdao.editCourseInfor(cou);
 	}

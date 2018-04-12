@@ -24,9 +24,8 @@ public class VideoServiceImpl implements VideoService{
 	}
 
 	@Override
-	public Boolean reUploadVideo(Video video,Integer oldVideoId) {
-		videoDao.delVideo(oldVideoId);
-		videoDao.addVideo(video);
+	public Boolean updateVideo(Video video) {
+		videoDao.updateVideo(video);
 		return true;
 	}
 

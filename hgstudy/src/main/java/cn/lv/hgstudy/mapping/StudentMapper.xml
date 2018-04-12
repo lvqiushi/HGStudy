@@ -6,8 +6,14 @@
     <select id="selectStudentById" parameterType="String"  resultMap="stuResultMap">
 		select * from student stu where stu.stu_id = #{stuid}
 	</select>
- 	
-	<update id="editinfor" parameterType="Teacher">  
+
+	<update id="editStuHeader" parameterType="Student">
+		update student stu
+			set stu.stu_header = #{stuImage}
+		where stu.stu_id = #{stuId};
+	</update>
+
+	<update id="editinfor" parameterType="Student">
         update student stu 
         	<trim prefix="set" suffixOverrides=",">
        			<if test="stuName!=null and stuName!='' ">

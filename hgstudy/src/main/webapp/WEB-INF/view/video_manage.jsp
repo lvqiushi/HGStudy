@@ -54,9 +54,15 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="operate" class="col-xs-3 control-label  text-center">操作</label>
+                        <label for="xj-name" class="col-xs-3 control-label  text-center">视频简介</label>
                         <div class="col-xs-9">
-                            <p id="operate"><a href="delVideo?videoId=${video.vidId}">删除</a> | <a href="toUploadVideo?jointid=${joint.jid }&operte=2">重新上传</a></p>
+                            <input id="video-infor" type="text" value="${video.vidInfor}" />
+                        </div>
+                    </div>
+                    <div class="form-group" >
+                        <label for="operate" class="col-xs-3 control-label  text-center" style="margin-top: 20px">操作</label>
+                        <div class="col-xs-9">
+                            <p id="operate" style="margin-top: 20px"><a href="delVideo?videoId=${video.vidId}">删除</a> | <a href="toUploadVideo?jointid=${joint.jid }&operte=2">重新上传</a></p>
                         </div>
                     </div>
 				</c:if>

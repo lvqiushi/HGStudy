@@ -9,8 +9,12 @@ public interface CourseDao {
 	Course selectCourseById(Integer couid);
 	//
 	List<Course> selectCourses(Map<String,Object> map);
+
+	List<Course> selectAttCourses(Map<String,Object> map);
 	
 	Integer selectCoursesTotal(Map<String,Object> map);
+
+	Integer selectAttCoursesTotal(Map<String,Object> map);
 	//
 	//List<Course> selectCoursesByTeaId(Map<String,Object> map);
 	//

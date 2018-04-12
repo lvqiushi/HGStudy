@@ -12,7 +12,7 @@ import cn.lv.hgstudy.pojo.Video;
 public interface VideoService {
 	Boolean uploadVideo(Video video);
 
-	Boolean reUploadVideo(Video video,Integer oldVideoId);
+	Boolean updateVideo(Video video);
 
 	Video selectVideo(Integer jointId);
 

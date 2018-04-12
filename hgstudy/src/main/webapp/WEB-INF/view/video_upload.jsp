@@ -67,6 +67,7 @@
 				<div id="uploader">
 					<p>您的浏览器未安装 Flash, Silverlight, Gears, BrowserPlus 或者支持 HTML5 .</p>
 				</div>
+				<input class="photo-file" type="file" name="pic" id="fcupload" />
 				<input type="submit" value="完成"/>
 			</form>
 		</div>
