@@ -8,12 +8,22 @@
  */
 package cn.lv.hgstudy.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
+import cn.lv.hgstudy.enums.EmailTypeEnum;
+import cn.lv.hgstudy.model.UserMailInfo;
 import cn.lv.hgstudy.pojo.Chapter;
+import cn.lv.hgstudy.pojo.Student;
+import cn.lv.hgstudy.service.StudentService;
+import cn.lv.hgstudy.util.AesUtil;
+import cn.lv.hgstudy.util.RedisUtil;
+import cn.lv.hgstudy.util.SendMailUtil;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,14 +53,20 @@ import cn.lv.hgstudy.util.BASE64Encode;
 @Controller
 public class TeacherController {
 	@Resource
-	TeacherService tercherService;
+	private TeacherService tercherService;
 	@Resource
-	CourseService courseService;
+	private CourseService courseService;
 	@Resource
-	ChapterService chapterService;
+	private ChapterService chapterService;
+	@Autowired
+	private StudentService studentService;
+	@Autowired
+	private RedisUtil redisUtil;
 	
 	//分页时每页数量
-    private int pageNumber = 5;
+    private static final int pageNumber = 5;
+
+    private static final String PASSWORD_URL = "localhost:8080/toEditPassword?token=";
 	
     /**
      * 
@@ -149,7 +165,7 @@ public class TeacherController {
 	 * @return java.lang.String 
 	 */
 	@RequestMapping(value = "/toEditCourse")
-    public String toEditCourse(Model model,Integer couid,HttpSession session){
+    public String toEditCourse(Model model,Integer couid){
 		Course cou = courseService.selectCourseByID(couid);
 		model.addAttribute("couname", cou.getCouName());
 		model.addAttribute("couid", cou.getCouId());
@@ -179,9 +195,98 @@ public class TeacherController {
 	@RequestMapping(value = "/editHeader")
 	@ResponseBody
     public JsonResult editHeader(Model model,String img,String teaid){
-		tercherService.editTeaHeader(img,teaid);	
+		tercherService.editTeaHeader(img,teaid);
 		JsonResult result = new JsonResult();
 		result.setMessage("修改头像成功");
+		return result;
+	}
+
+	@RequestMapping(value = "/toSendPasswordMail")
+	public String toSendPasswordMail(){
+		return "password_send_mail";
+	}
+
+	@RequestMapping(value = "/toEditPassword")
+	public String toEditPassword(String token,Model model){
+		model.addAttribute("token",token);
+		return "reset_password";
+	}
+
+	@RequestMapping(value = "/editPassword")
+	@ResponseBody
+	public JsonResult editPassword(String token,HttpSession session,String password){
+		JsonResult result = new JsonResult();
+		if(StringUtils.isBlank(token)){
+			result.setSuccess(false);
+			result.setMessage("token不能为空");
+			return result;
+		}
+		String type = (String) session.getAttribute("userType");
+		String userId = AesUtil.AESDecode(token);
+		if(StringUtils.isBlank(userId)){
+			result.setSuccess(false);
+			result.setMessage("请访问正确的连接地址修改密码");
+			return result;
+		}
+//		if("student".equals(type)){
+//			Student student = new Student();
+//			//获取redis中用户token
+//			String userToken = redisUtil.getString(student.getStuId());
+//			if(!token.equals(userToken)){
+//				result.setSuccess(false);
+//				result.setMessage("你只能修改自己的密码");
+//				return result;
+//			}
+//			student.setStuId(userId);
+//			student.setStuPassword(password);
+//			studentService.editStudentInfor(student);
+//		}else {
+//			Teacher teacher = new Teacher();
+//			//获取redis中用户token
+//			String userToken = redisUtil.getString(teacher.getTeaId());
+//			if(!token.equals(userToken)){
+//				result.setSuccess(false);
+//				result.setMessage("你只能修改自己的密码");
+//				return result;
+//			}
+//			teacher.setTeaId(userId);
+//			teacher.setTeaPassword(password);
+//			tercherService.editTeacher(teacher);
+//		}
+		result.setMessage("修改密码成功，请重新登录");
+		return result;
+	}
+
+	@RequestMapping(value = "/sendPasswordMail")
+	@ResponseBody
+	public JsonResult sendPasswordMail(HttpSession session,String email){
+		JsonResult result = new JsonResult();
+//		String type = (String) session.getAttribute("userType");
+//		UserMailInfo user = new UserMailInfo();
+//		List<UserMailInfo> users = new ArrayList<>();
+//		if("student".equals(type)){
+//			Student stu = (Student) session.getAttribute("user");
+//			String token = AesUtil.AESEncode(stu.getStuId());
+//			user.setUserMailAdress(email);
+//			user.setUserName(stu.getStuName());
+//			users.add(user);
+//			String content = String.format(EmailTypeEnum.EDIT_PASSWORD.getContent(),PASSWORD_URL+token);
+//			//发送链接邮件
+//			SendMailUtil.sendMail(EmailTypeEnum.EDIT_PASSWORD.getType(),content,users);
+//			//将token保存在redis
+//			redisUtil.set(stu.getStuId(),token);
+//		} else {
+//			Teacher tea = (Teacher) session.getAttribute("user");
+//			String token = AesUtil.AESEncode(tea.getTeaId());
+//			user.setUserMailAdress(tea.getEmailAdress());
+//			user.setUserName(tea.getTeaName());
+//			users.add(user);
+//			String content = String.format(EmailTypeEnum.EDIT_PASSWORD.getContent(),PASSWORD_URL+token);
+//			//发送链接邮件
+//			SendMailUtil.sendMail(EmailTypeEnum.EDIT_PASSWORD.getType(),content,users);
+//			//将token保存在redis
+//			redisUtil.set(tea.getTeaId(),token);
+//		}
 		return result;
 	}
 }

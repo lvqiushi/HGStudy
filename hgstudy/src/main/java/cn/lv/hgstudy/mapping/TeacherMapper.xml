@@ -38,6 +38,9 @@
        			<if test="emailAdress!=null and emailAdress!='' ">
        				tea.tea_email = #{emailAdress}, 
        			</if>
+				<if test="teaPassword!=null and teaPassword!='' ">
+					tea.tea_password = #{teaPassword},
+				</if>
        			<if test="teaSex!=null and teaSex!='' ">
        				tea.tea_sex = #{teaSex} , 
        			</if>
@@ -61,6 +64,7 @@
          <result property="teaTil" column="tea_til"/>
          <result property="teaSchool" column="tea_school"/>
          <result property="teaImage" column="tea_header"/>
+		 <result property="teaPassword" column="tea_password"/>
          <result property="emailAdress" column="tea_email"/>
          <result property="teaEduca" column="tea_educa"/>
          <result property="teaSex" column="tea_sex"/>

@@ -50,7 +50,7 @@
                         <button onclick="attention(${cou.couId},2)" class="btn" style="background-color: #b2dba1; color: white">取消关注</button>
                      </c:if>
                      <c:if test="${statu==1 }">
-                        <button onclick="attention(${cou.couId},1)" class="btn" >关注</button>
+                        <button onclick="attention(${cou.couId},1)" class="btn" style="background-color: #b2dba1; color: white">关注</button>
                      </c:if>
                 </c:if>
              </h1><br>
@@ -121,27 +121,27 @@
                 //得到的d是一个形如{"key":"value","key1":"value1"}的数据类型，然后取值出来
 
                 var divshow = $("#attention");
-                if(data.nologin != null){
-                    alert("请先进行登陆!");
-                    //回到登录页面
-                    window.location.href="/login.jsp";
-                }
-                else{
-                    alert(data.jsonResult.message);
-                    if(data.jsonResult.success == true){
+//                if(data.nologin != null){
+//                    alert("请先进行登陆!");
+//                    //回到登录页面
+//                    window.location.href="/login.jsp";
+//                }
+
+                    alert(data.message);
+                    if(data.success == true){
                         $("#courseinfor button:eq(0)").remove();
-                        if(data.jsonResult.otherinfor == 1){
+                        if(data.otherinfor == 1){
                             //$("#courseinfor").children("button:first").remove();
                             divshow.append("<button onclick=\"attention(${cou.couId},2)\" class=\"btn\" style=\"background-color: #b2dba1; color: white\">取消关注</button>");
                         }
                         else{
-                            divshow.append("<button onclick=\"attention(${cou.couId},1)\" class=\"btn\" >关注</button>");
+                            divshow.append("<button onclick=\"attention(${cou.couId},1)\" class=\"btn\" style=\"background-color: #b2dba1; color: white\">关注</button>");
                         }
                     }
                     else{
 
                     }
-                }
+
             },
             error:function(data,state){
                 alert(data+"系统异常，请稍后重试！"+state);

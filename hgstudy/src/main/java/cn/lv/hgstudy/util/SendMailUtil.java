@@ -94,43 +94,46 @@ public class SendMailUtil {
 		return session;
 	}
 
-	public static void sendMail(Integer type,String content,List<UserMailInfo> userList) throws Exception{
+	public static void sendMail(Integer type,String content,List<UserMailInfo> userList){
+		try {
+			// 2. 根据配置创建会话对象, 用于和邮件服务器交互
+			//Session session = Session.getDefaultInstance(props);
+			Session session = getMailSession();
+			MimeMessage message ;
+			// 3. 创建一封邮件
+			if(EmailTypeEnum.EDIT_PASSWORD.getType().equals(type)) {
+				message = createMimeMessage(session, myEmailAccount, userList, EmailTypeEnum.EDIT_PASSWORD.getTitle(), content);
+			}
+			else {
+				message = createMimeMessage(session, myEmailAccount, userList, EmailTypeEnum.PUB_MESSAGE.getTitle(), content);
+			}
+			// 4. 根据 Session 获取邮件传输对象
+			Transport transport = session.getTransport();
 
-		// 2. 根据配置创建会话对象, 用于和邮件服务器交互
-		//Session session = Session.getDefaultInstance(props);
-		Session session = getMailSession();
-		MimeMessage message ;
-		// 3. 创建一封邮件
-		if(EmailTypeEnum.EDIT_PASSWORD.getType().equals(type)) {
-			message = createMimeMessage(session, myEmailAccount, userList, EmailTypeEnum.EDIT_PASSWORD.getTitle(), EmailTypeEnum.EDIT_PASSWORD.getContent());
+			// 5. 使用 邮箱账号 和 密码 连接邮件服务器, 这里认证的邮箱必须与 message 中的发件人邮箱一致, 否则报错
+			//
+			//    PS_01: 成败的判断关键在此一句, 如果连接服务器失败, 都会在控制台输出相应失败原因的 log,
+			//           仔细查看失败原因, 有些邮箱服务器会返回错误码或查看错误类型的链接, 根据给出的错误
+			//           类型到对应邮件服务器的帮助网站上查看具体失败原因。
+			//
+			//    PS_02: 连接失败的原因通常为以下几点, 仔细检查代码:
+			//           (1) 邮箱没有开启 SMTP 服务;
+			//           (2) 邮箱密码错误, 例如某些邮箱开启了独立密码;
+			//           (3) 邮箱服务器要求必须要使用 SSL 安全连接;
+			//           (4) 请求过于频繁或其他原因, 被邮件服务器拒绝服务;
+			//           (5) 如果以上几点都确定无误, 到邮件服务器网站查找帮助。
+			//
+			//    PS_03: 仔细看log, 认真看log, 看懂log, 错误原因都在log已说明。
+			transport.connect(myEmailAccount, myEmailPassword);
+
+			// 6. 发送邮件, 发到所有的收件地址, message.getAllRecipients() 获取到的是在创建邮件对
+			transport.sendMessage(message, message.getAllRecipients());
+
+			// 7. 关闭连接
+			transport.close();
+		}catch (Exception e){
+			e.printStackTrace();
 		}
-		else {
-			message = createMimeMessage(session, myEmailAccount, userList, EmailTypeEnum.PUB_MESSAGE.getTitle(), content);
-		}
-		// 4. 根据 Session 获取邮件传输对象
-		Transport transport = session.getTransport();
-
-		// 5. 使用 邮箱账号 和 密码 连接邮件服务器, 这里认证的邮箱必须与 message 中的发件人邮箱一致, 否则报错
-		//
-		//    PS_01: 成败的判断关键在此一句, 如果连接服务器失败, 都会在控制台输出相应失败原因的 log,
-		//           仔细查看失败原因, 有些邮箱服务器会返回错误码或查看错误类型的链接, 根据给出的错误
-		//           类型到对应邮件服务器的帮助网站上查看具体失败原因。
-		//
-		//    PS_02: 连接失败的原因通常为以下几点, 仔细检查代码:
-		//           (1) 邮箱没有开启 SMTP 服务;
-		//           (2) 邮箱密码错误, 例如某些邮箱开启了独立密码;
-		//           (3) 邮箱服务器要求必须要使用 SSL 安全连接;
-		//           (4) 请求过于频繁或其他原因, 被邮件服务器拒绝服务;
-		//           (5) 如果以上几点都确定无误, 到邮件服务器网站查找帮助。
-		//
-		//    PS_03: 仔细看log, 认真看log, 看懂log, 错误原因都在log已说明。
-		transport.connect(myEmailAccount, myEmailPassword);
-
-		// 6. 发送邮件, 发到所有的收件地址, message.getAllRecipients() 获取到的是在创建邮件对
-		transport.sendMessage(message, message.getAllRecipients());
-
-		// 7. 关闭连接
-		transport.close();
 	}
 
 }

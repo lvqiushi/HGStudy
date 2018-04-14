@@ -40,18 +40,18 @@
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
             <div class="login-panel panel panel-default">
-                <!--                     <div class="panel-heading">
-                                        <h3 class="panel-title" align=center>重新设置密码</h3>
-                                    </div> -->
                 <div class="panel-body">
-                    <form role="form"  id="send-mail">
-                        <fieldset id="filed">
-                            <div class="form-group" style="height: 130px" id="mail">
+                    <form role="form" id="set-password">
+                        <fieldset>
+                            <div class="form-group" style="height: 230px">
                                 <h3 align=center>重新设置密码</h3>
-                                <input class="form-control" style="margin-top: 40px;height: 50px" placeholder="E-mail" name="email" type="email" autofocus>
+                                <input class="form-control" style="margin-top: 40px;height: 50px" placeholder="新密码" name="password" type="text" autofocus>
+
+                                <input class="form-control" style="margin-top: 40px;height: 50px" placeholder="重复新密码" name="repassword" type="text">
+                                <input type="hidden"  name="token" value="${param.token}">
                             </div>
                             <!-- Change this to a button or input when using this as a form -->
-                            <a onclick="setPassword()" id="click" class="btn btn-lg btn-success btn-block">发送重设密码地址</a>
+                            <a onclick="setPassword()" class="btn btn-lg btn-success btn-block">确定</a>
                         </fieldset>
                     </form>
                 </div>
@@ -61,29 +61,24 @@
 </div>
 <script type="text/javascript">
     function setPassword(){
-        var form = new FormData(document.getElementById("send-mail"));
-
+        var form = new FormData(document.getElementById("set-password"));
+//             var req = new XMLHttpRequest();
+//             req.open("post", "${pageContext.request.contextPath}/public/testupload", false);
+//             req.send(form);
         $.ajax({
-            url: "/sendPasswordMail",
-            type: "post",
-            data: form,
-            processData: false,
-            contentType: false,
-            success: function (data) {
-                if (data.success == true) {
-                    var parent = $("#filed");
-                    var divshow = $("#mail");
-                    var click = $("#click");
-                    divshow.remove();
-                    click.remove();
-                    parent.append("<p class=\"form-control\" style=\"margin-top: 40px;height: 50px\" >已经将修改密码的连接地址发送到你的邮箱，请注意查收.</p>");
-                    //parent.remove(click);
+            url:"/editPassword",
+            type:"post",
+            data:form,
+            processData:false,
+            contentType:false,
+            success:function(data){
+                if(data.success == true){
                     alert("success");
-                } else {
+                }else {
                     alert("fails");
                 }
             },
-            error: function (e) {
+            error:function(e){
                 alert("错误！！");
                 window.clearInterval(timer);
             }

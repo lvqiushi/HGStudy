@@ -37,7 +37,7 @@
                             	<c:if test="${'teacher' == userType}">
                             		<li><a href="teaInfor">个人中心</a></li>
                             	</c:if> 
-                                <li><a href="html/editpassword.jsp">修改密码</a></li>
+                                <li><a href="toSendPasswordMail">修改密码</a></li>
                                 <li><a href="logout">退出</a></li>
                             </ul>
                             </c:if>
@@ -60,4 +60,4 @@
 				return false;
 			}
 		}		
-	</script>
+</script>

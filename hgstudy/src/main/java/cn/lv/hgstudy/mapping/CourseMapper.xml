@@ -42,20 +42,8 @@
 	</select>
 	
 	<select id="selectCoursesTotal" parameterType="map"  resultType="int">
-		select cou.*,tea.tea_name,tea.tea_id from course cou left join teacher tea on cou.tea_id=tea.tea_id
-			<where>
-				<if test="type != null and type != '' " >
-				    cou.cou_type = #{type}
-				</if>
-				<if test="teaid != null and teaid != '' " >
-				    and cou.tea_id = #{teaid}
-				</if>
-				<if test="keyword != null and keyword != '' " >
-					and (cou.cou_school like concat('%',#{keyword},'%')
-					or cou.cou_name like concat('%',#{keyword},'%')
-					or tea.tea_name like concat('%',#{keyword},'%'))
-				</if>
-		   	</where>
+		select count(cou.cou_id) from course cou
+			where cou.tea_id = #{teaid}
 	</select>
 
 	<select id="selectAttCoursesTotal" parameterType="map"  resultType="int">
@@ -78,8 +66,8 @@
 		    <!--limit #{start},#{pagenumber}-->
 	<!--</select>-->
 	
-	<select id="selectHotCourse" parameterType="int"  resultMap="couMap">
-		select * from course cou where cou.cou_type=#{type} order by cou.evaluate desc limit 0,1
+	<select id="selectHotCourse" parameterType="int"  resultMap="couDetilMap">
+		select cou.*,tea.tea_id,tea.tea_name from course cou left join teacher tea on cou.tea_id=tea.tea_id where cou.cou_type=#{type} order by cou.evaluate desc limit 0,1
 	</select>
 	
     <delete id="deleteCourseById" parameterType="String">

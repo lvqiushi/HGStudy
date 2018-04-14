@@ -62,7 +62,7 @@
 	                        </div>
 	                        <div class="col-xs-6">
 	                            <h2>${jsj.couName }</h2><br>
-	                            <p>${jteacher.teaSchool }&nbsp;&nbsp;&nbsp;  &nbsp;${jteacher.teaName }</p><br>
+	                            <p>${jsj.couSchool }&nbsp;&nbsp;&nbsp;  &nbsp;${jsj.tea.teaName }</p><br>
 	                            <div class="row">
 	                                <div class="col-sm-6">
 	                                    <a href="CourseAction?couID=${jsj.couId}"><button type="button" class="btn btn-primary btn-block">课程详情</button></a>
@@ -96,7 +96,7 @@
 	                        </div>
 	                        <div class="col-xs-6">
 	                            <h2>${wy.couName }</h2><br>
-	                            <p>${wyteacher.teaSchool }&nbsp;&nbsp;&nbsp;  &nbsp;${wyteacher.teaName }</p><br>
+	                            <p>${wy.couSchool}&nbsp;&nbsp;&nbsp;  &nbsp;${wy.tea.teaName}</p><br>
 	                            <div class="row">
 	                                <div class="col-sm-6">
 	                                    <a href="CourseAction?couID=${wy.couId}"><button type="button" class="btn btn-primary btn-block">课程详情</button></a>
@@ -128,7 +128,7 @@
 	                        </div>
 	                        <div class="col-xs-6">
 	                            <h2>${gx.couName }</h2><br>
-	                            <p>${gxteacher.teaSchool }&nbsp;&nbsp;&nbsp;  &nbsp;${gxteacher.teaName }</p><br>
+	                            <p>${gx.couSchool}&nbsp;&nbsp;&nbsp;  &nbsp;${gx.tea.teaName}</p><br>
 	                            <div class="row">
 	                                <div class="col-sm-6">
 	                                    <a href="CourseAction?couID=${gx.couId}"><button type="button" class="btn btn-primary btn-block">课程详情</button></a>
@@ -159,7 +159,7 @@
 	                        </div>
 	                        <div class="col-xs-6">
 	                            <h2>${wx.couName }</h2><br>
-	                            <p>${wxteacher.teaSchool }&nbsp;&nbsp;&nbsp;  &nbsp;${wxteacher.teaName }</p><br>
+	                            <p>${wx.couSchool}&nbsp;&nbsp;&nbsp;  &nbsp;${wx.tea.teaName}</p><br>
 	                            <div class="row">
 	                                <div class="col-sm-6">
 	                                    <a href="CourseAction?couID=${wx.couId}"><button type="button" class="btn btn-primary btn-block">课程详情</button></a>
@@ -192,7 +192,7 @@
 	                        </div>
 	                        <div class="col-xs-6">
 	                            <h2>${lx.couName }</h2><br>
-	                            <p>${lxteacher.teaSchool }&nbsp;&nbsp;&nbsp;  &nbsp;${lxteacher.teaName }</p><br>
+	                            <p>${lx.couSchool}&nbsp;&nbsp;&nbsp;  &nbsp;${lx.tea.teaName}</p><br>
 	                            <div class="row">
 	                                <div class="col-sm-6">
 	                                    <a href="CourseAction?couID=${lx.couId}"><button type="button" class="btn btn-primary btn-block">课程详情</button></a>

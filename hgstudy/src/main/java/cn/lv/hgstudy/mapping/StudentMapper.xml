@@ -28,6 +28,9 @@
        			<if test="emailAdress!=null and emailAdress!='' ">
        				stu.stu_email = #{emailAdress}, 
        			</if>
+				<if test="stuPassword!=null and stuPassword!='' ">
+					stu.stu_password = #{stuPassword},
+				</if>
        			<if test="stuSex!=null and stuSex!='' ">
        				stu.stu_sex = #{stuSex}
        			</if>
