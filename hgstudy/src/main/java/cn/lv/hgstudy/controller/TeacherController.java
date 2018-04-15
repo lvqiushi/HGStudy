@@ -28,19 +28,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-
-
 import cn.lv.hgstudy.common.JsonResult;
 import cn.lv.hgstudy.common.Page;
-import cn.lv.hgstudy.dao.CourseDao;
-import cn.lv.hgstudy.dao.TeacherDao;
 import cn.lv.hgstudy.pojo.Course;
 import cn.lv.hgstudy.pojo.Teacher;
 import cn.lv.hgstudy.service.ChapterService;
 import cn.lv.hgstudy.service.CourseService;
 import cn.lv.hgstudy.service.TeacherService;
-import cn.lv.hgstudy.util.BASE64Encode;
 
 /** 
  * @ClassName: TeacherController 

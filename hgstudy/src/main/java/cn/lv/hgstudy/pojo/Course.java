@@ -16,6 +16,7 @@ public class Course implements java.io.Serializable {
 	private Date creatTime;
 	private String outline;
 	private String outview;
+	private Integer isDeleted;
 	
 	public Course() {
 	}
@@ -119,6 +120,12 @@ public class Course implements java.io.Serializable {
 	public void setOutview(String outview) {
 		this.outview = outview;
 	}
-	
-		
+
+	public Integer getIsDeleted() {
+		return isDeleted;
+	}
+
+	public void setIsDeleted(Integer isDeleted) {
+		this.isDeleted = isDeleted;
+	}
 }

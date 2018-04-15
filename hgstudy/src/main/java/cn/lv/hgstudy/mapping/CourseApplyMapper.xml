@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--命名空间应该是对应接口的包名+类名 -->
+<mapper namespace="cn.lv.hgstudy.dao.CourseApplyDao">
+    <!--id应该是接口中的方法，结果类型如没有配置别名则应该使用全名称 吕秋实-->
+
+
+    <select id="selectAllApply" parameterType="map"  resultMap="apply">
+        select * from course_apply apply where apply.status <![CDATA[<>]]> 2 limit #{start},#{pagenumber}
+    </select>
+
+    <select id="countApply" parameterType="String" resultType="int">
+        select count(apply.apply_id) from course_apply apply where apply.status <![CDATA[<>]]> 2 and apply.tea_id = #{teaId}
+    </select>
+
+    <update id="deleteApply" parameterType="int">
+        update course_apply apply
+        apply.status = 2
+        where apply.apply_id = #{applyId}
+    </update>
+
+    <insert id="insertApply" parameterType="CourseApply" >
+        insert into course_apply
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            tea_id,creat_time,course_name,teacher_name,school,
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            #{teaId},#{creatTime},#{couresName},#{teaName},#{teaSchool}
+        </trim>
+    </insert>
+
+    <resultMap type="CourseApply" id="apply">
+        <!-- 用id属性来映射主键字段  -->
+        <id property="applyId" column="apply_id"/>
+        <!-- 用result属性来映射非主键字段 -->
+        <result property="teaId" column="tea_id"/>
+        <result property="creatTime" column="creat_time"/>
+        <result property="couresName" column="course_name"/>
+        <result property="teaName" column="teacher_name"/>
+        <result property="teaSchool" column="school"/>
+        <result property="status" column="status"/>
+    </resultMap>
+</mapper>
