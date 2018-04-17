@@ -67,7 +67,7 @@
             </div>
         </div>
         <div class="col-xs-9">
-            <iframe id="student-iframe" class="iframeGroup" src="showAttCourse" height="1200px" width="100%" frameborder="0"></iframe>
+            <iframe id="student-iframe" class="iframeGroup" src="showAttCourse" height="900px" width="100%" frameborder="0" scrolling="no"></iframe>
         </div>
     </div>
 </article>
@@ -151,16 +151,16 @@
             var iframeWin = iframe.contentWindow || iframe.contentDocument.parentWindow;
             if (iframeWin.document.body) {
                 if(iframeWin.document.body.scrollHeight < 700)
-                    $("#upload-iframe").css("height",500);
+                    $("#student-iframe").css("height",700);
                 else
-                    $("#upload-iframe").css("height",iframeWin.document.body.scrollHeight);
+                    $("#student-iframe").css("height",iframeWin.document.body.scrollHeight);
             }
         }
     };
 
     setInterval(function() {
         var objDOM = document.getElementById('student-iframe');
-        setIframeHeight(objDOM)
+        setIframeHeight(objDOM);
     }, 400);
 
 

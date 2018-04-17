@@ -50,7 +50,8 @@ public class ChapterController {
 	@RequestMapping(value = "/AddChapter")
 	public String AddChapter(Model model,Chapter chapter){
 		chapterService.addChapter(chapter);
-		return "redirect:/toEditCourse?couid="+chapter.getCouId();
+		String msg = "新增章节成功";
+		return "redirect:/toEditCourse?couid="+chapter.getCouId() + "&msg=" + msg;
 	}
 	
 	/*     
@@ -76,7 +77,8 @@ public class ChapterController {
 	public String EditChapter(Model model,Chapter chapter){
 		System.out.println(chapter.getChapterTitle());
 		chapterService.editChapterInfor(chapter);
-		return "redirect:/toEditCourse?couid="+chapter.getCouId();
+		String msg = "编辑章节成功";
+		return "redirect:/toEditCourse?couid="+chapter.getCouId() + "&msg=" + msg;
 	}
 	
 	/*     
@@ -88,6 +90,7 @@ public class ChapterController {
 	@RequestMapping(value= "/deleteChapter")
 	public String deleteChapter(Model model,Integer chapterid,String couid){
 		chapterService.deleteChapterById(chapterid);
-		return "redirect:/toEditCourse?couid="+couid;
+		String msg = "删除章节成功";
+		return "redirect:/toEditCourse?couid="+couid + "&msg=" + msg;
 	}
 }

@@ -60,7 +60,7 @@ public class TeacherController {
 	//分页时每页数量
     private static final int pageNumber = 5;
 
-    private static final String PASSWORD_URL = "localhost:8080/toEditPassword?token=";
+    private static final String PASSWORD_URL = "http://localhost:8080/toEditPassword?token=";
 	
     /**
      * 
@@ -159,12 +159,13 @@ public class TeacherController {
 	 * @return java.lang.String 
 	 */
 	@RequestMapping(value = "/toEditCourse")
-    public String toEditCourse(Model model,Integer couid){
+    public String toEditCourse(Model model,Integer couid,String msg){
 		Course cou = courseService.selectCourseByID(couid);
 		model.addAttribute("couname", cou.getCouName());
 		model.addAttribute("couid", cou.getCouId());
 		List<Chapter> chapters = chapterService.selectChaptersByCouId(couid);
 		model.addAttribute("chapters", chapters);
+		model.addAttribute("msg",msg);
 		return "edit_course";
 	}
 	
@@ -175,8 +176,10 @@ public class TeacherController {
 	 * @return java.lang.String 
 	 */
 	@RequestMapping(value = "/toEditCourseIndex")
-    public String toEditCourseIndex(Model model,String couid){
+    public String toEditCourseIndex(Model model,Integer couid){
 		model.addAttribute("couid", couid);
+		Course cou = courseService.selectCourseByID(couid);
+		model.addAttribute("couname", cou.getCouName());
 		return "edit_course_index";
 	}
 	
@@ -255,32 +258,49 @@ public class TeacherController {
 	@ResponseBody
 	public JsonResult sendPasswordMail(HttpSession session,String email){
 		JsonResult result = new JsonResult();
-//		String type = (String) session.getAttribute("userType");
-//		UserMailInfo user = new UserMailInfo();
-//		List<UserMailInfo> users = new ArrayList<>();
-//		if("student".equals(type)){
-//			Student stu = (Student) session.getAttribute("user");
-//			String token = AesUtil.AESEncode(stu.getStuId());
-//			user.setUserMailAdress(email);
-//			user.setUserName(stu.getStuName());
-//			users.add(user);
-//			String content = String.format(EmailTypeEnum.EDIT_PASSWORD.getContent(),PASSWORD_URL+token);
-//			//发送链接邮件
-//			SendMailUtil.sendMail(EmailTypeEnum.EDIT_PASSWORD.getType(),content,users);
-//			//将token保存在redis
-//			redisUtil.set(stu.getStuId(),token);
-//		} else {
-//			Teacher tea = (Teacher) session.getAttribute("user");
-//			String token = AesUtil.AESEncode(tea.getTeaId());
-//			user.setUserMailAdress(tea.getEmailAdress());
-//			user.setUserName(tea.getTeaName());
-//			users.add(user);
-//			String content = String.format(EmailTypeEnum.EDIT_PASSWORD.getContent(),PASSWORD_URL+token);
-//			//发送链接邮件
-//			SendMailUtil.sendMail(EmailTypeEnum.EDIT_PASSWORD.getType(),content,users);
-//			//将token保存在redis
-//			redisUtil.set(tea.getTeaId(),token);
-//		}
+		String type = (String) session.getAttribute("userType");
+		UserMailInfo user = new UserMailInfo();
+		List<UserMailInfo> users = new ArrayList<>();
+		try {
+			if("student".equals(type)){
+				Student stu = (Student) session.getAttribute("user");
+				String token = AesUtil.AESEncode(stu.getStuId());
+				//将token保存在redis
+				String success = redisUtil.set(stu.getStuId(),token);
+				if(StringUtils.isBlank(success)){
+					result.setSuccess(false);
+					result.setMessage("发送邮件失败，请重试");
+					return result;
+				}
+				user.setUserMailAdress(email);
+				user.setUserName(stu.getStuName());
+				users.add(user);
+				String content = String.format(EmailTypeEnum.EDIT_PASSWORD.getContent(),PASSWORD_URL+token,PASSWORD_URL+token);
+				//发送链接邮件
+				//SendMailUtil.sendMail(EmailTypeEnum.EDIT_PASSWORD.getType(),content,users);
+			} else {
+				Teacher tea = (Teacher) session.getAttribute("user");
+				String token = AesUtil.AESEncode(tea.getTeaId());
+				//将token保存在redis
+				String success = redisUtil.set(tea.getTeaId(),token);
+				if(StringUtils.isBlank(success)){
+					result.setSuccess(false);
+					result.setMessage("发送邮件失败，请重试");
+					return result;
+				}
+				user.setUserMailAdress(tea.getEmailAdress());
+				user.setUserName(tea.getTeaName());
+				users.add(user);
+				String content = String.format(EmailTypeEnum.EDIT_PASSWORD.getContent(),PASSWORD_URL+token,PASSWORD_URL+token);
+				//发送链接邮件
+				//SendMailUtil.sendMail(EmailTypeEnum.EDIT_PASSWORD.getType(),content,users);
+			}
+		}catch (Exception e){
+			e.printStackTrace();
+			result.setSuccess(false);
+			result.setMessage("发送邮件失败，请重试");
+		}
+
 		return result;
 	}
 }

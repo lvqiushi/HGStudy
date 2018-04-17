@@ -78,9 +78,8 @@
                     click.remove();
                     parent.append("<p class=\"form-control\" style=\"margin-top: 40px;height: 50px\" >已经将修改密码的连接地址发送到你的邮箱，请注意查收.</p>");
                     //parent.remove(click);
-                    alert("success");
                 } else {
-                    alert("fails");
+                    alert("发送邮件失败，请稍后重试");
                 }
             },
             error: function (e) {

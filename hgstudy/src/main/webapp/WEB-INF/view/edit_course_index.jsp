@@ -28,7 +28,7 @@
 </head>
 <body>
 <div class="text-center">
-    <h3>课程标题</h3>
+    <h3>${couname}</h3>
     <hr>
     <div style="margin-top: 150px;">
         <div class="col-xs-offset-3 col-xs-2">

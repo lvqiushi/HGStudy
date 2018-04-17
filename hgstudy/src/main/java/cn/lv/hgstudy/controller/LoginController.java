@@ -71,9 +71,10 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value = "/logout")
-    public String logout(HttpSession session){
+    public String logout(HttpSession session,Model model){
 		session.removeAttribute("user");
 		session.removeAttribute("userType");
+		model.addAttribute("msg","成功退出");
 		return "redirect:/login.jsp";
 	}
 	

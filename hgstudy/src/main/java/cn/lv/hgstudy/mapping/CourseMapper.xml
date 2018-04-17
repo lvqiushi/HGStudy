@@ -45,7 +45,7 @@
 	
 	<select id="selectCoursesTotal" parameterType="map"  resultType="int">
 		select count(cou.cou_id) from course cou
-			where cou.tea_id = #{teaid} and and cou.is_deleted = 0
+			where cou.tea_id = #{teaid} and cou.is_deleted = 0
 	</select>
 
 	<select id="selectAttCoursesTotal" parameterType="map"  resultType="int">

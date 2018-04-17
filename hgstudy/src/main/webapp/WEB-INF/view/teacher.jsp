@@ -147,7 +147,10 @@
         if (iframe) {
             var iframeWin = iframe.contentWindow || iframe.contentDocument.parentWindow;
             if (iframeWin.document.body) {
-				$("#teacher-iframe").css("height",iframeWin.document.body.scrollHeight);
+                if(iframeWin.document.body.scrollHeight < 700)
+                    $("#teacher-iframe").css("height",700);
+                else
+                    $("#teacher-iframe").css("height",iframeWin.document.body.scrollHeight);
             }
         }
     };
@@ -155,7 +158,7 @@
     setInterval(function() {
         var objDOM = document.getElementById('teacher-iframe');
         setIframeHeight(objDOM)
-    }, 1000);
+    }, 400);
 
 	function click2(userid) {
 		$("#teacher-iframe").attr("src","showPersonInfor?teaid="+userid)

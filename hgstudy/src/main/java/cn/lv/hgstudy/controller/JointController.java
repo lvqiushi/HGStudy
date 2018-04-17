@@ -52,7 +52,8 @@ public class JointController {
 	@RequestMapping(value = "/addjoint")
     public String addjoint(Model model,Joint joint,String couid){
 		jointservice.addJoint(joint);
-		return "redirect:/toEditCourse?couid="+couid;
+		String msg = "新增小节成功";
+		return "redirect:/toEditCourse?couid="+couid+"&msg="+msg;
 	}
 	
 	/*     
@@ -77,8 +78,10 @@ public class JointController {
 	@RequestMapping(value = "/editjoint")
     public String editjoint(Model model,Joint joint,String couid){
 		try {
-			if(1==jointservice.editJoint(joint))
-				return "redirect:/toEditCourse?couid="+couid;
+			if(1==jointservice.editJoint(joint)) {
+				String msg = "编辑小节成功";
+				return "redirect:/toEditCourse?couid=" + couid + "&msg=" + msg;
+			}
 			else
 				return "redirect:/toEditCourse?couid="+couid;
 		} catch (Exception e) {
@@ -96,8 +99,10 @@ public class JointController {
 	 */
 	@RequestMapping(value = "/delejoint")
     public String delejoint(Model model,Integer jointid,String couid){
-		if(1==jointservice.deleteJoint(jointid))
-			return "redirect:/toEditCourse?couid="+couid;
+		if(1==jointservice.deleteJoint(jointid)) {
+			String msg = "删除小节成功";
+			return "redirect:/toEditCourse?couid=" + couid + "&msg=" + msg;
+		}
 		else
 			return "error";
 	}

@@ -127,7 +127,7 @@ function setIframeHeight(iframe) {
 
 setInterval(function() {
     var objDOM = document.getElementById('upload-iframe');
-    setIframeHeight(objDOM)
+    setIframeHeight(objDOM);
 }, 400);
 
 </script>
