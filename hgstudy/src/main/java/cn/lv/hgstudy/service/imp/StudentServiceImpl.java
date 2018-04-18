@@ -17,6 +17,8 @@ import org.springframework.stereotype.Service;
 import cn.lv.hgstudy.dao.StudentDao;
 import cn.lv.hgstudy.pojo.Student;
 
+import java.util.List;
+
 /** 
  * @ClassName: StudentServiceImp 
  * @Description:
@@ -27,7 +29,7 @@ import cn.lv.hgstudy.pojo.Student;
 @Service
 public class StudentServiceImpl implements StudentService {
 	@Resource
-	StudentDao sdao;
+	private StudentDao sdao;
 	
 	/* (non-Javadoc)
 	 * @see cn.lv.hgstudy.service.StudentService#showStudentInfor(java.lang.String)
@@ -68,4 +70,9 @@ public class StudentServiceImpl implements StudentService {
 		return sdao.editinfor(student);
 	}
 
+
+	@Override
+	public List<Student> selectStudentsByCId(Integer couId) {
+		return sdao.selectStudentsByCId(couId);
+	}
 }

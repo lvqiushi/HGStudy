@@ -10,8 +10,9 @@ package cn.lv.hgstudy.service;
 
 import cn.lv.hgstudy.pojo.Student;
 
+import java.util.List;
 
-/** 
+/**
  * @ClassName: TeacherService 
  * @Description: TODO
  * @author lv
@@ -27,4 +28,6 @@ public interface StudentService {
 	Boolean editStuHeader(String img,String stuId);
 
 	Boolean editStudentInfor(Student student);
+
+	List<Student> selectStudentsByCId(Integer couId);
 }

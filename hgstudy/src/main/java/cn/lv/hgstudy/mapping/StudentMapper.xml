@@ -7,6 +7,10 @@
 		select * from student stu where stu.stu_id = #{stuid}
 	</select>
 
+	<select id="selectStudentsByCId" parameterType="Integer"  resultMap="stuResultMap">
+		select stu.* from student stu join stu_attention att on att.user_id = stu.stu_id and att.cou_id = #{couId}
+	</select>
+
 	<update id="editStuHeader" parameterType="Student">
 		update student stu
 			set stu.stu_header = #{stuImage}

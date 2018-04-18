@@ -4,6 +4,7 @@ import java.util.List;
 
 import cn.lv.hgstudy.common.Page;
 import cn.lv.hgstudy.pojo.Course;
+import cn.lv.hgstudy.pojo.Student;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 public interface CourseService {

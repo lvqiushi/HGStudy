@@ -9,6 +9,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import cn.lv.hgstudy.pojo.Student;
 import cn.lv.hgstudy.service.CourseService;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +31,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 public class CourseServiceImpl implements CourseService {
 	
 	@Resource
-	CourseDao cdao;
+	private CourseDao cdao;
 
 	@Override
 	public List<Course> selectHotCourses() {

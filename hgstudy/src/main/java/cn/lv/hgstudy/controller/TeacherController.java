@@ -303,4 +303,20 @@ public class TeacherController {
 
 		return result;
 	}
+
+	@RequestMapping(value = "/sendMailToStudent")
+	@ResponseBody
+	public JsonResult sendMailToStudent(Integer couId,String content){
+		JsonResult result = new JsonResult();
+		List<Student> students = studentService.selectStudentsByCId(couId);
+		List<UserMailInfo> users = new ArrayList<>();
+		for (Student student:students) {
+			UserMailInfo user = new UserMailInfo();
+			user.setUserName(student.getStuName());
+			user.setUserMailAdress(student.getEmailAdress());
+			users.add(user);
+		}
+		SendMailUtil.sendMail(EmailTypeEnum.PUB_MESSAGE.getType(),content,users);
+		return result;
+	}
 }

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import cn.lv.hgstudy.pojo.Course;
+import cn.lv.hgstudy.pojo.Student;
 
 public interface CourseDao {
 	Course selectCourseById(Integer couid);

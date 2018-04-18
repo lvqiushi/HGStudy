@@ -64,10 +64,16 @@
                                     <c:if test="${stu.stuSex eq '男' }">
                                         <input type="radio" name="stuSex" id="inlineRadio1" selected="selected" value="男"> 男
                                     </c:if>
+                                    <c:if test="${stu.stuSex ne '男' }">
+                                        <input type="radio" name="stuSex" id="inlineRadio1" value="男" > 男
+                                    </c:if>
                                 </label>
                                 <label class="radio-inline">
                                     <c:if test="${stu.stuSex eq '女' }">
                                         <input type="radio" name="stuSex" id="inlineRadio2" selected="selected" value="女"> 女
+                                    </c:if>
+                                    <c:if test="${stu.stuSex ne '女' }">
+                                        <input type="radio" name="stuSex" id="inlineRadio2" value="女" > 女
                                     </c:if>
                                 </label>
                             </div>
