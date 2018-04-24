@@ -28,7 +28,7 @@ import cn.lv.hgstudy.util.BASE64Encode;
 @Service
 public class TeacherServiceImpl implements TeacherService {
 	@Resource
-	TeacherDao tdao;
+	private TeacherDao tdao;
 	
 	/* (non-Javadoc)
 	 * @see cn.lv.hgstudy.service.TeacherService#showTeacherInfor(int)
@@ -60,6 +60,11 @@ public class TeacherServiceImpl implements TeacherService {
 	@Override
 	public boolean editTeacher(Teacher tea) {
 		return tdao.editinfor(tea);
+	}
+
+	@Override
+	public Teacher findTeaByEmail(String email) {
+		return null;
 	}
 
 	/* (non-Javadoc)

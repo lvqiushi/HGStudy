@@ -64,6 +64,7 @@
        		<div class="info-btn">
 	       		<a type="button" id="teacher-profile-btn" onclick="click2('${tea.teaId}')" class="btn btn-default btn-block">编辑信息</a><br>			    
 			    <a type="button" id="edit-btn" onclick="click3()" class="btn btn-default btn-block">编辑课程</a></br>
+				<a type="button" id="apply-btn" onclick="apply()" class="btn btn-default btn-block">申请课程</a></br>
        			<button type="button" class="btn btn-default btn-block"  data-toggle="modal" data-target="#avatar-modal" >修改头像</button>
        		</div>
        </div>
@@ -127,7 +128,7 @@
 							          </button>
 							          <button type="button" class="btn btn-danger fa fa-refresh" data-method="reset" title="重置图片">
 								            <span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="$().cropper(&quot;reset&quot;)" aria-describedby="tooltip866214">
-								       </button>
+									  </button>
 							        </div>
 									<div class="col-md-3">
 										<button class="btn btn-danger btn-block avatar-save fa fa-save" type="button" data-dismiss="modal"> 保存修改</button>
@@ -166,6 +167,10 @@
 	function click3() {
 		$("#teacher-iframe").attr("src","selectCourseByTeaId?curpage=0")
 	}
+
+    function apply() {
+        $("#teacher-iframe").attr("src","toApplyCourse")
+    }
 	
 	$('#avatarInput').on('change', function(e) {
 		var filemaxsize = 1024 * 5;//5M

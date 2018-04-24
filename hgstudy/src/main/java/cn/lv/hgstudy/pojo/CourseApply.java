@@ -1,6 +1,8 @@
 package cn.lv.hgstudy.pojo;
 
-/**   
+import java.time.LocalDateTime;
+
+/**  
  * <p> (这里用一句话描述这个类的作用) </p>
  *   
  * @author: xiucai（xiucai@maihaoche.com） 
@@ -11,7 +13,10 @@ public class CourseApply {
 	private Integer applyId;
 	private String teaId;
 	private String couresName;
-	private String creatTime;
+	private Integer courseType;
+	private LocalDateTime creatTime;
+	private LocalDateTime modifiedTime;
+	private Integer isDeleted;
 	private String teaName;
 	private String teaSchool;
 	private Integer status;
@@ -40,12 +45,20 @@ public class CourseApply {
 		this.couresName = couresName;
 	}
 
-	public String getCreatTime() {
+	public LocalDateTime getCreatTime() {
 		return creatTime;
 	}
 
-	public void setCreatTime(String creatTime) {
+	public void setCreatTime(LocalDateTime creatTime) {
 		this.creatTime = creatTime;
+	}
+
+	public LocalDateTime getModifiedTime() {
+		return modifiedTime;
+	}
+
+	public void setModifiedTime(LocalDateTime modifiedTime) {
+		this.modifiedTime = modifiedTime;
 	}
 
 	public String getTeaName() {
@@ -70,5 +83,21 @@ public class CourseApply {
 
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+
+	public Integer getIsDeleted() {
+		return isDeleted;
+	}
+
+	public void setIsDeleted(Integer isDeleted) {
+		this.isDeleted = isDeleted;
+	}
+
+	public Integer getCourseType() {
+		return courseType;
+	}
+
+	public void setCourseType(Integer courseType) {
+		this.courseType = courseType;
 	}
 }

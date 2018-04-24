@@ -29,6 +29,6 @@
         <!-- 用result属性来映射非主键字段 -->
         <result property="userId" column="user_id"/>
         <result property="couId" column="cou_id"/>
-        <result property="creatTime" column="creat_time"/>
+        <result property="creatTime" column="creat_time" jdbcType="DATE"/>
     </resultMap>
 </mapper>

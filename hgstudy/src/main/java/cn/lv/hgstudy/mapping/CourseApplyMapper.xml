@@ -4,28 +4,28 @@
 <mapper namespace="cn.lv.hgstudy.dao.CourseApplyDao">
     <!--id应该是接口中的方法，结果类型如没有配置别名则应该使用全名称 吕秋实-->
 
-
     <select id="selectAllApply" parameterType="map"  resultMap="apply">
-        select * from course_apply apply where apply.status <![CDATA[<>]]> 2 limit #{start},#{pagenumber}
+        select * from course_apply apply where apply.is_deleted = 0 limit #{start},#{pagenumber}
     </select>
 
+    <!-- <![CDATA[<>]]>  -->
     <select id="countApply" parameterType="String" resultType="int">
-        select count(apply.apply_id) from course_apply apply where apply.status <![CDATA[<>]]> 2 and apply.tea_id = #{teaId}
+        select count(apply.apply_id) from course_apply apply where apply.is_deleted = 0 and apply.tea_id = #{teaId}
     </select>
 
     <update id="deleteApply" parameterType="int">
         update course_apply apply
-        apply.status = 2
+        apply.is_deleted = 1
         where apply.apply_id = #{applyId}
     </update>
 
     <insert id="insertApply" parameterType="CourseApply" >
         insert into course_apply
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            tea_id,creat_time,course_name,teacher_name,school,
+            tea_id,course_name,course_type,teacher_name,school,gmt_creat,gmt_modified
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            #{teaId},#{creatTime},#{couresName},#{teaName},#{teaSchool}
+            #{teaId},#{couresName},#{courseType},#{teaName},#{teaSchool},now(),now()
         </trim>
     </insert>
 
@@ -34,10 +34,13 @@
         <id property="applyId" column="apply_id"/>
         <!-- 用result属性来映射非主键字段 -->
         <result property="teaId" column="tea_id"/>
-        <result property="creatTime" column="creat_time"/>
+        <result property="creatTime" column="gmt_creat" jdbcType="DATE"/>
+        <result property="modifiedTime" column="gmt_modified" jdbcType="DATE"/>
         <result property="couresName" column="course_name"/>
+        <result property="courseType" column="course_type"/>
         <result property="teaName" column="teacher_name"/>
         <result property="teaSchool" column="school"/>
         <result property="status" column="status"/>
+        <result property="isDeleted" column="is_deleted"/>
     </resultMap>
 </mapper>

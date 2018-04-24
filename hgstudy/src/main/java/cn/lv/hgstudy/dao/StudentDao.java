@@ -13,4 +13,6 @@ public interface StudentDao {
 	boolean editStuHeader(Student stu);
 
 	List<Student> selectStudentsByCId(Integer couId);
+
+	Student selectStudentByEmail(String email);
 }

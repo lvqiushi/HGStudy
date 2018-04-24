@@ -10,4 +10,5 @@ public interface TeacherDao {
 	boolean editTeaHeader(Teacher tea);
 	Teacher selectTeacherById(String teaid);
 	Teacher selectTeaInforById(String teaid);
+	Teacher selectTeaByEmail(String email);
 }

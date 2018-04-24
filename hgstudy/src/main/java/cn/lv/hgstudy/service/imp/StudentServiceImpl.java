@@ -75,4 +75,9 @@ public class StudentServiceImpl implements StudentService {
 	public List<Student> selectStudentsByCId(Integer couId) {
 		return sdao.selectStudentsByCId(couId);
 	}
+
+	@Override
+	public Student findStuByEmail(String email) {
+		return sdao.selectStudentByEmail(email);
+	}
 }

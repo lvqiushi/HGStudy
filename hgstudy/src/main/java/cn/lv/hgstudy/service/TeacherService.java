@@ -23,4 +23,5 @@ public interface TeacherService {
 	Teacher loginTeacher(String username,String password);
 	boolean editTeaHeader(String img,String teaid);
 	boolean editTeacher(Teacher tea);
+	Teacher findTeaByEmail(String email);
 }

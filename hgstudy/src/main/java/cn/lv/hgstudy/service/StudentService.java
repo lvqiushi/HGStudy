@@ -30,4 +30,6 @@ public interface StudentService {
 	Boolean editStudentInfor(Student student);
 
 	List<Student> selectStudentsByCId(Integer couId);
+
+	Student findStuByEmail(String email);
 }

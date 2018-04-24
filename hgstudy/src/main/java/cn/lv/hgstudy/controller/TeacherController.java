@@ -10,15 +10,15 @@ package cn.lv.hgstudy.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import cn.lv.hgstudy.enums.EmailTypeEnum;
 import cn.lv.hgstudy.model.UserMailInfo;
-import cn.lv.hgstudy.pojo.Chapter;
-import cn.lv.hgstudy.pojo.Student;
-import cn.lv.hgstudy.service.StudentService;
+import cn.lv.hgstudy.pojo.*;
+import cn.lv.hgstudy.service.*;
 import cn.lv.hgstudy.util.AesUtil;
 import cn.lv.hgstudy.util.RedisUtil;
 import cn.lv.hgstudy.util.SendMailUtil;
@@ -30,11 +30,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import cn.lv.hgstudy.common.JsonResult;
 import cn.lv.hgstudy.common.Page;
-import cn.lv.hgstudy.pojo.Course;
-import cn.lv.hgstudy.pojo.Teacher;
-import cn.lv.hgstudy.service.ChapterService;
-import cn.lv.hgstudy.service.CourseService;
-import cn.lv.hgstudy.service.TeacherService;
 
 /** 
  * @ClassName: TeacherController 
@@ -54,6 +49,8 @@ public class TeacherController {
 	private ChapterService chapterService;
 	@Autowired
 	private StudentService studentService;
+	@Autowired
+	private CourseApplyService applyService;
 	@Autowired
 	private RedisUtil redisUtil;
 	
@@ -182,6 +179,40 @@ public class TeacherController {
 		model.addAttribute("couname", cou.getCouName());
 		return "edit_course_index";
 	}
+
+	/*    
+	 * <p> 跳转到课程申请页面 </p>
+	 *
+	 * @param [model, couid]
+	 * @return java.lang.String
+	 */
+	@RequestMapping(value = "/toApplyCourse")
+	public String toApplyCourse(Model model,HttpSession session){
+		Teacher tea = (Teacher) session.getAttribute("user");
+		model.addAttribute("teaId",tea.getTeaId());
+		return "apply_course";
+	}
+
+	/*    
+	 * <p> 提交课程申请 </p>
+	 *
+	 * @param [model, couid]
+	 * @return java.lang.String
+	 */
+	@RequestMapping(value = "/applyCourse")
+	public String applyCourse(Model model,String teaId,String courseName,Integer courseType){
+		CourseApply apply = new CourseApply();
+		Teacher tea = tercherService.showTeacherInfor(teaId);
+		apply.setCouresName(courseName);
+		apply.setCourseType(courseType);
+		apply.setTeaId(teaId);
+		apply.setTeaSchool(tea.getTeaSchool());
+		apply.setTeaName(tea.getTeaName());
+		applyService.applyCourse(apply);
+		model.addAttribute("tea", tea);
+		model.addAttribute("msg","成功提交课程申请");
+		return "teacher";
+	}
 	
 	/*     
 	 * <p> 修改头像 </p>
@@ -218,69 +249,56 @@ public class TeacherController {
 			result.setMessage("token不能为空");
 			return result;
 		}
-		String type = (String) session.getAttribute("userType");
-		String userId = AesUtil.AESDecode(token);
-		if(StringUtils.isBlank(userId)){
+		//String type = (String) session.getAttribute("userType");
+		String idAndType = AesUtil.AESDecode(token);
+		if(StringUtils.isBlank(idAndType)){
 			result.setSuccess(false);
 			result.setMessage("请访问正确的连接地址修改密码");
 			return result;
 		}
-//		if("student".equals(type)){
-//			Student student = new Student();
-//			//获取redis中用户token
-//			String userToken = redisUtil.getString(student.getStuId());
-//			if(!token.equals(userToken)){
-//				result.setSuccess(false);
-//				result.setMessage("你只能修改自己的密码");
-//				return result;
-//			}
-//			student.setStuId(userId);
-//			student.setStuPassword(password);
-//			studentService.editStudentInfor(student);
-//		}else {
-//			Teacher teacher = new Teacher();
-//			//获取redis中用户token
-//			String userToken = redisUtil.getString(teacher.getTeaId());
-//			if(!token.equals(userToken)){
-//				result.setSuccess(false);
-//				result.setMessage("你只能修改自己的密码");
-//				return result;
-//			}
-//			teacher.setTeaId(userId);
-//			teacher.setTeaPassword(password);
-//			tercherService.editTeacher(teacher);
-//		}
+		String[] properties = idAndType.split("_");
+		String userId = properties[0];
+		String type = properties[1];
+		if("stu".equals(type)){
+			Student student = new Student();
+			//获取redis中用户token
+			String userToken = redisUtil.getString(student.getStuId());
+			if(!token.equals(userToken)){
+				result.setSuccess(false);
+				result.setMessage("你只能修改自己的密码");
+				return result;
+			}
+			student.setStuId(userId);
+			student.setStuPassword(password);
+			studentService.editStudentInfor(student);
+		}else {
+			Teacher teacher = new Teacher();
+			//获取redis中用户token
+			String userToken = redisUtil.getString(teacher.getTeaId());
+			if(!token.equals(userToken)){
+				result.setSuccess(false);
+				result.setMessage("你只能修改自己的密码");
+				return result;
+			}
+			teacher.setTeaId(userId);
+			teacher.setTeaPassword(password);
+			tercherService.editTeacher(teacher);
+		}
 		result.setMessage("修改密码成功，请重新登录");
 		return result;
 	}
 
 	@RequestMapping(value = "/sendPasswordMail")
 	@ResponseBody
-	public JsonResult sendPasswordMail(HttpSession session,String email){
+	public JsonResult sendPasswordMail(String email){
 		JsonResult result = new JsonResult();
-		String type = (String) session.getAttribute("userType");
+		//String type = (String) session.getAttribute("userType");
 		UserMailInfo user = new UserMailInfo();
 		List<UserMailInfo> users = new ArrayList<>();
 		try {
-			if("student".equals(type)){
-				Student stu = (Student) session.getAttribute("user");
-				String token = AesUtil.AESEncode(stu.getStuId());
-				//将token保存在redis
-				String success = redisUtil.set(stu.getStuId(),token);
-				if(StringUtils.isBlank(success)){
-					result.setSuccess(false);
-					result.setMessage("发送邮件失败，请重试");
-					return result;
-				}
-				user.setUserMailAdress(email);
-				user.setUserName(stu.getStuName());
-				users.add(user);
-				String content = String.format(EmailTypeEnum.EDIT_PASSWORD.getContent(),PASSWORD_URL+token,PASSWORD_URL+token);
-				//发送链接邮件
-				//SendMailUtil.sendMail(EmailTypeEnum.EDIT_PASSWORD.getType(),content,users);
-			} else {
-				Teacher tea = (Teacher) session.getAttribute("user");
-				String token = AesUtil.AESEncode(tea.getTeaId());
+			Teacher tea = tercherService.findTeaByEmail(email);
+			if (!Objects.isNull(tea)){
+				String token = AesUtil.AESEncode(tea.getTeaId()+"_tea");
 				//将token保存在redis
 				String success = redisUtil.set(tea.getTeaId(),token);
 				if(StringUtils.isBlank(success)){
@@ -290,6 +308,28 @@ public class TeacherController {
 				}
 				user.setUserMailAdress(tea.getEmailAdress());
 				user.setUserName(tea.getTeaName());
+				users.add(user);
+				String content = String.format(EmailTypeEnum.EDIT_PASSWORD.getContent(),PASSWORD_URL+token,PASSWORD_URL+token);
+				//发送链接邮件
+				//SendMailUtil.sendMail(EmailTypeEnum.EDIT_PASSWORD.getType(),content,users);
+				return result;
+			}
+			Student stu = studentService.findStuByEmail(email);
+			if(Objects.isNull(stu)){
+				result.setSuccess(false);
+				result.setMessage("邮箱地址无效");
+				return result;
+			}else {
+				String token = AesUtil.AESEncode(stu.getStuId()+"_stu");
+				//将token保存在redis
+				String success = redisUtil.set(stu.getStuId(),token);
+				if(StringUtils.isBlank(success)){
+					result.setSuccess(false);
+					result.setMessage("发送邮件失败，请重试");
+					return result;
+				}
+				user.setUserMailAdress(email);
+				user.setUserName(stu.getStuName());
 				users.add(user);
 				String content = String.format(EmailTypeEnum.EDIT_PASSWORD.getContent(),PASSWORD_URL+token,PASSWORD_URL+token);
 				//发送链接邮件
