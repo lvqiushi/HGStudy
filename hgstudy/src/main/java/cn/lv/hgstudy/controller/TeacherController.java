@@ -8,6 +8,10 @@
  */
 package cn.lv.hgstudy.controller;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -16,6 +20,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import cn.lv.hgstudy.enums.EmailTypeEnum;
+import cn.lv.hgstudy.form.Announce;
 import cn.lv.hgstudy.model.UserMailInfo;
 import cn.lv.hgstudy.pojo.*;
 import cn.lv.hgstudy.service.*;
@@ -51,6 +56,8 @@ public class TeacherController {
 	private StudentService studentService;
 	@Autowired
 	private CourseApplyService applyService;
+	@Autowired
+	private LiveService liveService;
 	@Autowired
 	private RedisUtil redisUtil;
 	
@@ -300,7 +307,7 @@ public class TeacherController {
 			if (!Objects.isNull(tea)){
 				String token = AesUtil.AESEncode(tea.getTeaId()+"_tea");
 				//将token保存在redis
-				String success = redisUtil.set(tea.getTeaId(),token);
+				String success = redisUtil.setex(tea.getTeaId(),60*10,token);
 				if(StringUtils.isBlank(success)){
 					result.setSuccess(false);
 					result.setMessage("发送邮件失败，请重试");
@@ -322,7 +329,7 @@ public class TeacherController {
 			}else {
 				String token = AesUtil.AESEncode(stu.getStuId()+"_stu");
 				//将token保存在redis
-				String success = redisUtil.set(stu.getStuId(),token);
+				String success = redisUtil.setex(stu.getStuId(),60*10,token);
 				if(StringUtils.isBlank(success)){
 					result.setSuccess(false);
 					result.setMessage("发送邮件失败，请重试");
@@ -333,7 +340,7 @@ public class TeacherController {
 				users.add(user);
 				String content = String.format(EmailTypeEnum.EDIT_PASSWORD.getContent(),PASSWORD_URL+token,PASSWORD_URL+token);
 				//发送链接邮件
-				//SendMailUtil.sendMail(EmailTypeEnum.EDIT_PASSWORD.getType(),content,users);
+				//SendMailUtil.sendMail(EmailTypeEnum.EDIT_PASSWORD.getType(),content,users,"");
 			}
 		}catch (Exception e){
 			e.printStackTrace();
@@ -346,9 +353,20 @@ public class TeacherController {
 
 	@RequestMapping(value = "/sendMailToStudent")
 	@ResponseBody
-	public JsonResult sendMailToStudent(Integer couId,String content){
+	public JsonResult sendMailToStudent(Announce announce,HttpSession session){
 		JsonResult result = new JsonResult();
-		List<Student> students = studentService.selectStudentsByCId(couId);
+		String frequency = redisUtil.getString(announce.getCouId().toString());
+		if(StringUtils.isNotBlank(frequency)){
+			Integer frequencys = Integer.valueOf(frequency);
+			if(frequencys > 2){
+				result.setSuccess(false);
+				result.setMessage("每天发送课程公告次数不能大于三次,请明天再试");
+				return result;
+			}
+		}
+		Course course = courseService.selectCourseByID(announce.getCouId());
+		Teacher tea = (Teacher) session.getAttribute("user");
+		List<Student> students = studentService.selectStudentsByCId(announce.getCouId());
 		List<UserMailInfo> users = new ArrayList<>();
 		for (Student student:students) {
 			UserMailInfo user = new UserMailInfo();
@@ -356,7 +374,32 @@ public class TeacherController {
 			user.setUserMailAdress(student.getEmailAdress());
 			users.add(user);
 		}
-		SendMailUtil.sendMail(EmailTypeEnum.PUB_MESSAGE.getType(),content,users);
+		String title = String.format(EmailTypeEnum.PUB_MESSAGE.getTitle(),tea.getTeaName(),course.getCouName());
+		SendMailUtil.sendMail(EmailTypeEnum.PUB_MESSAGE.getType(),announce.getContent(),users,title);
+		//将使用次数保存在redis
+		LocalDateTime today_end = LocalDateTime.of(LocalDate.now(), LocalTime.MAX);//当天零点
+		Long success = redisUtil.incrAtExpire(announce.getCouId().toString(),
+				today_end.toInstant(ZoneOffset.of("+8")).toEpochMilli());
 		return result;
+	}
+
+	@RequestMapping(value = "/toAnnounce")
+	public String toAnnounce(Integer couId,Model model){
+		model.addAttribute("couId",couId);
+		return "announce";
+	}
+
+	@RequestMapping(value = "/toApplyLive")
+	public String toApplyLive(Integer couId,Model model){
+		model.addAttribute("couId",couId);
+		return "apply_live_room";
+	}
+
+	@RequestMapping(value = "/applyLive")
+	public String applyLive(Live live,HttpSession session){
+		Teacher tea = (Teacher) session.getAttribute("user");
+		live.setTeaId(tea.getTeaId());
+		liveService.addLive(live);
+		return "apply_live_room";
 	}
 }

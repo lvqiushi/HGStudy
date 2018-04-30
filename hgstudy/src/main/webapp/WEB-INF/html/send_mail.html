@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">  
+		<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+		<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<style type="text/css">
+			
+			.right{
+				float: right;
+				width: 100%;
+			}
+			.center{
+				width: 95%;
+				height: 100%;
+				margin-left: 50px;
+				margin-top: 200px;
+				
+			}
+			.center_mid{
+				text-align: center;
+			}
+		</style>
+	</head>
+	<body>
+		<div>
+			<div class="right">
+				<div class="center">
+					<form class="bs-example bs-example-form" role="form">
+						<div class="input-group input-group-lg">
+							<span class="input-group-addon">收件人：</span>
+							<input type="text" class="form-control" placeholder="收件人">
+						</div>
+						<br>
+						<div class="input-group input-group-lg">
+							<span class="input-group-addon">主题：</span>
+							<input type="text" class="form-control"  placeholder="主题">
+						</div>
+						<br>
+						<div class="form-group form-group-lg">
+							<span class="input-group-addon">正文：</span>
+							<textarea class="form-control" placeholder="正文" rows="10"></textarea>
+						</div>
+						<div class="center_mid">
+							<button class="btn btn-info" type="submit">发送</button>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<button class="btn btn-danger"  type="reset">重置</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

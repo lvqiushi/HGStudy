@@ -94,7 +94,7 @@ public class SendMailUtil {
 		return session;
 	}
 
-	public static void sendMail(Integer type,String content,List<UserMailInfo> userList){
+	public static void sendMail(Integer type,String content,List<UserMailInfo> userList,String title){
 		try {
 			// 2. 根据配置创建会话对象, 用于和邮件服务器交互
 			//Session session = Session.getDefaultInstance(props);
@@ -105,7 +105,7 @@ public class SendMailUtil {
 				message = createMimeMessage(session, myEmailAccount, userList, EmailTypeEnum.EDIT_PASSWORD.getTitle(), content);
 			}
 			else {
-				message = createMimeMessage(session, myEmailAccount, userList, EmailTypeEnum.PUB_MESSAGE.getTitle(), content);
+				message = createMimeMessage(session, myEmailAccount, userList, title, content);
 			}
 			// 4. 根据 Session 获取邮件传输对象
 			Transport transport = session.getTransport();

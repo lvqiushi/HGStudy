@@ -75,7 +75,7 @@
                 if(data.success == true){
                     alert("success");
                 }else {
-                    alert("fails");
+                    alert(data.message);
                 }
             },
             error:function(e){

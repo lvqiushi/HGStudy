@@ -28,7 +28,7 @@ public class MailTest {
 		userInfos.add(user1);
 		userInfos.add(user2);
 		try {
-			SendMailUtil.sendMail(EmailTypeEnum.EDIT_PASSWORD.getType(),"",userInfos);
+			SendMailUtil.sendMail(EmailTypeEnum.EDIT_PASSWORD.getType(),"",userInfos,"");
 		}catch (Exception e){
 			e.printStackTrace();
 		}

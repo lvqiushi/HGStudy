@@ -53,6 +53,18 @@ public class RedisUtil {
 		}
 	}
 
+	public String setex(String key, int second, String value) {
+		Jedis jedis = getJedis();
+		try {
+			return jedis.setex(key, second, value);
+		} catch (Exception e) {
+
+			return null;
+		} finally {
+			close(jedis);
+		}
+	}
+
 
 	public List<String> getStrings(List<String> keys) {
 		Jedis jedis = getJedis();
@@ -383,6 +395,19 @@ public class RedisUtil {
 		try {
 			Long l= jedis.incr(key);
 			jedis.expire(key,expire);
+			return l;
+		} catch (Exception e) {
+		} finally {
+			close(jedis);
+		}
+		return null;
+	}
+
+	public Long incrAtExpire(String key, long unixTime) {
+		Jedis jedis = getJedis();
+		try {
+			Long l= jedis.incr(key);
+			jedis.expireAt(key,unixTime);
 			return l;
 		} catch (Exception e) {
 		} finally {
