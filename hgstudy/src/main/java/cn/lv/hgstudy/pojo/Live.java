@@ -19,6 +19,7 @@ public class Live implements Serializable{
 	private String roomName;
 	private Integer status;
 	private String teaName;
+	private Integer couId;
 
 	public Live() {
 	}
@@ -85,5 +86,13 @@ public class Live implements Serializable{
 
 	public void setTeaName(String teaName) {
 		this.teaName = teaName;
+	}
+
+	public Integer getCouId() {
+		return couId;
+	}
+
+	public void setCouId(Integer couId) {
+		this.couId = couId;
 	}
 }

@@ -36,13 +36,13 @@
 	<body>
 		<div>
 			<div class="right">
-				<div class="center">
-					<form class="bs-example bs-example-form" role="form" action="announce" id="announce">
-						<div class="input-group input-group-lg">
-							<span class="input-group-addon">收件人：</span>
-							<input type="text" class="form-control" placeholder="收件人">
-						</div>
-						<br>
+				<div class="center" style="margin-top: 10px">
+					<form class="bs-example bs-example-form" role="form"  id="announce" style="width: 650px;height: 500px">
+						<%--<div class="input-group input-group-lg">--%>
+							<%--<span class="input-group-addon">收件人：</span>--%>
+							<%--<input type="text" class="form-control" placeholder="收件人">--%>
+						<%--</div>--%>
+						<%--<br>--%>
 						<div class="input-group input-group-lg">
 							<span class="input-group-addon">标题：</span>
 							<input type="text" class="form-control" name="title" placeholder="标题">
@@ -53,7 +53,7 @@
 							<textarea class="form-control" name="content" placeholder="正文" rows="10"></textarea>
 						</div>
 						<div class="center_mid">
-							<button class="btn btn-info" type="submit">发送</button>
+							<button class="btn btn-info" onclick="send()">发送</button>
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<button class="btn btn-danger"  type="reset">重置</button>
 						</div>
@@ -64,6 +64,7 @@
 		</div>
 		<script type="text/javascript">
             function send(){
+                var form = new FormData(document.getElementById("announce"));
                 $.ajax({
                     url:"/sendMailToStudent",
                     type:"post",
@@ -72,7 +73,7 @@
                     contentType:false,
                     success:function(data){
                         if(data.success == true){
-                            alert("success");
+                            alert(data.message);
                         }else {
                             alert(data.message);
                         }

@@ -24,9 +24,10 @@
 </head>
 <body>
 
-<h1>直播间</h1>
+<h1>${live.getTitle()}</h1>
 <video id="example_video_1" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto" width="960" height="460" poster="http://vjs.zencdn.net/v/oceans.png" data-setup="{}">
     <!--<source src="rtmp://172.21.2.75/rtmplive/test" type="rtmp/flv">-->
+    <source src="${url}" type="rtmp/flv">
     <source src="rtmp://live.hkstv.hk.lxdns.com/live/hks" type="rtmp/flv">
 
     <p class="vjs-no-js">播放视频需要启用 JavaScript，推荐使用支持HTML5的浏览器访问。

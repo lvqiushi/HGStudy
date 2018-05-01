@@ -20,6 +20,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import cn.lv.hgstudy.enums.EmailTypeEnum;
+import cn.lv.hgstudy.enums.UrlEnum;
 import cn.lv.hgstudy.form.Announce;
 import cn.lv.hgstudy.model.UserMailInfo;
 import cn.lv.hgstudy.pojo.*;
@@ -31,6 +32,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import cn.lv.hgstudy.common.JsonResult;
@@ -65,7 +67,8 @@ public class TeacherController {
     private static final int pageNumber = 5;
 
     private static final String PASSWORD_URL = "http://localhost:8080/toEditPassword?token=";
-	
+
+    private static final String LIVE_URL = "rtmp://123.207.189.242/live";
     /**
      * 
      * @Title: showTeacherInfor 
@@ -355,9 +358,10 @@ public class TeacherController {
 	@ResponseBody
 	public JsonResult sendMailToStudent(Announce announce,HttpSession session){
 		JsonResult result = new JsonResult();
+		Integer frequencys = 0;
 		String frequency = redisUtil.getString(announce.getCouId().toString());
 		if(StringUtils.isNotBlank(frequency)){
-			Integer frequencys = Integer.valueOf(frequency);
+			frequencys = Integer.valueOf(frequency);
 			if(frequencys > 2){
 				result.setSuccess(false);
 				result.setMessage("每天发送课程公告次数不能大于三次,请明天再试");
@@ -367,6 +371,11 @@ public class TeacherController {
 		Course course = courseService.selectCourseByID(announce.getCouId());
 		Teacher tea = (Teacher) session.getAttribute("user");
 		List<Student> students = studentService.selectStudentsByCId(announce.getCouId());
+		if(CollectionUtils.isEmpty(students)){
+			result.setSuccess(false);
+			result.setMessage("该课程下没有学生关注");
+			return result;
+		}
 		List<UserMailInfo> users = new ArrayList<>();
 		for (Student student:students) {
 			UserMailInfo user = new UserMailInfo();
@@ -380,6 +389,7 @@ public class TeacherController {
 		LocalDateTime today_end = LocalDateTime.of(LocalDate.now(), LocalTime.MAX);//当天零点
 		Long success = redisUtil.incrAtExpire(announce.getCouId().toString(),
 				today_end.toInstant(ZoneOffset.of("+8")).toEpochMilli());
+		result.setMessage(String.format("发送公告邮件成功，今日剩余可用次数：%d次",3-frequencys));
 		return result;
 	}
 
@@ -396,10 +406,16 @@ public class TeacherController {
 	}
 
 	@RequestMapping(value = "/applyLive")
-	public String applyLive(Live live,HttpSession session){
+	public String applyLive(Live live,HttpSession session,Model model){
 		Teacher tea = (Teacher) session.getAttribute("user");
+		String roomName = live.getTeaId()+"-"+live.getCouId();
+		live.setRoomName(roomName);
 		live.setTeaId(tea.getTeaId());
 		liveService.addLive(live);
-		return "apply_live_room";
+		model.addAttribute("liveURL", UrlEnum.LIVE_URL.getDesc());
+		model.addAttribute("roomName",roomName);
+		model.addAttribute("liveId",live.getId());
+		return "start_live_room";
 	}
+
 }

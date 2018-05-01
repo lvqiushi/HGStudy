@@ -53,7 +53,7 @@
                 <a  class="pull-right"><i onclick="editinfor('${couid}')" class="fa fa-edit fa-fw"></i></a>
                 <a href="teaInfor" class="pull-right" id="teacher-user"><i class="fa fa-user-circle fa-fw"></i></a>
 				<a class="pull-right" id="send-mail"><i onclick="announce('${couid}')" class="fa fa-envelope-open" style="width: 42px"></i></a>
-				<a class="pull-right" id="live-apply"><i onclick="live('${couid}')" class="fa fa-video-camera" style="width: 46px"></i></a>
+				<a href="toApplyLive?couId=${couid}" target="_blank" class="pull-right" id="live-apply"><i class="fa fa-video-camera" style="width: 46px"></i></a>
             </h1>
             <hr style="margin: 30px 0">
             <div class="col-xs-4">
@@ -141,7 +141,7 @@ setInterval(function() {
     }
 
     function live(couId) {
-        $("#upload-iframe").attr("src","toAnnounce?couId="+couId)
+        $("#upload-iframe").attr("src","toApplyLive?couId="+couId)
     }
 
 	function editchapter(chapterid,couid) {

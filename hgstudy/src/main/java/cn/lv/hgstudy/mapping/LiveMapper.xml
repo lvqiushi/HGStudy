@@ -29,7 +29,7 @@
         where l.id = #{id}
     </update>
 
-    <insert id="addLive" parameterType="live" >
+    <insert id="addLive" parameterType="live" useGeneratedKeys="true" keyProperty="id">
         insert into live
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="description != null">

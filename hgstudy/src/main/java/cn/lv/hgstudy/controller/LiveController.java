@@ -1,11 +1,14 @@
 package cn.lv.hgstudy.controller;
 
+import cn.lv.hgstudy.common.JsonResult;
+import cn.lv.hgstudy.enums.UrlEnum;
 import cn.lv.hgstudy.pojo.Live;
 import cn.lv.hgstudy.service.LiveService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**  
  * <p> (这里用一句话描述这个类的作用) </p>
@@ -23,20 +26,23 @@ public class LiveController {
 	public String toLiveRoom(Integer id,Model model){
 		Live live = liveService.selectById(id);
 		model.addAttribute("live",live);
+		model.addAttribute("url", UrlEnum.LIVE_URL.getDesc()+"/"+live.getRoomName());
 		return "live_room";
 	}
 
-	@RequestMapping(value = "/cteatLiveRoom")
-	public String cteatLiveRoom(Live live,Model model){
-		liveService.addLive(live);
-
-		return "";
+	@RequestMapping(value = "/startLive")
+	@ResponseBody
+	public JsonResult startLive(Integer liveId){
+		JsonResult result = new JsonResult();
+		liveService.openLive(liveId);
+		return result;
 	}
 
-	@RequestMapping(value = "/closeLiveRoom")
-	public String closeLiveRoom(Integer liveId,Model model){
+	@RequestMapping(value = "/closeLive")
+	@ResponseBody
+	public JsonResult closeLiveRoom(Integer liveId){
+		JsonResult result = new JsonResult();
 		liveService.exitLive(liveId);
-
-		return "";
+		return result;
 	}
 }
