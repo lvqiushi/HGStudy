@@ -1,6 +1,7 @@
 package cn.lv.hgstudy.service;
 
 import java.util.List;
+import java.util.Map;
 
 import cn.lv.hgstudy.common.Page;
 import cn.lv.hgstudy.pojo.Course;
@@ -25,4 +26,7 @@ public interface CourseService {
 	Boolean EditCourseImg(Integer couid,CommonsMultipartFile pic,String path);
 
 	Boolean EditCourseInfor(Course cou);
+
+	Boolean editCourseEvaluate(Integer couId,Integer evaluate);
+
 }

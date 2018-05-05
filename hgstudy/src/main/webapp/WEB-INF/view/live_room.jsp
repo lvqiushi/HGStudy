@@ -25,7 +25,7 @@
 <body>
 
 <h1>${live.getTitle()}</h1>
-<video id="example_video_1" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto" width="960" height="460" poster="http://vjs.zencdn.net/v/oceans.png" data-setup="{}">
+<video id="example_video_1" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto" width="960" height="460" poster="${live.getImage()}" data-setup="{}">
     <!--<source src="rtmp://172.21.2.75/rtmplive/test" type="rtmp/flv">-->
     <source src="${url}" type="rtmp/flv">
     <source src="rtmp://live.hkstv.hk.lxdns.com/live/hks" type="rtmp/flv">

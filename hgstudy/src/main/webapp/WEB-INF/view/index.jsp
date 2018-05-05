@@ -65,7 +65,7 @@
 	                            <p>${jsj.couSchool }&nbsp;&nbsp;&nbsp;  &nbsp;${jsj.tea.teaName }</p><br>
 	                            <div class="row">
 	                                <div class="col-sm-6">
-	                                    <a href="CourseAction?couID=${jsj.couId}"><button type="button" class="btn btn-primary btn-block">课程详情</button></a>
+	                                    <a href="selectCourseInfor?couid=${jsj.couId}"><button type="button" class="btn btn-primary btn-block">课程详情</button></a>
 	                                </div>
 	                            </div>
 	                        </div>
@@ -99,7 +99,7 @@
 	                            <p>${wy.couSchool}&nbsp;&nbsp;&nbsp;  &nbsp;${wy.tea.teaName}</p><br>
 	                            <div class="row">
 	                                <div class="col-sm-6">
-	                                    <a href="CourseAction?couID=${wy.couId}"><button type="button" class="btn btn-primary btn-block">课程详情</button></a>
+	                                    <a href="selectCourseInfor?couid=${wy.couId}"><button type="button" class="btn btn-primary btn-block">课程详情</button></a>
 	                                </div>
 	                            </div>
 	                        </div>
@@ -131,7 +131,7 @@
 	                            <p>${gx.couSchool}&nbsp;&nbsp;&nbsp;  &nbsp;${gx.tea.teaName}</p><br>
 	                            <div class="row">
 	                                <div class="col-sm-6">
-	                                    <a href="CourseAction?couID=${gx.couId}"><button type="button" class="btn btn-primary btn-block">课程详情</button></a>
+	                                    <a href="selectCourseInfor?couid=${gx.couId}"><button type="button" class="btn btn-primary btn-block">课程详情</button></a>
 	                                </div>
 	                            </div>
 	                        </div>
@@ -162,7 +162,7 @@
 	                            <p>${wx.couSchool}&nbsp;&nbsp;&nbsp;  &nbsp;${wx.tea.teaName}</p><br>
 	                            <div class="row">
 	                                <div class="col-sm-6">
-	                                    <a href="CourseAction?couID=${wx.couId}"><button type="button" class="btn btn-primary btn-block">课程详情</button></a>
+	                                    <a href="selectCourseInfor?couid=${wx.couId}"><button type="button" class="btn btn-primary btn-block">课程详情</button></a>
 	                                </div>
 	                            </div>
 	                        </div>
@@ -195,7 +195,7 @@
 	                            <p>${lx.couSchool}&nbsp;&nbsp;&nbsp;  &nbsp;${lx.tea.teaName}</p><br>
 	                            <div class="row">
 	                                <div class="col-sm-6">
-	                                    <a href="CourseAction?couID=${lx.couId}"><button type="button" class="btn btn-primary btn-block">课程详情</button></a>
+	                                    <a href="selectCourseInfor?couid=${lx.couId}"><button type="button" class="btn btn-primary btn-block">课程详情</button></a>
 	                                </div>
 	                            </div>
 	                        </div>

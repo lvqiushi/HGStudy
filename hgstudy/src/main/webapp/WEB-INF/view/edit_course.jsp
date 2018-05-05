@@ -120,7 +120,7 @@ function setIframeHeight(iframe) {
 			if(iframeWin.document.body.scrollHeight < 700)
                 $("#upload-iframe").css("height",500);
 			else
-            	$("#upload-iframe").css("height",iframeWin.document.body.scrollHeight);
+            	$("#upload-iframe").css("height",iframeWin.document.body.scrollHeight+50);
         }
     }
 };

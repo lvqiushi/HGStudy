@@ -148,7 +148,7 @@ public class VideoController {
 //			Long times = System.currentTimeMillis();
 //			Date d = new Date(times);
 //			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			if(VideoUploadEnum.UPLOAD.equals(operte)) {
+			if(VideoUploadEnum.UPLOAD.getCode().equals(operte)) {
 				Video vid = new Video();
 				vid.setVidPath(path);
 				vid.setJointid(jointId);
@@ -192,6 +192,7 @@ public class VideoController {
 	public String delVideo(Integer videoId,Model model){
 		try {
 			videoService.delVideo(videoId);
+			model.addAttribute("msg","删除课程视频成功");
 		}catch (Exception e){
 			e.printStackTrace();
 		}

@@ -17,15 +17,19 @@
         select count(l.id) from live l
     </select>
 
+    <select id="selectLiveByCouId" parameterType="int" resultMap="live">
+        select * from live l where l.cou_id = #{couId}
+    </select>
+
     <update id="openLive" parameterType="int">
       update live l
-        l.status = 1
+        set l.status = 1
       where l.id = #{id}
     </update>
 
     <update id="exitLive" parameterType="int">
         update live l
-        l.status = 0
+        set l.status = 0
         where l.id = #{id}
     </update>
 
@@ -35,13 +39,13 @@
             <if test="description != null">
                 description,
             </if>
-            tea_id,title,image,room_name,status,tea_name
+            tea_id,title,image,room_name,status,tea_name,cou_id
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="description != null">
                 #{description},
             </if>
-            #{teaId},#{title},#{image},#{roomName},#{status},#{teaName}
+            #{teaId},#{title},#{image},#{roomName},#{status},#{teaName},#{couId}
         </trim>
     </insert>
 
@@ -53,6 +57,7 @@
         <result property="title" column="title"/>
         <result property="image" column="image"/>
         <result property="roomName" column="room_name"/>
+        <result property="couId" column="cou_id"/>
         <result property="status" column="status"/>
         <result property="teaName" column="tea_name"/>
     </resultMap>

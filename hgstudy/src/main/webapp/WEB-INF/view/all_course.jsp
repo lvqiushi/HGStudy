@@ -109,10 +109,7 @@
                     </div>
                 </div>
             </div>
-
-
-
-            <div class="col-sm-9" style="width: 1000px;">
+            <div class="col-sm-9" style="width: 900px;">
                 <ul class="nav nav-tabs" role="tablist" id="kind">
                     <li role="presentation"><a onclick="foward()" role="tab" data-toggle="tab">热门</a></li>
                     <li role="presentation"><a onclick="foward1()" role="tab" data-toggle="tab">最新</a></li>

@@ -7,6 +7,7 @@ import cn.lv.hgstudy.service.LiveService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -32,17 +33,17 @@ public class LiveController {
 
 	@RequestMapping(value = "/startLive")
 	@ResponseBody
-	public JsonResult startLive(Integer liveId){
+	public JsonResult startLive(Live live){
 		JsonResult result = new JsonResult();
-		liveService.openLive(liveId);
+		liveService.openLive(live.getId());
 		return result;
 	}
 
 	@RequestMapping(value = "/closeLive")
 	@ResponseBody
-	public JsonResult closeLiveRoom(Integer liveId){
+	public JsonResult closeLiveRoom(Live live){
 		JsonResult result = new JsonResult();
-		liveService.exitLive(liveId);
+		liveService.exitLive(live.getId());
 		return result;
 	}
 }

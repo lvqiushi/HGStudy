@@ -3,6 +3,7 @@ package cn.lv.hgstudy.controller;
 import cn.lv.hgstudy.common.JsonResult;
 import cn.lv.hgstudy.enums.AttentionEnum;
 import cn.lv.hgstudy.pojo.Student;
+import cn.lv.hgstudy.service.CourseService;
 import cn.lv.hgstudy.service.StuAttService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +21,9 @@ import javax.servlet.http.HttpSession;
 @RestController
 public class AttentionController {
 	@Autowired
-	StuAttService stuAttService;
+	private StuAttService stuAttService;
+	@Autowired
+	private CourseService courseService;
 
 	@RequestMapping(value = "/AttentionCou")
 	public JsonResult AttentionCou(Integer couid,Integer oper,HttpSession session){
@@ -31,11 +34,13 @@ public class AttentionController {
 				jsonResult.setSuccess(stuAttService.AttCourse(stu.getStuId(),couid));
 				jsonResult.setMessage("关注课程成功");
 				jsonResult.setOtherinfor(AttentionEnum.ATTENTION.getCode().toString());
+				courseService.editCourseEvaluate(couid,1);
 			}
 			else {
 				jsonResult.setSuccess(stuAttService.cancelAtt(stu.getStuId(),couid));
 				jsonResult.setMessage("取消关注课程成功");
 				jsonResult.setOtherinfor(AttentionEnum.CANCEL.getCode().toString());
+				courseService.editCourseEvaluate(couid,-1);
 			}
 		}catch (Exception e){
 			jsonResult.setSuccess(false);

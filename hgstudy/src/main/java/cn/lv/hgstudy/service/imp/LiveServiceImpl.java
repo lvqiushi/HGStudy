@@ -57,4 +57,9 @@ public class LiveServiceImpl implements LiveService{
 	public Boolean exitLive(Integer id) {
 		return liveDao.exitLive(id);
 	}
+
+	@Override
+	public Live selectLiveByCouId(Integer couId) {
+		return liveDao.selectLiveByCouId(couId);
+	}
 }

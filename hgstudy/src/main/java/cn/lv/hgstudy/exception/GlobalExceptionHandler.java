@@ -50,7 +50,7 @@ public class GlobalExceptionHandler {
             return new ModelAndView();
         }
         ModelAndView mav = new ModelAndView();
-        mav.addObject("exception", e);
+        mav.addObject("exception", "系统发生错误");
         mav.addObject("url", req.getRequestURL());
         mav.setViewName(DEFAULT_ERROR_VIEW);
         return mav;

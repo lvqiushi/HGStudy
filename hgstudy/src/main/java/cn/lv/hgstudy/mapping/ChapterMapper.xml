@@ -12,6 +12,10 @@
 	<select id="selectChapterByCId" parameterType="Integer"  resultMap="chapterMap">
 		select * from chapter c where c.chapter_id = #{chapterid}
 	</select>
+
+	<select id="selectChapterByIndex" parameterType="Integer"  resultMap="chapterMap">
+		select * from chapter c where c.chapter_index = #{index}
+	</select>
 	
     <delete id="deleteChapterById" parameterType="Integer">
 		delete c from chapter c where c.chapter_id = #{chapterid}

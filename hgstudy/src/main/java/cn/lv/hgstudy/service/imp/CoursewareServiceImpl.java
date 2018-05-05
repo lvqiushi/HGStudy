@@ -70,8 +70,6 @@ public class CoursewareServiceImpl implements CoursewareService {
 	 */
 	@Override
 	public boolean addCouseware(Courseware crsware,CommonsMultipartFile courseware,String path){
-		System.out.println("paht "+path);
-		System.out.println("crs "+crsware.getUploader().getTeaId());
 		String fileName = courseware.getOriginalFilename();
 		String prefix = fileName.substring(fileName.lastIndexOf(".")+1);
 		String filename = crsware.getUploader().getTeaId()+System.currentTimeMillis()+"."+prefix;

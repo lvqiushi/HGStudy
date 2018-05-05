@@ -130,7 +130,7 @@ public class CourseController {
 	public String editCourseInfor(Course cou,Model model){
 		boolean b = courseService.EditCourseInfor(cou);
 		//model.addAttribute("cou", course);
-
+		model.addAttribute("msg","修改课程信息成功");
 		return "redirect:/toEditCourse?couid="+cou.getCouId();
 	}
 

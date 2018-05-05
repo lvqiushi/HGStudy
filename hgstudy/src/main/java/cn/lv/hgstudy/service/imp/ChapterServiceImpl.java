@@ -9,6 +9,7 @@
 package cn.lv.hgstudy.service.imp;
 
 import java.util.List;
+import java.util.Objects;
 
 import javax.annotation.Resource;
 
@@ -67,7 +68,12 @@ public class ChapterServiceImpl implements ChapterService {
 	 */
 	@Override
 	public boolean addChapter(Chapter chapter) {
-		return chdao.addChapter(chapter);
+		Chapter exist = chdao.selectChapterByIndex(chapter.getChapterIndex());
+		if(Objects.isNull(exist)) {
+			return chdao.addChapter(chapter);
+		}
+		else
+			return false;
 	}
 
 }

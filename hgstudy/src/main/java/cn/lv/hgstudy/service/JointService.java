@@ -22,7 +22,7 @@ import cn.lv.hgstudy.pojo.Joint;
 public interface JointService {
 	Joint selectJointByJId(Integer jointid);
 	List<Joint> selectJointsByCId(Integer chapterid);
-	int addJoint(Joint joint);
+	String addJoint(Joint joint);
 	int editJoint(Joint joint);
 	int deleteJoint(Integer jointid);
 }

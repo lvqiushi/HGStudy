@@ -8,6 +8,8 @@
  */
 package cn.lv.hgstudy.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -166,8 +168,9 @@ public class TeacherController {
 	 * @return java.lang.String 
 	 */
 	@RequestMapping(value = "/toEditCourse")
-    public String toEditCourse(Model model,Integer couid,String msg){
+    public String toEditCourse(Model model,Integer couid,String msg) throws UnsupportedEncodingException {
 		Course cou = courseService.selectCourseByID(couid);
+		msg = URLDecoder.decode(msg,"UTF-8");
 		model.addAttribute("couname", cou.getCouName());
 		model.addAttribute("couid", cou.getCouId());
 		List<Chapter> chapters = chapterService.selectChaptersByCouId(couid);
@@ -389,7 +392,7 @@ public class TeacherController {
 		LocalDateTime today_end = LocalDateTime.of(LocalDate.now(), LocalTime.MAX);//当天零点
 		Long success = redisUtil.incrAtExpire(announce.getCouId().toString(),
 				today_end.toInstant(ZoneOffset.of("+8")).toEpochMilli());
-		result.setMessage(String.format("发送公告邮件成功，今日剩余可用次数：%d次",3-frequencys));
+		result.setMessage(String.format("发送公告邮件成功，今日剩余可用次数：%d次",3-(frequencys+1)));
 		return result;
 	}
 
@@ -402,13 +405,25 @@ public class TeacherController {
 	@RequestMapping(value = "/toApplyLive")
 	public String toApplyLive(Integer couId,Model model){
 		model.addAttribute("couId",couId);
-		return "apply_live_room";
+
+		Live live = liveService.selectLiveByCouId(couId);
+		if(Objects.isNull(live)) {
+			return "apply_live_room";
+		}
+		else {
+			model.addAttribute("liveURL", UrlEnum.LIVE_URL.getDesc());
+			model.addAttribute("roomName",live.getRoomName());
+			model.addAttribute("liveId",live.getId());
+			return "start_live_room";
+		}
 	}
 
 	@RequestMapping(value = "/applyLive")
 	public String applyLive(Live live,HttpSession session,Model model){
 		Teacher tea = (Teacher) session.getAttribute("user");
 		String roomName = live.getTeaId()+"-"+live.getCouId();
+		Course course = courseService.selectCourseByID(live.getCouId());
+		live.setImage(course.getCouImg());
 		live.setRoomName(roomName);
 		live.setTeaId(tea.getTeaId());
 		liveService.addLive(live);

@@ -52,20 +52,18 @@ public class JointServiceImpl implements JointService {
 	 * @see cn.lv.hgstudy.service.JointService#addJoint(cn.lv.hgstudy.pojo.Joint)
 	 */
 	@Override
-	public int addJoint(Joint joint) {
+	public String addJoint(Joint joint) {
 		Map map = new HashMap<String, Object>();
 		map.put("chapterid", joint.getChapterid());
 		map.put("index", joint.getJointIndex());
-		if(jointdao.selectJointByIndex(map)){
-			System.out.println("存在");
-			
-			return 1;
-		}
 		// 已经存在该小节不能添加
+		if(jointdao.selectJointByIndex(map)){
+			return "已经存在该小节，不能重复添加";
+		}
+
 		else{
-			System.out.println("不存在");
 			jointdao.addJoint(joint);
-			return 2;
+			return "添加小节成功";
 		}
 		
 	}

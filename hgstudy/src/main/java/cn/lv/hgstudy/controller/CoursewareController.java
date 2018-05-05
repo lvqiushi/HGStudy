@@ -71,9 +71,10 @@ public class CoursewareController {
 		String filepath = ctxPath + File.separator +courseware.getFilePath();
 		//设置响应头和客户端保存文件名
 		response.setCharacterEncoding("utf-8");
-		response.setContentType("multipart/form-data");
-		response.setHeader("Content-Disposition", "attachment;fileName=" + new String(courseware.getFileName().getBytes("utf-8"),"iso-8859-1"));
-
+		//response.setContentType("multipart/form-data");
+		response.setContentType("application/x-msdownload");
+		response.setHeader("Content-Disposition", "attachment;fileName=" + new String(courseware.getFileName().getBytes(),"utf-8"));
+		//new String(courseware.getFileName().getBytes("utf-8"),"iso-8859-1")
 		//用于记录以完成的下载的数据量，单位是byte
 		long downloadedLength = 0L;
 		try {

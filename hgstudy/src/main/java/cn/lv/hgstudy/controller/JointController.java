@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import cn.lv.hgstudy.pojo.Joint;
 import cn.lv.hgstudy.service.JointService;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 /** 
  * @ClassName: JointController 
  * @Description:
@@ -51,9 +54,14 @@ public class JointController {
 	 */
 	@RequestMapping(value = "/addjoint")
     public String addjoint(Model model,Joint joint,String couid){
-		jointservice.addJoint(joint);
-		String msg = "新增小节成功";
-		return "redirect:/toEditCourse?couid="+couid+"&msg="+msg;
+		String msg = jointservice.addJoint(joint);
+		String newMsg = "";
+		try {
+			newMsg = URLEncoder.encode(msg, "UTF-8");
+		}catch (UnsupportedEncodingException e){
+
+		}
+		return "redirect:/toEditCourse?couid="+couid+"&msg="+newMsg;
 	}
 	
 	/*     
@@ -80,7 +88,13 @@ public class JointController {
 		try {
 			if(1==jointservice.editJoint(joint)) {
 				String msg = "编辑小节成功";
-				return "redirect:/toEditCourse?couid=" + couid + "&msg=" + msg;
+				String newMsg = "";
+				try {
+					newMsg = URLEncoder.encode(msg, "UTF-8");
+				}catch (UnsupportedEncodingException e){
+
+				}
+				return "redirect:/toEditCourse?couid=" + couid + "&msg=" + newMsg;
 			}
 			else
 				return "redirect:/toEditCourse?couid="+couid;
@@ -101,7 +115,13 @@ public class JointController {
     public String delejoint(Model model,Integer jointid,String couid){
 		if(1==jointservice.deleteJoint(jointid)) {
 			String msg = "删除小节成功";
-			return "redirect:/toEditCourse?couid=" + couid + "&msg=" + msg;
+			String newMsg = "";
+			try {
+				newMsg = URLEncoder.encode(msg, "UTF-8");
+			}catch (UnsupportedEncodingException e){
+
+			}
+			return "redirect:/toEditCourse?couid=" + couid + "&msg=" + newMsg;
 		}
 		else
 			return "error";

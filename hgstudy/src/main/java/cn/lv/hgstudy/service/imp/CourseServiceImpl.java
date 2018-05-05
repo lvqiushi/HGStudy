@@ -89,6 +89,14 @@ public class CourseServiceImpl implements CourseService {
 	}
 
 	@Override
+	public Boolean editCourseEvaluate(Integer couId, Integer evaluate) {
+		Map<String,Object> map = new HashMap<>();
+		map.put("evaluate",evaluate);
+		map.put("couId",couId);
+		return cdao.editCourseEvaluate(map);
+	}
+
+	@Override
 	public Course selectCourseByID(Integer couid) {
 		return cdao.selectCourseById(couid);
 	}
@@ -152,7 +160,7 @@ public class CourseServiceImpl implements CourseService {
 		map.put("sort", "cou.create_time");
 
 		courses = cdao.selectCourses(map);
-		int total = cdao.selectCoursesTotal(map);
+		Integer total = cdao.searchCoursesTotal(map);
 
 		Page page = new Page(total, start, pageNumber);
 		page.setContents(courses);

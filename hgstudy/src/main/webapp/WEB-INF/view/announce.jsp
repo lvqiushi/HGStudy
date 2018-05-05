@@ -53,7 +53,7 @@
 							<textarea class="form-control" name="content" placeholder="正文" rows="10"></textarea>
 						</div>
 						<div class="center_mid">
-							<button class="btn btn-info" onclick="send()">发送</button>
+							<a class="btn btn-info" onclick="send()">发送</a>
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<button class="btn btn-danger"  type="reset">重置</button>
 						</div>

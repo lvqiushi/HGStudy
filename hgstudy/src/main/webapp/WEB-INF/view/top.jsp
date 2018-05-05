@@ -20,7 +20,7 @@
                     </ul>
                     <form class="navbar-form navbar-right" role="search" action="searchCourses" onsubmit="return checkSearch();">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="search" name="keyword" placeholder="Search">
+                            <input type="text" class="form-control" id="search" name="keyword" placeholder="Search" value="${keyword}">
                         </div>
                         <input name="curpage" type="hidden" value=1 />
                         <button type="submit" class="btn btn-default">搜索</button>

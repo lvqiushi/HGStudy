@@ -17,6 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import cn.lv.hgstudy.pojo.Chapter;
 import cn.lv.hgstudy.service.ChapterService;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+
 /** 
  * @ClassName: ChapterController 
  * @Description: TODO(这里用一句话描述这个类的作用) 
@@ -48,10 +52,17 @@ public class ChapterController {
 	 * @return java.lang.String 
 	 */
 	@RequestMapping(value = "/AddChapter")
-	public String AddChapter(Model model,Chapter chapter){
-		chapterService.addChapter(chapter);
-		String msg = "新增章节成功";
-		return "redirect:/toEditCourse?couid="+chapter.getCouId() + "&msg=" + msg;
+	public String AddChapter(Model model,Chapter chapter) throws UnsupportedEncodingException{
+		String msg = "";
+		if(chapterService.addChapter(chapter)) {
+			msg = "新增章节成功";
+		}
+		else {
+			msg = "该章节已经存在，不能重复添加";
+		}
+		//String url = "redirect:/toEditCourse?couid="+chapter.getCouId() + "&msg=" + msg;
+		String newMsg = URLEncoder.encode(msg, "UTF-8");
+		return "redirect:/toEditCourse?couid="+chapter.getCouId() + "&msg=" + newMsg;
 	}
 	
 	/*     
@@ -74,11 +85,12 @@ public class ChapterController {
 	 * @return java.lang.String 
 	 */
 	@RequestMapping(value= "/editChapter")
-	public String EditChapter(Model model,Chapter chapter){
+	public String EditChapter(Model model,Chapter chapter) throws UnsupportedEncodingException{
 		System.out.println(chapter.getChapterTitle());
 		chapterService.editChapterInfor(chapter);
 		String msg = "编辑章节成功";
-		return "redirect:/toEditCourse?couid="+chapter.getCouId() + "&msg=" + msg;
+		String newMsg = URLEncoder.encode(msg, "UTF-8");
+		return "redirect:/toEditCourse?couid="+chapter.getCouId() + "&msg=" + newMsg;
 	}
 	
 	/*     
@@ -88,9 +100,10 @@ public class ChapterController {
 	 * @return java.lang.String 
 	 */
 	@RequestMapping(value= "/deleteChapter")
-	public String deleteChapter(Model model,Integer chapterid,String couid){
+	public String deleteChapter(Model model,Integer chapterid,String couid) throws UnsupportedEncodingException{
 		chapterService.deleteChapterById(chapterid);
 		String msg = "删除章节成功";
-		return "redirect:/toEditCourse?couid="+couid + "&msg=" + msg;
+		String newMsg = URLEncoder.encode(msg, "UTF-8");
+		return "redirect:/toEditCourse?couid="+couid + "&msg=" + newMsg;
 	}
 }

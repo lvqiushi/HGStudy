@@ -25,4 +25,6 @@ public interface LiveDao {
 	Boolean openLive(Integer id);
 
 	Boolean exitLive(Integer id);
+
+	Live selectLiveByCouId(Integer couId);
 }

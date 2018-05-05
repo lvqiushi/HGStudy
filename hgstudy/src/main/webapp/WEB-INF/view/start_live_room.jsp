@@ -45,59 +45,61 @@
 			</div>
 			<div class="right">
 				<div class="center">
-					<form class="bs-example bs-example-form" role="form">
+					<form class="bs-example bs-example-form" role="form" id="live-room">
 						<div class="input-group input-group-lg">
 							<span class="input-group-addon">直播流地址：</span>
-							<input type="text"  class="form-control" value="${liveURL}">
+							<input type="text"  class="form-control" style="width: 360px" value="${liveURL}">
 						</div>
 						<br>
 						<div class="input-group input-group-lg">
 							<span class="input-group-addon">直播流名称：</span>
 							<input type="text" class="form-control"  value="${roomName}">
 						</div>
-						<br>
+						<br>'
 						<div class="center_mid" id="live-btn">
-							<button class="btn btn-info" onclick="startLive(${liveId})">开始直播</button>
+							<a class="btn btn-info" onclick="startLive(${liveId})">开始直播</a>
 						</div>
+						<input type="hidden" name="id" value="${liveId}">
 					</form>
 				</div>
 			</div>
 		</div>
 		<script type="text/javascript">
             function startLive(liveId){
+                var form = new FormData(document.getElementById("live-room"));
                 $.ajax({
                     url:"/startLive",
                     type:"post",
-                    data:{liveId:liveId},
+                    data:form,
                     processData:false,
                     contentType:false,
                     success:function(data){
                         if(data.success == true){
-                            $("#live-btn button:eq(0)").remove();
-                            $("#live-btn").append("<button class=\"btn btn-info\" onclick=\"closeLive(${liveId})\">关闭直播</button>");
+                            $("#live-btn a:eq(0)").remove();
+                            $("#live-btn").append("<a class=\"btn btn-info\" onclick=\"closeLive(${liveId})\">关闭直播</a>");
                             alert("开启直播成功");
                         }else {
                             alert(data.message);
                         }
                     },
                     error:function(e){
-                        alert("错误！！");
-                        window.clearInterval(timer);
+                        alert("错误");
                     }
                 });
             }
 
             function closeLive(liveId){
+                var form = new FormData(document.getElementById("live-room"));
                 $.ajax({
                     url:"/closeLive",
                     type:"post",
-                    data:{liveId:liveId},
+                    data:form,
                     processData:false,
                     contentType:false,
                     success:function(data){
                         if(data.success == true){
                             $("#live-btn button:eq(0)").remove();
-                            $("#live-btn").append("<button class=\"btn btn-info\" onclick=\"startLive(${liveId})\">开始直播</button>");
+                            $("#live-btn").append("<a class=\"btn btn-info\" onclick=\"startLive(${liveId})\">开始直播</a>");
                             alert("关闭直播成功");
                         }else {
                             alert(data.message);

@@ -46,8 +46,26 @@
 	<select id="selectCoursesTotal" parameterType="map"  resultType="int">
 		select count(cou.cou_id) from course cou
 		<where>
+			<if test="type != null and type != '' " >
+				cou.cou_type = #{type}
+			</if>
 			<if test="teaid != null and teaid != '' " >
 				and cou.tea_id = #{teaid}
+			</if>
+			and cou.is_deleted = 0
+		</where>
+	</select>
+
+	<select id="searchCoursesTotal" parameterType="map"  resultType="int">
+		select count(cou.cou_id) from course cou join teacher tea on cou.tea_id=tea.tea_id
+		<where>
+			<if test="teaid != null and teaid != '' " >
+				and cou.tea_id = #{teaid}
+			</if>
+			<if test="keyword != null and keyword != '' " >
+				and (cou.cou_school like concat('%',#{keyword},'%')
+				or cou.cou_name like concat('%',#{keyword},'%')
+				or tea.tea_name like concat('%',#{keyword},'%'))
 			</if>
 			and cou.is_deleted = 0
 		</where>
@@ -102,6 +120,12 @@
        			</if>
              </trim>
          where cou.cou_id = #{couId};    
+	</update>
+
+	<update id="editCourseEvaluate" parameterType="map">
+		update course cou
+			set c.evaluate = c.evaluate+#{evaluate}
+		where cou.cou_id = #{couId};
 	</update>
 
 

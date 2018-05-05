@@ -26,6 +26,16 @@
     <![endif]-->
 </head>
 <body>
+<%
+    String msg = (String)request.getAttribute("msg");         // 获取提示信息
+    if(msg != null) {
+%>
+<script type="text/javascript" language="javascript">
+    alert("<%=msg%>");                                            // 弹出提示信息
+</script>
+<%
+    }
+%>
 <article>
         <div class="panel panel-default">
             <div class="panel-heading">视频列表</div>
@@ -53,12 +63,12 @@
                             <p id="xj-name">第${joint.jointIndex}节   ${joint.jointTitle}</p>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="xj-name" class="col-xs-3 control-label  text-center">视频简介</label>
-                        <div class="col-xs-9">
-                            <input id="video-infor" type="text" value="${video.vidInfor}" />
-                        </div>
-                    </div>
+                    <%--<div class="form-group">--%>
+                        <%--<label for="xj-name" class="col-xs-3 control-label  text-center">视频简介</label>--%>
+                        <%--<div class="col-xs-9">--%>
+                            <%--<input id="video-infor" type="text" value="${video.vidInfor}" />--%>
+                        <%--</div>--%>
+                    <%--</div>--%>
                     <div class="form-group" >
                         <label for="operate" class="col-xs-3 control-label  text-center" style="margin-top: 20px">操作</label>
                         <div class="col-xs-9">

@@ -15,6 +15,8 @@ public interface CourseDao {
 	
 	Integer selectCoursesTotal(Map<String,Object> map);
 
+	Integer searchCoursesTotal(Map<String,Object> map);
+
 	Integer selectAttCoursesTotal(Map<String,Object> map);
 	//
 	//List<Course> selectCoursesByTeaId(Map<String,Object> map);
@@ -27,5 +29,6 @@ public interface CourseDao {
 	//
 	Boolean deleteCourseById(Integer couid);
 	//
+	Boolean editCourseEvaluate(Map<String,Object> map);
 	//boolean changeTeacher();
 }
