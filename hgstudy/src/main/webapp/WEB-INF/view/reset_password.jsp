@@ -45,9 +45,9 @@
                         <fieldset>
                             <div class="form-group" style="height: 230px">
                                 <h3 align=center>重新设置密码</h3>
-                                <input class="form-control" style="margin-top: 40px;height: 50px" placeholder="新密码" name="password" type="text" autofocus>
+                                <input type="password" class="form-control" style="margin-top: 40px;height: 50px" placeholder="新密码" name="password" id="password"  autofocus>
 
-                                <input class="form-control" style="margin-top: 40px;height: 50px" placeholder="重复新密码" name="repassword" type="text">
+                                <input type="password" class="form-control" style="margin-top: 40px;height: 50px" placeholder="重复新密码" name="repassword" id="repassword">
                                 <input type="hidden"  name="token" value="${param.token}">
                             </div>
                             <!-- Change this to a button or input when using this as a form -->
@@ -211,9 +211,7 @@
         document.getElementById("password").value=calcMD5(pass).toLowerCase();
 
         var form = new FormData(document.getElementById("set-password"));
-//             var req = new XMLHttpRequest();
-//             req.open("post", "${pageContext.request.contextPath}/public/testupload", false);
-//             req.send(form);
+
         $.ajax({
             url:"/editPassword",
             type:"post",
@@ -222,7 +220,7 @@
             contentType:false,
             success:function(data){
                 if(data.success == true){
-                    alert("success");
+                    alert("修改密码成功！请重新登录");
                 }else {
                     alert(data.message);
                 }

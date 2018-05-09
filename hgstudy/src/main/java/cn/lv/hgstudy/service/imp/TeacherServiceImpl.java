@@ -64,7 +64,7 @@ public class TeacherServiceImpl implements TeacherService {
 
 	@Override
 	public Teacher findTeaByEmail(String email) {
-		return null;
+		return tdao.selectTeaByEmail(email);
 	}
 
 	/* (non-Javadoc)

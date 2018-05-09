@@ -10,6 +10,7 @@ package cn.lv.hgstudy.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -170,7 +171,7 @@ public class TeacherController {
 	@RequestMapping(value = "/toEditCourse")
     public String toEditCourse(Model model,Integer couid,String msg) throws UnsupportedEncodingException {
 		Course cou = courseService.selectCourseByID(couid);
-		msg = URLDecoder.decode(msg,"UTF-8");
+		//msg = URLDecoder.decode(msg,"UTF-8");
 		model.addAttribute("couname", cou.getCouName());
 		model.addAttribute("couid", cou.getCouId());
 		List<Chapter> chapters = chapterService.selectChaptersByCouId(couid);
@@ -255,7 +256,7 @@ public class TeacherController {
 
 	@RequestMapping(value = "/editPassword")
 	@ResponseBody
-	public JsonResult editPassword(String token,HttpSession session,String password){
+	public JsonResult editPassword(String token,String password,HttpSession session){
 		JsonResult result = new JsonResult();
 		if(StringUtils.isBlank(token)){
 			result.setSuccess(false);
@@ -275,7 +276,7 @@ public class TeacherController {
 		if("stu".equals(type)){
 			Student student = new Student();
 			//获取redis中用户token
-			String userToken = redisUtil.getString(student.getStuId());
+			String userToken = redisUtil.getString(String.valueOf(student.getStuId()));
 			if(!token.equals(userToken)){
 				result.setSuccess(false);
 				result.setMessage("你只能修改自己的密码");
@@ -287,7 +288,7 @@ public class TeacherController {
 		}else {
 			Teacher teacher = new Teacher();
 			//获取redis中用户token
-			String userToken = redisUtil.getString(teacher.getTeaId());
+			String userToken = redisUtil.getString(userId);
 			if(!token.equals(userToken)){
 				result.setSuccess(false);
 				result.setMessage("你只能修改自己的密码");
@@ -297,6 +298,9 @@ public class TeacherController {
 			teacher.setTeaPassword(password);
 			tercherService.editTeacher(teacher);
 		}
+		redisUtil.delete(userId);
+		session.removeAttribute("user");
+		session.removeAttribute("userType");
 		result.setMessage("修改密码成功，请重新登录");
 		return result;
 	}
@@ -322,9 +326,14 @@ public class TeacherController {
 				user.setUserMailAdress(tea.getEmailAdress());
 				user.setUserName(tea.getTeaName());
 				users.add(user);
+				try {
+					token = URLEncoder.encode(token,"UTF-8");
+				}catch (Exception e){
+
+				}
 				String content = String.format(EmailTypeEnum.EDIT_PASSWORD.getContent(),PASSWORD_URL+token,PASSWORD_URL+token);
 				//发送链接邮件
-				//SendMailUtil.sendMail(EmailTypeEnum.EDIT_PASSWORD.getType(),content,users);
+				SendMailUtil.sendMail(EmailTypeEnum.EDIT_PASSWORD.getType(),content,users,"");
 				return result;
 			}
 			Student stu = studentService.findStuByEmail(email);
@@ -346,7 +355,7 @@ public class TeacherController {
 				users.add(user);
 				String content = String.format(EmailTypeEnum.EDIT_PASSWORD.getContent(),PASSWORD_URL+token,PASSWORD_URL+token);
 				//发送链接邮件
-				//SendMailUtil.sendMail(EmailTypeEnum.EDIT_PASSWORD.getType(),content,users,"");
+				SendMailUtil.sendMail(EmailTypeEnum.EDIT_PASSWORD.getType(),content,users,"");
 			}
 		}catch (Exception e){
 			e.printStackTrace();

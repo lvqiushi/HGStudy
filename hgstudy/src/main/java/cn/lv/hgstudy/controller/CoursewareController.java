@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URLEncoder;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -73,7 +74,14 @@ public class CoursewareController {
 		response.setCharacterEncoding("utf-8");
 		//response.setContentType("multipart/form-data");
 		response.setContentType("application/x-msdownload");
-		response.setHeader("Content-Disposition", "attachment;fileName=" + new String(courseware.getFileName().getBytes(),"utf-8"));
+		String newNmae = "";
+		if (request.getHeader("User-Agent").toUpperCase().indexOf("MSIE") > 0) {
+			newNmae = URLEncoder.encode(courseware.getFileName(), "UTF-8");
+		} else {
+			newNmae = new String(courseware.getFileName().getBytes("UTF-8"), "ISO8859-1");
+		}
+		response.setHeader("Content-Disposition", "attachment;fileName="
+				+ newNmae);
 		//new String(courseware.getFileName().getBytes("utf-8"),"iso-8859-1")
 		//用于记录以完成的下载的数据量，单位是byte
 		long downloadedLength = 0L;
