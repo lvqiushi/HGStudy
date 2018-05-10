@@ -23,6 +23,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import cn.lv.hgstudy.enums.EmailTypeEnum;
+import cn.lv.hgstudy.enums.LiveStatusEnum;
 import cn.lv.hgstudy.enums.UrlEnum;
 import cn.lv.hgstudy.form.Announce;
 import cn.lv.hgstudy.model.UserMailInfo;
@@ -69,7 +70,9 @@ public class TeacherController {
 	//分页时每页数量
     private static final int pageNumber = 5;
 
-    private static final String PASSWORD_URL = "http://localhost:8080/toEditPassword?token=";
+    private static final String PASSWORD_URL = "http://localhost:8888/toEditPassword?token=";
+
+	//private static final String PASSWORD_URL = "http://123.207.189.242:8080/toEditPassword?token=";
 
     private static final String LIVE_URL = "rtmp://123.207.189.242/live";
     /**
@@ -423,6 +426,7 @@ public class TeacherController {
 			model.addAttribute("liveURL", UrlEnum.LIVE_URL.getDesc());
 			model.addAttribute("roomName",live.getRoomName());
 			model.addAttribute("liveId",live.getId());
+			model.addAttribute("status",live.getStatus());
 			return "start_live_room";
 		}
 	}
@@ -430,11 +434,13 @@ public class TeacherController {
 	@RequestMapping(value = "/applyLive")
 	public String applyLive(Live live,HttpSession session,Model model){
 		Teacher tea = (Teacher) session.getAttribute("user");
-		String roomName = live.getTeaId()+"-"+live.getCouId();
+		String roomName = tea.getTeaId()+"-"+live.getCouId();
 		Course course = courseService.selectCourseByID(live.getCouId());
 		live.setImage(course.getCouImg());
 		live.setRoomName(roomName);
 		live.setTeaId(tea.getTeaId());
+		live.setStatus(LiveStatusEnum.STOP.getCode());
+		live.setTeaName(tea.getTeaName());
 		liveService.addLive(live);
 		model.addAttribute("liveURL", UrlEnum.LIVE_URL.getDesc());
 		model.addAttribute("roomName",roomName);

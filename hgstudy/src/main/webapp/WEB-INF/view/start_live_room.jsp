@@ -10,7 +10,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<base href="<%=basePath%>">
+		<base href="<%=basePath%>" id="base">
 		<title></title>
 		<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">  
 		<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -57,7 +57,12 @@
 						</div>
 						<br>'
 						<div class="center_mid" id="live-btn">
-							<a class="btn btn-info" onclick="startLive(${liveId})">开始直播</a>
+							<c:if test="${status eq 0 }">
+								<a class="btn btn-info" onclick="startLive(${liveId})">开始直播</a>
+							</c:if>
+							<c:if test="${status eq 1 }">
+								<a class="btn btn-info" onclick="closeLive(${liveId})">关闭直播</a>
+							</c:if>
 						</div>
 						<input type="hidden" name="id" value="${liveId}">
 					</form>
@@ -68,7 +73,7 @@
             function startLive(liveId){
                 var form = new FormData(document.getElementById("live-room"));
                 $.ajax({
-                    url:"/startLive",
+                    url:document.getElementById("base").href+"/startLive",
                     type:"post",
                     data:form,
                     processData:false,
@@ -91,14 +96,14 @@
             function closeLive(liveId){
                 var form = new FormData(document.getElementById("live-room"));
                 $.ajax({
-                    url:"/closeLive",
+                    url:document.getElementById("base").href+"/closeLive",
                     type:"post",
                     data:form,
                     processData:false,
                     contentType:false,
                     success:function(data){
                         if(data.success == true){
-                            $("#live-btn button:eq(0)").remove();
+                            $("#live-btn a:eq(0)").remove();
                             $("#live-btn").append("<a class=\"btn btn-info\" onclick=\"startLive(${liveId})\">开始直播</a>");
                             alert("关闭直播成功");
                         }else {

@@ -45,7 +45,7 @@
 			</div>
 			<div class="right">
 				<div class="center">
-					<form class="bs-example bs-example-form" role="form">
+					<form class="bs-example bs-example-form" role="form" action="applyLive">
 						<div class="input-group input-group-lg">
 							<span class="input-group-addon">直播间名称：</span>
 							<input type="text" name="roomName" class="form-control" placeholder="直播间名称">
