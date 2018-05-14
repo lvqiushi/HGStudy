@@ -26,15 +26,17 @@
 		</div>
 	</c:if>
 	<!--<source src="rtmp://172.21.2.75/rtmplive/test" type="rtmp/flv">-->
-	<video id="example_video_1" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto" width="960" height="460" poster="${video.vidImg }" data-setup="{}">
-		<!--<source src="rtmp://172.21.2.75/rtmplive/test" type="rtmp/flv">-->
-		<source src="video/${video.vidPath }" type="video/mp4">
+	<c:if test="${not empty video}">
+		<video id="example_video_1" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto" width="960" height="460" poster="${video.vidImg }" data-setup="{}">
+			<!--<source src="rtmp://172.21.2.75/rtmplive/test" type="rtmp/flv">-->
+			<source src="video/${video.vidPath }" type="video/mp4">
 
-		<p class="vjs-no-js">播放视频需要启用 JavaScript，推荐使用支持HTML5的浏览器访问。
-			To view this video please enable JavaScript, and consider upgrading to a web browser that
-			<a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
-		</p>
-	</video>
+			<p class="vjs-no-js">播放视频需要启用 JavaScript，推荐使用支持HTML5的浏览器访问。
+				To view this video please enable JavaScript, and consider upgrading to a web browser that
+				<a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+			</p>
+		</video>
+	</c:if>
 	<%--<video width="700" height="500"  height="auto" controls>--%>
 	    <%--<source src="${video.vidPath }" type="video/mp4">--%>
 	<%--</video>--%>

@@ -127,7 +127,8 @@
 							          </button>
 							          <button type="button" class="btn btn-danger fa fa-refresh" data-method="reset" title="重置图片">
 								            <span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="$().cropper(&quot;reset&quot;)" aria-describedby="tooltip866214">
-								       </button>
+								       		</span>
+									  </button>
 							        </div>
 									<div class="col-md-3">
 										<button class="btn btn-danger btn-block avatar-save fa fa-save" type="button" data-dismiss="modal"> 保存修改</button>

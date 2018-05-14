@@ -32,7 +32,7 @@
 	<article class="container">
 	<div class="panel panel-default course-history">
 		<div class="panel-heading">
-			<h4>观看记录 总数： ${pagebean.rowCount}</h4>
+			<h4>关注课程列表 总数： ${pagebean.rowCount}</h4>
 		</div>
 		<div class="panel-body">
 			<div class="row">

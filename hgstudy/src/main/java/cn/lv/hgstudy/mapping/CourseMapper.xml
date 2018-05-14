@@ -100,7 +100,7 @@
 		delete cou from course cou where cou.cou_id = #{couid}
 	</delete>
 
-	<update id="editCourseInfor" parameterType="Course">  
+	<update id="editCourseInfor" parameterType="Course">
        update course cou 
        		<trim prefix="set" suffixOverrides=",">
        			<if test="couName!=null and couName!='' ">
@@ -124,7 +124,7 @@
 
 	<update id="editCourseEvaluate" parameterType="map">
 		update course cou
-			set c.evaluate = c.evaluate+#{evaluate}
+			set cou.evaluate = cou.evaluate+#{evaluate}
 		where cou.cou_id = #{couId};
 	</update>
 

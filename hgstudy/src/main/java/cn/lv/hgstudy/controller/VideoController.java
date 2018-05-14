@@ -247,7 +247,7 @@ public class VideoController {
 		try {
 			if(null != jointId && 0 != jointId) {
 				Video video = videoService.selectVideo(jointId);
-				if(!StringUtils.isEmpty(video.getVidPath())) {
+				if(Objects.nonNull(video) && !StringUtils.isEmpty(video.getVidPath())) {
 					model.addAttribute("video", video);
 				}
 			}

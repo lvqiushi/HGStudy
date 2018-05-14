@@ -24,6 +24,8 @@ import cn.lv.hgstudy.service.StudentService;
 import cn.lv.hgstudy.service.TeacherService;
 import cn.lv.hgstudy.util.VerifyCodeUtils;
 
+import java.net.URLEncoder;
+
 /** 
  * @ClassName: LoginController 
  * @Description: TODO
@@ -39,13 +41,14 @@ public class LoginController {
 	StudentService studentService;
 	
 	@RequestMapping(value = "/login")
-    public String login(String username,String password,String usertype,HttpSession session){
+    public String login(String username,String password,String usertype,HttpSession session,Model model){
 		try {
 			password = password.trim();
 			if ("student".equals(usertype)) {
 				Student stu = studentService.loginStudent(username, password);
 				if (null == stu) {
-					return "redirect:/login.jsp";
+					model.addAttribute("msg","用户名或者密码错误");
+					return "login";
 				} else {
 					session.setAttribute("user", stu);
 					session.setAttribute("userType", usertype);
@@ -55,7 +58,8 @@ public class LoginController {
 			if ("teacher".equals(usertype)) {
 				Teacher tea = teacherService.loginTeacher(username, password);
 				if (null == tea) {
-					return "redirect:/login.jsp";
+					model.addAttribute("msg","用户名或者密码错误");
+					return "login";
 				} else {
 					session.setAttribute("user", tea);
 					session.setAttribute("userType", usertype);
@@ -75,7 +79,9 @@ public class LoginController {
 		session.removeAttribute("user");
 		session.removeAttribute("userType");
 		model.addAttribute("msg","成功退出");
-		return "redirect:/login.jsp";
+		//String msg = "成功退出";
+		//String newMsg = URLEncoder.encode(msg, "UTF-8");
+		return "login";
 	}
 	
 	@RequestMapping(value="/getYzm",method=RequestMethod.GET)

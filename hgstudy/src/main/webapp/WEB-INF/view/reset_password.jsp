@@ -15,7 +15,7 @@
 %>
 <html>
 <head>
-    <base href="<%=basePath%>">
+    <base href="<%=basePath%>" id="base">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -213,7 +213,7 @@
         var form = new FormData(document.getElementById("set-password"));
 
         $.ajax({
-            url:"/editPassword",
+            url:document.getElementById("base").href+"/editPassword",
             type:"post",
             data:form,
             processData:false,

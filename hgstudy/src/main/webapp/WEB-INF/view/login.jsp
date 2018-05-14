@@ -35,15 +35,7 @@
 					<div class="slide-bar"></div>
 				</div>
 			</div>
-			<s:fielderror>
-				<s:param>username</s:param>
-			</s:fielderror>
-			<s:fielderror>
-				<s:param>password</s:param>
-			</s:fielderror>
-			<s:fielderror>
-				<s:param>role</s:param>
-			</s:fielderror>
+
 			<form action="login" method="post" >
 				<div class="login form">
 					<div class="group">
