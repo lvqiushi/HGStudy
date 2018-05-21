@@ -88,13 +88,13 @@
     <div class="form-group">
         <label for="edit-course-2" class="col-sm-2 control-label">课程概述</label>
         <div class="col-sm-10">
-            <textarea class="form-control" name="outview" rows="8" id="edit-course-2" required>${cou.outview }</textarea>
+            <textarea class="form-control" name="outview" rows="8" id="edit-course-2" >${cou.outview }</textarea>
         </div>
     </div>
 	<div class="form-group">
         <label for="edit-course-3" class="col-sm-2 control-label">课程大纲</label>
         <div class="col-sm-10">
-            <textarea class="form-control" name="outline" rows="8" id="edit-course-3" required>${cou.outline }</textarea>
+            <textarea class="form-control" name="outline" rows="8" id="edit-course-3" >${cou.outline }</textarea>
         </div>
     </div>
 

@@ -16,7 +16,7 @@ public interface ChapterDao {
 	
 	boolean addChapter(Chapter chapter);
 
-	Chapter selectChapterByIndex(Integer index);
+	Chapter selectChapterByIndex(Map map);
 	
 	//���ݿγ�ID����ɾ����
 	//boolean deleteChaptersByCouid(int couid);

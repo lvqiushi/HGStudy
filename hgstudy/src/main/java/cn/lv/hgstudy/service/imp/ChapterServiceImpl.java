@@ -8,7 +8,9 @@
  */
 package cn.lv.hgstudy.service.imp;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import javax.annotation.Resource;
@@ -68,7 +70,10 @@ public class ChapterServiceImpl implements ChapterService {
 	 */
 	@Override
 	public boolean addChapter(Chapter chapter) {
-		Chapter exist = chdao.selectChapterByIndex(chapter.getChapterIndex());
+		Map<String,Object> map = new HashMap<>(2);
+		map.put("index",chapter.getChapterIndex());
+		map.put("couId",chapter.getCouId());
+		Chapter exist = chdao.selectChapterByIndex(map);
 		if(Objects.isNull(exist)) {
 			return chdao.addChapter(chapter);
 		}

@@ -112,37 +112,6 @@
                 </div>
                 
                 <div id="python-course" class="course">
-                	<c:if test="${empty gx}">
-						<br><br><br>
-                        <div class="col-sm-offset-2 col-sm-8" style="border: 1px solid black">
-                            <br><br><br>
-                            <h1>暂无该课程</h1>
-                            <br><br><br>
-                        </div>
-                        <p></p>
-					</c:if>
-					<c:if test="${not empty gx}">
-	                    <div class="row">
-	                        <div class="col-xs-6">
-	                            <img class="img-responsive" src="${gx.couImg }" alt="" >
-	                        </div>
-	                        <div class="col-xs-6">
-	                            <h2>${gx.couName }</h2><br>
-	                            <p>${gx.couSchool}&nbsp;&nbsp;&nbsp;  &nbsp;${gx.tea.teaName}</p><br>
-	                            <div class="row">
-	                                <div class="col-sm-6">
-	                                    <a href="selectCourseInfor?couid=${gx.couId}"><button type="button" class="btn btn-primary btn-block">课程详情</button></a>
-	                                </div>
-	                            </div>
-	                        </div>
-	                    </div>
-	                    <div class="row" style="margin:30px">
-	                        <h4>课程概述</h4>
-	                        <p>${gx.couinfor }</p>
-	                    </div>
-                    </c:if>
-                </div>
-                <div id="c-course" class="course">
                 	<c:if test="${empty wx}">
 						<br><br><br>
                         <div class="col-sm-offset-2 col-sm-8" style="border: 1px solid black">
@@ -170,6 +139,37 @@
 	                    <div class="row" style="margin:30px">
 	                        <h4>课程概述</h4>
 	                        <p>${wx.couinfor }</p>
+	                    </div>
+                    </c:if>
+                </div>
+                <div id="c-course" class="course">
+                	<c:if test="${empty gx}">
+						<br><br><br>
+                        <div class="col-sm-offset-2 col-sm-8" style="border: 1px solid black">
+                            <br><br><br>
+                            <h1>暂无该课程</h1>
+                            <br><br><br>
+                        </div>
+                        <p></p>
+					</c:if>
+					<c:if test="${not empty gx}">
+	                    <div class="row">
+	                        <div class="col-xs-6">
+	                            <img class="img-responsive" src="${gx.couImg }" alt="" >
+	                        </div>
+	                        <div class="col-xs-6">
+	                            <h2>${gx.couName }</h2><br>
+	                            <p>${gx.couSchool}&nbsp;&nbsp;&nbsp;  &nbsp;${gx.tea.teaName}</p><br>
+	                            <div class="row">
+	                                <div class="col-sm-6">
+	                                    <a href="selectCourseInfor?couid=${gx.couId}"><button type="button" class="btn btn-primary btn-block">课程详情</button></a>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
+	                    <div class="row" style="margin:30px">
+	                        <h4>课程概述</h4>
+	                        <p>${gx.couinfor }</p>
 	                    </div>
                     </c:if>
                 </div>
